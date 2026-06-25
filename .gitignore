@@ -1,0 +1,11 @@
+# 公式サイトから取得した生HTML（再取得可能なので追跡しない）
+jp_frame.html
+*_frame.html
+
+# 抽出途中の中間JSON（data.js を生成すれば不要）
+jp_parsed.json
+*_parsed.json
+
+# OS / エディタ
+.DS_Store
+Thumbs.db
