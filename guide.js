@@ -116,20 +116,20 @@ const SF6_GUIDE = [
     summary: "発生フレームと硬直差を見て判断する",
     body: "・相手の技をガードした時の硬直差と、自分の技の発生フレームを比べる\n・自分の技の発生が、相手の不利フレームより速ければ確定反撃が入る\n・「フレーム」タブの確反逆引きに数値を入れると、使える技が自動で分かる",
     relatedView: "frame", relatedLabel: "フレームタブの確反逆引きを開く",
-    diagram: `<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg">
+    diagram: `<svg viewBox="-20 0 680 260" xmlns="http://www.w3.org/2000/svg">
       <style>.lbl{fill:var(--text);font-size:13px}.sub{fill:var(--muted);font-size:12px}</style>
       <line x1="60" y1="200" x2="600" y2="200" stroke="var(--line)" stroke-width="2"/>
-      <text class="sub" x="60" y="218">0F（ガード成立）</text>
-      <text class="lbl" x="60" y="55">相手が動けない時間（不利フレーム）</text>
-      <rect x="60" y="65" width="260" height="32" fill="var(--bad)" opacity="0.6"/>
-      <text class="lbl" x="60" y="115">自分の技が当たるまで（発生フレーム）</text>
-      <rect x="60" y="125" width="170" height="32" fill="var(--good)" opacity="0.85"/>
-      <rect x="230" y="125" width="90" height="32" fill="var(--good)" opacity="0.25"/>
-      <line x1="230" y1="115" x2="230" y2="190" stroke="var(--good)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text class="sub" x="60" y="220">0F（ガード成立）</text>
+      <text class="lbl" x="60" y="50">相手が動けない時間（不利フレーム）</text>
+      <rect x="60" y="60" width="260" height="32" fill="var(--bad)" opacity="0.6"/>
+      <text class="lbl" x="60" y="112">自分の技が当たるまで（発生フレーム）</text>
+      <rect x="60" y="122" width="170" height="32" fill="var(--good)" opacity="0.85"/>
+      <rect x="230" y="122" width="90" height="32" fill="var(--good)" opacity="0.25"/>
+      <line x1="230" y1="112" x2="230" y2="190" stroke="var(--good)" stroke-width="2" stroke-dasharray="4 3"/>
       <text class="sub" x="236" y="190">技が当たる</text>
-      <line x1="320" y1="55" x2="320" y2="190" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
+      <line x1="320" y1="50" x2="320" y2="190" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
       <text class="sub" x="326" y="190">相手が動き出す</text>
-      <text class="lbl" x="60" y="172" fill="var(--good)">緑が赤の中に収まれば → 確定反撃が成立（余裕分）</text>
+      <text class="lbl" x="60" y="170" fill="var(--good)">緑が赤の中に収まれば → 確定反撃が成立（余裕分）</text>
     </svg>`,
   },
   {
@@ -153,13 +153,11 @@ const SF6_GUIDE = [
       .arrow{stroke:var(--accent2);stroke-width:2;fill:none}</style>
       <defs><marker id="arOki" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M0,0L10,5L0,10z" fill="var(--accent2)"/></marker></defs>
-      <rect class="fig" x="20" y="145" width="120" height="50" rx="10"/>
-      <text class="lbl" x="80" y="175">ダウン中の相手</text>
-      <line class="arrow" x1="150" y1="170" x2="250" y2="170" marker-end="url(#arOki)"/>
-      <text class="sub" x="200" y="155">前ステで近づく</text>
-      <path class="arrow" d="M250,170 C290,120 320,80 360,60" marker-end="url(#arOki)"/>
-      <path class="arrow" d="M250,170 L360,170" marker-end="url(#arOki)"/>
-      <path class="arrow" d="M250,170 C290,220 320,260 360,280" marker-end="url(#arOki)"/>
+      <rect class="fig" x="20" y="145" width="140" height="50" rx="10"/>
+      <text class="lbl" x="90" y="175">ダウン中の相手</text>
+      <path class="arrow" d="M160,170 C220,120 280,80 360,60" marker-end="url(#arOki)"/>
+      <path class="arrow" d="M160,170 L360,170" marker-end="url(#arOki)"/>
+      <path class="arrow" d="M160,170 C220,220 280,260 360,280" marker-end="url(#arOki)"/>
       <rect class="fig" x="370" y="35" width="120" height="50" rx="10"/>
       <text class="lbl" x="430" y="65">打撃</text>
       <rect class="fig" x="370" y="145" width="120" height="50" rx="10"/>
