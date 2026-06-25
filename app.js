@@ -20,6 +20,11 @@ function ns(key){ // キャラ別ネームスペース
   if(key==="userCombos"||key==="userSetplays") store[currentChar][key] = store[currentChar][key] || [];
   return store[currentChar][key];
 }
+function gns(key){ // キャラに依存しない全体共通のネームスペース（用語集など）
+  store._global = store._global || {};
+  store._global[key] = store._global[key] || (key==="glossaryUser"?[]:{});
+  return store._global[key];
+}
 
 /* -------- キャラセレクタ＆タブ -------- */
 function initChars(){
@@ -297,10 +302,25 @@ document.getElementById("saveNote").onclick = ()=>{
 };
 
 /* ============ 用語集 ============ */
+// 初期データ(glossary.js) + ブラウザに保存した 追加/編集/削除 をマージして返す
+// builtin項目は id="b-<index>"、自作項目は id="u-<timestamp>"
+function allGlossaryRaw(){
+  const builtinSrc = typeof SF6_GLOSSARY!=="undefined" ? SF6_GLOSSARY : [];
+  const edits   = gns("glossaryEdits");
+  const deleted = gns("glossaryDeleted");
+  const builtin = builtinSrc
+    .map((t,i)=>({...t, id:"b-"+i, builtin:true}))
+    .filter(t=>!deleted[t.id])
+    .map(t=> edits[t.id] ? {...t, ...edits[t.id]} : t);
+  const user = gns("glossaryUser").map(t=>({...t, builtin:false}));
+  return [...builtin, ...user];
+}
+function isGlossaryModified(t){ return t.builtin && !!gns("glossaryEdits")[t.id]; }
+
 let glossaryCat = "全て";
 function glossaryCats(){
   const set = new Set(["全て"]);
-  (typeof SF6_GLOSSARY!=="undefined"?SF6_GLOSSARY:[]).forEach(t=>set.add(t.cat));
+  allGlossaryRaw().forEach(t=>set.add(t.cat));
   return [...set];
 }
 function renderGlossaryFilters(){
@@ -318,13 +338,27 @@ function hl(text, q){
   return esc(text.slice(0,i))+"<mark>"+esc(text.slice(i,i+q.length))+"</mark>"+esc(text.slice(i+q.length));
 }
 function renderGlossary(){
-  const all = (typeof SF6_GLOSSARY!=="undefined"?SF6_GLOSSARY:[]);
+  const all = allGlossaryRaw();
   const q = (document.getElementById("glossarySearch").value||"").trim();
   const ql = q.toLowerCase();
   let list = all;
   if(glossaryCat!=="全て") list = list.filter(t=>t.cat===glossaryCat);
   if(ql) list = list.filter(t=>
     (t.term+" "+(t.read||"")+" "+t.def).toLowerCase().includes(ql));
+
+  // 非表示にした(削除した)既定の用語があれば、個別に復元できるよう案内する
+  const hidden = document.getElementById("glossaryHidden");
+  const deletedIds = Object.keys(gns("glossaryDeleted"));
+  if(deletedIds.length){
+    const builtinSrc = typeof SF6_GLOSSARY!=="undefined" ? SF6_GLOSSARY : [];
+    const names = builtinSrc.map((t,i)=>({...t, id:"b-"+i})).filter(t=>deletedIds.includes(t.id));
+    hidden.style.display = "block";
+    hidden.innerHTML = `非表示にした既定の用語（${names.length}件）: ` +
+      names.map(t=>`<button class="ghost" data-grestore="${t.id}" style="margin:2px">${esc(t.term)} を復元</button>`).join(" ");
+    hidden.querySelectorAll("[data-grestore]").forEach(b=>b.onclick=()=>{
+      delete gns("glossaryDeleted")[b.dataset.grestore]; saveStore(); renderGlossaryFilters(); renderGlossary();
+    });
+  } else { hidden.style.display="none"; hidden.innerHTML=""; }
 
   const el = document.getElementById("glossaryList");
   if(!list.length){ el.innerHTML=`<div class="empty">該当する用語がありません</div>`; return; }
@@ -333,10 +367,61 @@ function renderGlossary(){
       <span class="term-name">${hl(t.term,q)}</span>
       ${t.read?`<span class="term-read">${hl(t.read,q)}</span>`:""}
       <span class="badge">${esc(t.cat)}</span>
+      ${isGlossaryModified(t)?`<span class="badge" style="color:var(--warn);border-color:var(--warn)">編集済み</span>`:""}
+      ${!t.builtin?`<span class="badge" style="color:var(--accent2);border-color:var(--accent2)">自作</span>`:""}
     </div>
     <div class="term-def">${hl(t.def,q)}</div>
+    <div class="row-actions">
+      <button class="ghost" data-gedit="${t.id}">✎ 編集</button>
+      <button class="danger" data-gdel="${t.id}">削除</button>
+      ${isGlossaryModified(t)?`<button class="ghost" data-greset="${t.id}">↺ 元に戻す</button>`:""}
+    </div>
   </div>`).join("");
+
+  el.querySelectorAll("[data-gedit]").forEach(b=>b.onclick=()=>editGlossaryTerm(list.find(x=>x.id===b.dataset.gedit)));
+  el.querySelectorAll("[data-gdel]").forEach(b=>b.onclick=()=>deleteGlossaryTerm(list.find(x=>x.id===b.dataset.gdel)));
+  el.querySelectorAll("[data-greset]").forEach(b=>b.onclick=()=>{
+    delete gns("glossaryEdits")[b.dataset.greset]; saveStore(); renderGlossaryFilters(); renderGlossary();
+  });
 }
+function editGlossaryTerm(item){
+  if(!item) return;
+  const term = prompt("用語名", item.term); if(term===null||term.trim()==="") return;
+  const read = prompt("読み・別名（検索用、任意）", item.read||"");
+  if(read===null) return;
+  const cat = prompt("カテゴリ（例: システム / 攻め / 守り / 立ち回り / コンボ / フレーム / 表記）", item.cat);
+  if(cat===null||cat.trim()==="") return;
+  const def = prompt("意味の説明", item.def); if(def===null||def.trim()==="") return;
+  const patch = {term:term.trim(), read:read.trim(), cat:cat.trim(), def:def.trim()};
+  if(item.builtin){
+    gns("glossaryEdits")[item.id] = patch;
+  } else {
+    const list = gns("glossaryUser");
+    const idx = list.findIndex(x=>x.id===item.id);
+    if(idx>=0) list[idx] = {...list[idx], ...patch};
+  }
+  saveStore(); renderGlossaryFilters(); renderGlossary();
+}
+function deleteGlossaryTerm(item){
+  if(!item) return;
+  if(!confirm(`「${item.term}」を削除しますか？`)) return;
+  if(item.builtin){
+    gns("glossaryDeleted")[item.id] = true;   // 既定データ自体は残し、表示だけ非表示にする
+  } else {
+    const list = gns("glossaryUser");
+    const idx = list.findIndex(x=>x.id===item.id);
+    if(idx>=0) list.splice(idx,1);
+  }
+  saveStore(); renderGlossaryFilters(); renderGlossary();
+}
+document.getElementById("addGlossary").onclick = ()=>{
+  const term = prompt("用語名"); if(!term) return;
+  const read = prompt("読み・別名（検索用、任意）")||"";
+  const cat = prompt("カテゴリ（例: システム / 攻め / 守り / 立ち回り / コンボ / フレーム / 表記）","自作")||"自作";
+  const def = prompt("意味の説明")||"";
+  gns("glossaryUser").push({id:"u-"+Date.now(), term:term.trim(), read:read.trim(), cat:cat.trim(), def:def.trim()});
+  saveStore(); renderGlossaryFilters(); renderGlossary();
+};
 
 /* -------- ユーティリティ -------- */
 function esc(s){ return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m])); }

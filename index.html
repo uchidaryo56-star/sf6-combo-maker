@@ -108,7 +108,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.0.0</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.1.0</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:13px">キャラ</span>
     <select id="charSelect"></select>
@@ -203,15 +203,17 @@
   <section class="view" id="view-glossary">
     <div class="toolbar">
       <input id="glossarySearch" placeholder="🔍 用語・読み・意味で検索（例: シミー / 確反 / DI）" style="flex:1;min-width:220px">
+      <button id="addGlossary">＋ 用語を追加</button>
     </div>
     <div class="toolbar" id="glossaryFilters"></div>
+    <div class="hint" id="glossaryHidden" style="display:none"></div>
     <div id="glossaryList"></div>
   </section>
 </main>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.0.0"></script>
-<script src="glossary.js?v=1.0.0"></script>
-<script src="app.js?v=1.0.0"></script>
+<script src="data.js?v=1.1.0"></script>
+<script src="glossary.js?v=1.1.0"></script>
+<script src="app.js?v=1.1.0"></script>
 </body>
 </html>
