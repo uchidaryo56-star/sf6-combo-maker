@@ -36,7 +36,10 @@
   .stats{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;color:var(--muted);margin-top:6px}
   .stats b{color:var(--text)}
   .note{font-size:15px;color:var(--muted);margin-top:6px}
-  .row-actions{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap}
+  .row-actions{display:flex;gap:6px;margin-top:10px;align-items:center;flex-wrap:wrap}
+  /* カード内の編集/削除/動画系ボタンは控えめに小さくして本文を読みやすくする */
+  .row-actions button.ghost,.row-actions button.danger{font-size:12px;padding:4px 10px;border-radius:6px}
+  .row-actions .check{font-size:13px}
   button{background:var(--accent2);color:#fff;border:none;border-radius:8px;padding:9px 16px;cursor:pointer;font-size:15px;font-family:inherit}
   button.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}
   button.ghost:hover{color:var(--text)}
@@ -54,6 +57,7 @@
   .panel-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px}
   .panel-box h3{margin:0 0 10px;font-size:18px}
   .hint{font-size:14px;color:var(--muted);background:var(--panel2);border-left:3px solid var(--accent2);padding:9px 12px;border-radius:6px;margin-bottom:14px;line-height:1.6}
+  .hint button.ghost{font-size:11px;padding:3px 9px;border-radius:6px}
   .punish-result{margin-top:12px}
   .punish-row{display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:var(--panel2);margin-bottom:6px;font-size:15px}
   .punish-summary{margin-top:12px;font-size:15px;color:var(--muted)}
@@ -118,7 +122,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.5.0</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.5.1</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -229,9 +233,9 @@
 </main>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.5.0"></script>
-<script src="glossary.js?v=1.5.0"></script>
-<script src="guide.js?v=1.5.0"></script>
-<script src="app.js?v=1.5.0"></script>
+<script src="data.js?v=1.5.1"></script>
+<script src="glossary.js?v=1.5.1"></script>
+<script src="guide.js?v=1.5.1"></script>
+<script src="app.js?v=1.5.1"></script>
 </body>
 </html>
