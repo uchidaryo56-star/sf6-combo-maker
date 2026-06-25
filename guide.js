@@ -10,7 +10,7 @@ const SF6_GUIDE = [
     title: "操作に慣れる（トレーニングモード）",
     summary: "まずは操作とレバー表記に慣れる",
     body: "・モダン操作とクラシック操作の違いを理解し、自分に合う方を選ぶ\n・レバー表記（テンキー）の見方を覚える（下の図解参照）\n・トレーニングモードのコンボトライアルで基本入力に慣れる",
-    diagram: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    diagram: `<svg viewBox="-40 0 380 300" xmlns="http://www.w3.org/2000/svg">
       <style>.cell{fill:var(--panel2);stroke:var(--line);stroke-width:2}
       .num{fill:var(--text);font-size:30px;font-weight:700;text-anchor:middle}
       .lbl{fill:var(--muted);font-size:12px;text-anchor:middle}</style>
@@ -26,10 +26,10 @@ const SF6_GUIDE = [
       <text class="num" x="50" y="45">7 ↖</text><text class="lbl" x="50" y="70">斜め後ジャンプ</text>
       <text class="num" x="150" y="45">8 ↑</text><text class="lbl" x="150" y="70">ジャンプ</text>
       <text class="num" x="250" y="45">9 ↗</text><text class="lbl" x="250" y="70">斜め前ジャンプ</text>
-      <text class="num" x="50" y="145">4 ←</text><text class="lbl" x="50" y="170">後ろ（ガード）</text>
+      <text class="num" x="50" y="145">4 ←</text><text class="lbl" x="50" y="170">後ろ<tspan x="50" dy="15">（ガード）</tspan></text>
       <text class="num" x="150" y="150">5</text><text class="lbl" x="150" y="172">ニュートラル</text>
-      <text class="num" x="250" y="145">6 →</text><text class="lbl" x="250" y="170">前（前進）</text>
-      <text class="num" x="50" y="245">1 ↙</text><text class="lbl" x="50" y="270">後ろしゃがみ（ガード）</text>
+      <text class="num" x="250" y="145">6 →</text><text class="lbl" x="250" y="170">前<tspan x="250" dy="15">（前進）</tspan></text>
+      <text class="num" x="50" y="240">1 ↙</text><text class="lbl" x="50" y="265">後ろしゃがみ<tspan x="50" dy="15">（ガード）</tspan></text>
       <text class="num" x="150" y="245">2 ↓</text><text class="lbl" x="150" y="270">しゃがみ</text>
       <text class="num" x="250" y="245">3 ↘</text><text class="lbl" x="250" y="270">前しゃがみ</text>
     </svg>`,
