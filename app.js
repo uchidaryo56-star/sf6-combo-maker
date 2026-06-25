@@ -149,7 +149,7 @@ function renderFrames(){
     });
   }
   const tb = document.querySelector("#frameTable tbody");
-  const m = "color:var(--muted);font-size:13px";
+  const m = "color:var(--muted);font-size:14px";
   tb.innerHTML = data.map(f=>`<tr data-fi="${orig.indexOf(f)}">
     <td>${esc(f.move)}</td><td style="${m}">${esc(f.type)}</td>
     <td>${f.startup??"-"}</td>
@@ -165,7 +165,7 @@ function renderFrames(){
     <td style="${m}">${esc(f.driveLosePunish||"-")}</td>
     <td style="${m}">${esc(f.saGain||"-")}</td>
     <td style="${m}">${esc(f.attribute||"-")}</td>
-    <td style="color:var(--muted);font-size:12px">${esc(f.note||"")}</td>
+    <td style="color:var(--muted);font-size:13px">${esc(f.note||"")}</td>
   </tr>`).join("");
   renderPunish();
 }
