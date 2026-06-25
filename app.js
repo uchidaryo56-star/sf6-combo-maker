@@ -96,6 +96,7 @@ function renderCombos(){
         <button class="ghost" data-vidfile="${c.id}">📁 動画ファイル</button>
         <button class="ghost" data-vidurl="${c.id}">🔗 URL</button>
         ${media?`<button class="ghost" data-vidclear="${c.id}">動画を消す</button>`:""}
+        ${localVideoKeys.has(vkey("comboVideos",c.id))?`<button class="ghost" data-viddl="${c.id}">📥 動画を書き出す</button>`:""}
         ${isUser?`<button class="danger" data-delcombo="${c.id}">削除</button>`:""}
       </div>
     </div>`;
@@ -105,6 +106,7 @@ function renderCombos(){
   el.querySelectorAll("[data-vidfile]").forEach(b=>b.onclick=()=>pickVideoFile("comboVideos", b.dataset.vidfile, renderCombos));
   el.querySelectorAll("[data-vidurl]").forEach(b=>b.onclick=()=>editVideo("comboVideos", list.find(x=>x.id===b.dataset.vidurl), renderCombos));
   el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("comboVideos", b.dataset.vidclear, renderCombos));
+  el.querySelectorAll("[data-viddl]").forEach(b=>b.onclick=()=>downloadLocalVideo("comboVideos", b.dataset.viddl, list.find(x=>x.id===b.dataset.viddl).name));
   el.querySelectorAll("[data-fav]").forEach(s=>s.onclick=()=>{
     const id=s.dataset.fav; favs[id]=!favs[id]; saveStore(); renderCombos();
   });
@@ -250,6 +252,7 @@ function renderSetplays(){
         <button class="ghost" data-vidfile="${s.id}">📁 動画ファイル</button>
         <button class="ghost" data-vidurl="${s.id}">🔗 URL</button>
         ${media?`<button class="ghost" data-vidclear="${s.id}">動画を消す</button>`:""}
+        ${localVideoKeys.has(vkey("setplayVideos",s.id))?`<button class="ghost" data-viddl="${s.id}">📥 動画を書き出す</button>`:""}
         ${isUser?`<button class="danger" data-delsp="${s.id}">削除</button>`:""}</div>
     </div>`;
   }).join("");
@@ -257,6 +260,7 @@ function renderSetplays(){
   el.querySelectorAll("[data-vidfile]").forEach(b=>b.onclick=()=>pickVideoFile("setplayVideos", b.dataset.vidfile, renderSetplays));
   el.querySelectorAll("[data-vidurl]").forEach(b=>b.onclick=()=>editVideo("setplayVideos", list.find(x=>x.id===b.dataset.vidurl), renderSetplays));
   el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("setplayVideos", b.dataset.vidclear, renderSetplays));
+  el.querySelectorAll("[data-viddl]").forEach(b=>b.onclick=()=>downloadLocalVideo("setplayVideos", b.dataset.viddl, list.find(x=>x.id===b.dataset.viddl).situation));
   el.querySelectorAll("[data-delsp]").forEach(b=>b.onclick=()=>{
     store[currentChar].userSetplays = store[currentChar].userSetplays.filter(x=>x.id!==b.dataset.delsp);
     saveStore(); renderSetplays();
@@ -362,7 +366,9 @@ function renderGlossary(){
 
   const el = document.getElementById("glossaryList");
   if(!list.length){ el.innerHTML=`<div class="empty">該当する用語がありません</div>`; return; }
-  el.innerHTML = list.map(t=>`<div class="card">
+  el.innerHTML = list.map(t=>{
+    const media = hasMedia("glossaryVideos", t);
+    return `<div class="card">
     <div class="term">
       <span class="term-name">${hl(t.term,q)}</span>
       ${t.read?`<span class="term-read">${hl(t.read,q)}</span>`:""}
@@ -371,12 +377,23 @@ function renderGlossary(){
       ${!t.builtin?`<span class="badge" style="color:var(--accent2);border-color:var(--accent2)">自作</span>`:""}
     </div>
     <div class="term-def">${hl(t.def,q)}</div>
+    ${mediaHTML("glossaryVideos", t)}
     <div class="row-actions">
       <button class="ghost" data-gedit="${t.id}">✎ 編集</button>
       <button class="danger" data-gdel="${t.id}">削除</button>
       ${isGlossaryModified(t)?`<button class="ghost" data-greset="${t.id}">↺ 元に戻す</button>`:""}
+      <button class="ghost" data-vidfile="${t.id}">📁 動画ファイル</button>
+      <button class="ghost" data-vidurl="${t.id}">🔗 URL</button>
+      ${media?`<button class="ghost" data-vidclear="${t.id}">動画を消す</button>`:""}
+      ${localVideoKeys.has(vkey("glossaryVideos",t.id))?`<button class="ghost" data-viddl="${t.id}">📥 動画を書き出す</button>`:""}
     </div>
-  </div>`).join("");
+  </div>`;
+  }).join("");
+  attachVideoHandlers(el); fillLocalVideos(el);
+  el.querySelectorAll("[data-vidfile]").forEach(b=>b.onclick=()=>pickVideoFile("glossaryVideos", b.dataset.vidfile, renderGlossary));
+  el.querySelectorAll("[data-vidurl]").forEach(b=>b.onclick=()=>editVideo("glossaryVideos", list.find(x=>x.id===b.dataset.vidurl), renderGlossary));
+  el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("glossaryVideos", b.dataset.vidclear, renderGlossary));
+  el.querySelectorAll("[data-viddl]").forEach(b=>b.onclick=()=>downloadLocalVideo("glossaryVideos", b.dataset.viddl, list.find(x=>x.id===b.dataset.viddl).term));
 
   el.querySelectorAll("[data-gedit]").forEach(b=>b.onclick=()=>editGlossaryTerm(list.find(x=>x.id===b.dataset.gedit)));
   el.querySelectorAll("[data-gdel]").forEach(b=>b.onclick=()=>deleteGlossaryTerm(list.find(x=>x.id===b.dataset.gdel)));
@@ -442,12 +459,14 @@ function renderGuide(){
           <button class="ghost" data-vidfile="${s.id}">📁 動画ファイル</button>
           <button class="ghost" data-vidurl="${s.id}">🔗 URL</button>
           ${media?`<button class="ghost" data-vidclear="${s.id}">動画を消す</button>`:""}
+          ${localVideoKeys.has(vkey("guideVideos",s.id))?`<button class="ghost" data-viddl="${s.id}">📥 動画を書き出す</button>`:""}
         </div>
       </div>
     </div>`;
   }).join("");
 
   attachVideoHandlers(el); fillLocalVideos(el);
+  el.querySelectorAll("[data-viddl]").forEach(b=>b.onclick=()=>downloadLocalVideo("guideVideos", b.dataset.viddl, steps.find(x=>x.id===b.dataset.viddl).title));
   el.querySelectorAll("[data-vidfile]").forEach(b=>b.onclick=()=>pickVideoFile("guideVideos", b.dataset.vidfile, renderGuide));
   el.querySelectorAll("[data-vidurl]").forEach(b=>b.onclick=()=>editVideo("guideVideos", steps.find(x=>x.id===b.dataset.vidurl), renderGuide));
   el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("guideVideos", b.dataset.vidclear, renderGuide));
@@ -509,7 +528,7 @@ function attachVideoHandlers(container){
   });
 }
 // "comboVideos"/"setplayVideos" はキャラ別、"guideVideos" はキャラに依存しない全体共通
-const GLOBAL_VIDEO_KINDS = new Set(["guideVideos"]);
+const GLOBAL_VIDEO_KINDS = new Set(["guideVideos", "glossaryVideos"]);
 function videoStore(kind){ return GLOBAL_VIDEO_KINDS.has(kind) ? gns(kind) : ns(kind); }
 
 // 動画URLの上書き保存（シードカードにも後から動画を付けられる）
@@ -585,6 +604,21 @@ function fillLocalVideos(container){
     const k = v.dataset.localvideo;
     if(objURLcache[k]){ v.src = objURLcache[k]; return; }
     idbGet(k).then(blob=>{ if(blob){ const u = URL.createObjectURL(blob); objURLcache[k]=u; v.src=u; }});
+  });
+}
+// ローカルに保存した動画ファイルを実ファイルとして書き出す（みんなに共有したい時、
+// videosフォルダに置いて data.js/glossary.js/guide.js から相対パスで参照するために使う）
+function downloadLocalVideo(kind, id, niceName){
+  const k = vkey(kind, id);
+  idbGet(k).then(blob=>{
+    if(!blob){ alert("保存された動画が見つかりません"); return; }
+    const ext = (blob.type.split("/")[1] || "mp4").replace(/[^a-z0-9]/gi, "");
+    const safe = String(niceName||id).replace(/[^\w぀-ヿ一-鿿-]+/g, "_").slice(0, 40);
+    const a = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    a.href = url; a.download = `${safe || id}.${ext}`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 4000);
   });
 }
 function clearVideo(kind, id, after){
