@@ -116,21 +116,21 @@ const SF6_GUIDE = [
     summary: "発生フレームと硬直差を見て判断する",
     body: "・相手の技をガードした時の硬直差と、自分の技の発生フレームを比べる\n・自分の技の発生が、相手の不利フレームより速ければ確定反撃が入る\n・「フレーム」タブの確反逆引きに数値を入れると、使える技が自動で分かる",
     relatedView: "frame", relatedLabel: "フレームタブの確反逆引きを開く",
-    diagram: `<svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg" style="overflow:hidden" preserveAspectRatio="xMidYMid meet">
+    diagram: `<svg viewBox="0 0 760 350" xmlns="http://www.w3.org/2000/svg" style="overflow:visible" preserveAspectRatio="xMidYMid meet">
       <style>.lbl{fill:var(--text);font-size:13px}.sub{fill:var(--muted);font-size:12px}</style>
-      <text class="lbl" x="70" y="50">相手が動けない時間（不利フレーム）</text>
-      <rect x="70" y="60" width="260" height="32" fill="var(--bad)" opacity="0.6"/>
-      <text class="lbl" x="70" y="125">自分の技が当たるまで（発生フレーム）</text>
-      <rect x="70" y="135" width="170" height="32" fill="var(--good)" opacity="0.85"/>
-      <rect x="240" y="135" width="90" height="32" fill="var(--good)" opacity="0.25"/>
-      <line x1="240" y1="125" x2="240" y2="240" stroke="var(--good)" stroke-width="2" stroke-dasharray="4 3"/>
-      <text class="sub" x="246" y="240">技が当たる</text>
-      <line x1="330" y1="50" x2="330" y2="240" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
-      <text class="sub" x="336" y="240">相手が動き出す</text>
-      <line x1="70" y1="260" x2="640" y2="260" stroke="var(--line)" stroke-width="2"/>
-      <text class="sub" x="70" y="278">0F（ガード成立）</text>
-      <text class="lbl" x="70" y="305" fill="var(--good)">緑が赤の中に収まれば</text>
-      <text class="lbl" x="70" y="323" fill="var(--good)">→ 確定反撃が成立（余裕分）</text>
+      <text class="lbl" x="120" y="50">相手が動けない時間（不利フレーム）</text>
+      <rect x="120" y="60" width="260" height="32" fill="var(--bad)" opacity="0.6"/>
+      <text class="lbl" x="120" y="125">自分の技が当たるまで（発生フレーム）</text>
+      <rect x="120" y="135" width="170" height="32" fill="var(--good)" opacity="0.85"/>
+      <rect x="290" y="135" width="90" height="32" fill="var(--good)" opacity="0.25"/>
+      <line x1="290" y1="125" x2="290" y2="240" stroke="var(--good)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text class="sub" x="296" y="240">技が当たる</text>
+      <line x1="380" y1="50" x2="380" y2="240" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text class="sub" x="386" y="240">相手が動き出す</text>
+      <line x1="120" y1="260" x2="690" y2="260" stroke="var(--line)" stroke-width="2"/>
+      <text class="sub" x="120" y="278">0F（ガード成立）</text>
+      <text class="lbl" x="120" y="305" fill="var(--good)">緑が赤の中に収まれば</text>
+      <text class="lbl" x="120" y="323" fill="var(--good)">→ 確定反撃が成立（余裕分）</text>
     </svg>`,
   },
   {
