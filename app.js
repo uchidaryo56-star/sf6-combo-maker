@@ -423,6 +423,40 @@ document.getElementById("addGlossary").onclick = ()=>{
   saveStore(); renderGlossaryFilters(); renderGlossary();
 };
 
+/* ============ 初心者ガイド ============ */
+function renderGuide(){
+  const steps = (typeof SF6_GUIDE!=="undefined" ? SF6_GUIDE : []).slice().sort((a,b)=>a.order-b.order);
+  const el = document.getElementById("guideList");
+  if(!steps.length){ el.innerHTML = `<div class="empty">ガイドがありません</div>`; return; }
+  el.innerHTML = steps.map(s=>{
+    const media = hasMedia("guideVideos", s);
+    return `<div class="card guide-card">
+      <div class="guide-num">${s.order}</div>
+      <div class="guide-body">
+        <div class="card-head"><h3>${esc(s.title)}</h3><span class="badge">${esc(s.summary||"")}</span></div>
+        <p>${esc(s.body||"")}</p>
+        ${s.diagram?`<div class="guide-diagram">${s.diagram}</div>`:""}
+        ${mediaHTML("guideVideos", s)}
+        <div class="row-actions">
+          ${s.relatedView?`<button class="ghost" data-gotoview="${esc(s.relatedView)}">→ ${esc(s.relatedLabel||"関連タブを開く")}</button>`:""}
+          <button class="ghost" data-vidfile="${s.id}">📁 動画ファイル</button>
+          <button class="ghost" data-vidurl="${s.id}">🔗 URL</button>
+          ${media?`<button class="ghost" data-vidclear="${s.id}">動画を消す</button>`:""}
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  attachVideoHandlers(el); fillLocalVideos(el);
+  el.querySelectorAll("[data-vidfile]").forEach(b=>b.onclick=()=>pickVideoFile("guideVideos", b.dataset.vidfile, renderGuide));
+  el.querySelectorAll("[data-vidurl]").forEach(b=>b.onclick=()=>editVideo("guideVideos", steps.find(x=>x.id===b.dataset.vidurl), renderGuide));
+  el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("guideVideos", b.dataset.vidclear, renderGuide));
+  el.querySelectorAll("[data-gotoview]").forEach(b=>b.onclick=()=>{
+    const tab = document.querySelector(`.tab[data-view="${b.dataset.gotoview}"]`);
+    if(tab) tab.click();
+  });
+}
+
 /* -------- ユーティリティ -------- */
 function esc(s){ return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m])); }
 
@@ -474,16 +508,20 @@ function attachVideoHandlers(container){
     el.replaceWith(f);
   });
 }
+// "comboVideos"/"setplayVideos" はキャラ別、"guideVideos" はキャラに依存しない全体共通
+const GLOBAL_VIDEO_KINDS = new Set(["guideVideos"]);
+function videoStore(kind){ return GLOBAL_VIDEO_KINDS.has(kind) ? gns(kind) : ns(kind); }
+
 // 動画URLの上書き保存（シードカードにも後から動画を付けられる）
 function videoOf(kind, item){
-  const ov = ns(kind);             // "comboVideos" / "setplayVideos"
+  const ov = videoStore(kind);
   return (item.id in ov) ? ov[item.id] : (item.video||"");
 }
 function editVideo(kind, item, after){
   const cur = videoOf(kind, item);
   const url = prompt("動画URL（YouTube / mp4 など）。空欄で削除:", cur);
   if(url===null) return;            // キャンセル
-  const ov = ns(kind);
+  const ov = videoStore(kind);
   if(url.trim()==="") delete ov[item.id]; else ov[item.id]=url.trim();
   saveStore(); after();
 }
@@ -493,7 +531,7 @@ const VID_DB = "sf6cm-videos";
 let _vdb = null;
 let localVideoKeys = new Set();   // 保存済みキーの一覧（同期判定用）
 const objURLcache = {};
-function vkey(kind, id){ return `${currentChar}:${kind}:${id}`; }
+function vkey(kind, id){ return `${GLOBAL_VIDEO_KINDS.has(kind)?"global":currentChar}:${kind}:${id}`; }
 function idb(){
   return new Promise((res, rej)=>{
     if(_vdb) return res(_vdb);
@@ -551,7 +589,7 @@ function fillLocalVideos(container){
 }
 function clearVideo(kind, id, after){
   if(!confirm("この動画を削除しますか？")) return;
-  const ov = ns(kind); delete ov[id]; saveStore();
+  const ov = videoStore(kind); delete ov[id]; saveStore();
   const k = vkey(kind, id);
   idbDel(k).then(()=>{ localVideoKeys.delete(k); delete objURLcache[k]; after(); });
 }
@@ -560,6 +598,7 @@ document.getElementById("glossarySearch").oninput = renderGlossary;
 
 /* -------- 全描画 -------- */
 function renderAll(){
+  renderGuide();
   renderComboFilters(); renderCombos();
   renderFrames();
   renderSetplays();
@@ -569,4 +608,4 @@ function renderAll(){
 initChars();
 renderAll();
 // 保存済みローカル動画のキーを読み込んでから再描画（再読み込み後も動画が出るように）
-idbKeys().then(keys=>{ localVideoKeys = new Set(keys); renderCombos(); renderSetplays(); }).catch(()=>{});
+idbKeys().then(keys=>{ localVideoKeys = new Set(keys); renderCombos(); renderSetplays(); renderGuide(); }).catch(()=>{});

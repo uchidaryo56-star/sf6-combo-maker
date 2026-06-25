@@ -103,12 +103,18 @@
   .term-def{font-size:14px;color:var(--text);line-height:1.6}
   .term mark{background:var(--warn);color:#1a1a1a;border-radius:3px;padding:0 2px}
   .ver{font-size:11px;color:var(--muted);font-weight:400;letter-spacing:0;vertical-align:middle}
-  @media(max-width:640px){.grid2{grid-template-columns:1fr}main{padding:14px}}
+  .guide-card{display:flex;gap:16px;align-items:flex-start}
+  .guide-num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+  .guide-body{flex:1;min-width:0}
+  .guide-body p{white-space:pre-wrap;font-size:14px;line-height:1.7;margin:8px 0}
+  .guide-diagram{max-width:480px;margin:10px 0;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}
+  .guide-diagram svg{width:100%;height:auto;display:block}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}main{padding:14px}.guide-card{flex-direction:column}}
 </style>
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.1.0</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.2.0</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:13px">キャラ</span>
     <select id="charSelect"></select>
@@ -116,7 +122,8 @@
 </header>
 
 <div class="tabs">
-  <div class="tab active" data-view="combo">コンボ</div>
+  <div class="tab active" data-view="guide">初心者ガイド</div>
+  <div class="tab" data-view="combo">コンボ</div>
   <div class="tab" data-view="frame">フレーム</div>
   <div class="tab" data-view="setplay">セットプレイ</div>
   <div class="tab" data-view="notes">マッチアップメモ</div>
@@ -124,8 +131,14 @@
 </div>
 
 <main>
+  <!-- ============ 初心者ガイド ============ -->
+  <section class="view active" id="view-guide">
+    <div class="hint">初心者がやるべき行動を順番にまとめたロードマップです。図解と動画つき。上から1つずつ進めてみてください。</div>
+    <div id="guideList"></div>
+  </section>
+
   <!-- ============ コンボ ============ -->
-  <section class="view active" id="view-combo">
+  <section class="view" id="view-combo">
     <div class="toolbar" id="comboFilters"></div>
     <div class="toolbar">
       <label class="check"><input type="checkbox" id="favOnly"> お気に入りのみ</label>
@@ -212,8 +225,9 @@
 </main>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.1.0"></script>
-<script src="glossary.js?v=1.1.0"></script>
-<script src="app.js?v=1.1.0"></script>
+<script src="data.js?v=1.2.0"></script>
+<script src="glossary.js?v=1.2.0"></script>
+<script src="guide.js?v=1.2.0"></script>
+<script src="app.js?v=1.2.0"></script>
 </body>
 </html>
