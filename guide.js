@@ -23,20 +23,20 @@ const SF6_GUIDE = [
       <rect class="cell" x="0" y="200" width="100" height="100"/>
       <rect class="cell" x="100" y="200" width="100" height="100"/>
       <rect class="cell" x="200" y="200" width="100" height="100"/>
-      <text class="num" x="50" y="45">7</text><text class="lbl" x="50" y="70">斜め後ジャンプ</text>
-      <text class="num" x="150" y="45">8</text><text class="lbl" x="150" y="70">ジャンプ</text>
-      <text class="num" x="250" y="45">9</text><text class="lbl" x="250" y="70">斜め前ジャンプ</text>
-      <text class="num" x="50" y="145">4</text><text class="lbl" x="50" y="170">後ろ（ガード）</text>
+      <text class="num" x="50" y="45">7 ↖</text><text class="lbl" x="50" y="70">斜め後ジャンプ</text>
+      <text class="num" x="150" y="45">8 ↑</text><text class="lbl" x="150" y="70">ジャンプ</text>
+      <text class="num" x="250" y="45">9 ↗</text><text class="lbl" x="250" y="70">斜め前ジャンプ</text>
+      <text class="num" x="50" y="145">4 ←</text><text class="lbl" x="50" y="170">後ろ（ガード）</text>
       <text class="num" x="150" y="150">5</text><text class="lbl" x="150" y="172">ニュートラル</text>
-      <text class="num" x="250" y="145">6</text><text class="lbl" x="250" y="170">前（前進）</text>
-      <text class="num" x="50" y="245">1</text><text class="lbl" x="50" y="270">後ろしゃがみ</text>
-      <text class="num" x="150" y="245">2</text><text class="lbl" x="150" y="270">しゃがみ</text>
-      <text class="num" x="250" y="245">3</text><text class="lbl" x="250" y="270">前しゃがみ</text>
+      <text class="num" x="250" y="145">6 →</text><text class="lbl" x="250" y="170">前（前進）</text>
+      <text class="num" x="50" y="245">1 ↙</text><text class="lbl" x="50" y="270">後ろしゃがみ（ガード）</text>
+      <text class="num" x="150" y="245">2 ↓</text><text class="lbl" x="150" y="270">しゃがみ</text>
+      <text class="num" x="250" y="245">3 ↘</text><text class="lbl" x="250" y="270">前しゃがみ</text>
     </svg>`,
   },
   {
-    id: "g2", order: 2,
-    title: "差し合い・間合いの基礎",
+    id: "g2", order: 7,
+    title: "差し合い・間合いの基礎（応用）",
     summary: "中距離の駆け引きの基本を知る",
     body: "・自分の技が当たり相手の技が当たらない距離（間合い）を意識する\n・リーチのある牽制技を置いて相手の接近を抑える\n・相手の技の空振りに差し返す（後で当てる）意識を持つ",
     diagram: `<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@ const SF6_GUIDE = [
     </svg>`,
   },
   {
-    id: "g3", order: 3,
+    id: "g3", order: 2,
     title: "ガードの基礎（中段・下段）",
     summary: "中段・下段の二択を理解する",
     body: "・立ちガードは中段を防げるが、下段には当たってしまう\n・しゃがみガードは下段を防げるが、中段には当たってしまう\n・最初は崩されて当然。中段/下段の意識だけ持って反応練習を積む",
@@ -80,53 +80,60 @@ const SF6_GUIDE = [
     </svg>`,
   },
   {
-    id: "g4", order: 4,
+    id: "g4", order: 3,
     title: "ドライブゲージを理解する",
-    summary: "5つの行動が同じゲージを消費すると知る",
-    body: "・パリィ／ジャストパリィ／ドライブインパクト／ドライブラッシュ／OD技／リバーサルは全部Dゲージを消費する共通リソース\n・0本になるとバーンアウト（ガークラの危険・OD技が使えない）\n・むやみに使わず、攻めと守りでバランス良く配分する",
-    diagram: `<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
-      <style>.lbl{fill:var(--text);font-size:12px;text-anchor:middle}
-      .sub{fill:var(--muted);font-size:11px;text-anchor:middle}</style>
-      <rect x="20" y="60" width="596" height="40" fill="var(--accent2)" opacity="0.7"/>
-      <rect x="20" y="60" width="596" height="40" fill="none" stroke="var(--line)" stroke-width="2"/>
-      <line x1="120" y1="60" x2="120" y2="100" stroke="var(--bg)" stroke-width="3"/>
-      <line x1="220" y1="60" x2="220" y2="100" stroke="var(--bg)" stroke-width="3"/>
-      <line x1="320" y1="60" x2="320" y2="100" stroke="var(--bg)" stroke-width="3"/>
-      <line x1="420" y1="60" x2="420" y2="100" stroke="var(--bg)" stroke-width="3"/>
-      <line x1="520" y1="60" x2="520" y2="100" stroke="var(--bg)" stroke-width="3"/>
-      <text class="lbl" x="70" y="35">パリィ</text>
-      <text class="lbl" x="170" y="35">ジャストパリィ</text>
-      <text class="lbl" x="270" y="35">ドライブ<tspan x="270" dy="13">インパクト</tspan></text>
-      <text class="lbl" x="370" y="35">ドライブ<tspan x="370" dy="13">ラッシュ</tspan></text>
-      <text class="lbl" x="470" y="35">OD技</text>
-      <text class="lbl" x="570" y="35">リバーサル</text>
-      <rect x="20" y="118" width="596" height="22" fill="var(--bad)" opacity="0.25"/>
-      <text class="sub" x="318" y="134">0本＝バーンアウト（OD技不可・ガークラの危険）</text>
+    summary: "6つの行動が同じゲージを消費すると知る",
+    body: "・パリィ／ジャストパリィ／ドライブインパクト／ドライブラッシュ／OD技／リバーサルは全部Dゲージを消費する共通リソース\n・0本になるとバーンアウト。OD技が使えなくなり、壁際でドライブインパクトを受けるとスタンしてしまう危険がある\n・むやみに使わず、攻めと守りでバランス良く配分する",
+    diagram: `<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg">
+      <style>.seg{fill:var(--accent2);opacity:0.7}
+      .segline{stroke:var(--bg);stroke-width:3}
+      .lbl{fill:var(--text);font-size:13px;text-anchor:middle}
+      .sub{fill:var(--muted);font-size:11px;text-anchor:middle}
+      .chip{fill:var(--panel2);stroke:var(--line);stroke-width:1.5}
+      .chiptxt{fill:var(--text);font-size:12px;text-anchor:middle}</style>
+      <rect x="20" y="20" width="600" height="40" class="seg"/>
+      <rect x="20" y="20" width="600" height="40" fill="none" stroke="var(--line)" stroke-width="2"/>
+      <line x1="120" y1="20" x2="120" y2="60" class="segline"/>
+      <line x1="220" y1="20" x2="220" y2="60" class="segline"/>
+      <line x1="320" y1="20" x2="320" y2="60" class="segline"/>
+      <line x1="420" y1="20" x2="420" y2="60" class="segline"/>
+      <line x1="520" y1="20" x2="520" y2="60" class="segline"/>
+      <text class="sub" x="320" y="78">ドライブゲージ（6本）</text>
+      <text class="lbl" x="320" y="105" font-weight="700">この6つの行動が同じゲージを消費する</text>
+      <rect class="chip" x="40"  y="120" width="170" height="36" rx="8"/><text class="chiptxt" x="125" y="143">パリィ</text>
+      <rect class="chip" x="230" y="120" width="170" height="36" rx="8"/><text class="chiptxt" x="315" y="143">ジャストパリィ</text>
+      <rect class="chip" x="420" y="120" width="170" height="36" rx="8"/><text class="chiptxt" x="505" y="143">ドライブインパクト</text>
+      <rect class="chip" x="40"  y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="125" y="189">ドライブラッシュ</text>
+      <rect class="chip" x="230" y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="315" y="189">OD技</text>
+      <rect class="chip" x="420" y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="505" y="189">リバーサル</text>
+      <rect x="20" y="212" width="600" height="22" fill="var(--bad)" opacity="0.25"/>
+      <text class="sub" x="320" y="228">0本＝バーンアウト（OD技不可・壁際でドライブインパクトを受けるとスタンの危険）</text>
     </svg>`,
   },
   {
-    id: "g5", order: 5,
+    id: "g5", order: 4,
     title: "確定反撃（確反）の考え方",
     summary: "発生フレームと硬直差を見て判断する",
     body: "・相手の技をガードした時の硬直差と、自分の技の発生フレームを比べる\n・自分の技の発生が、相手の不利フレームより速ければ確定反撃が入る\n・「フレーム」タブの確反逆引きに数値を入れると、使える技が自動で分かる",
     relatedView: "frame", relatedLabel: "フレームタブの確反逆引きを開く",
-    diagram: `<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg">
+    diagram: `<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg">
       <style>.lbl{fill:var(--text);font-size:13px}.sub{fill:var(--muted);font-size:12px}</style>
-      <line x1="40" y1="170" x2="600" y2="170" stroke="var(--line)" stroke-width="2"/>
-      <text class="sub" x="40" y="188">ガード成立(0F)</text>
-      <rect x="40" y="60" width="260" height="28" fill="var(--bad)" opacity="0.55"/>
-      <text class="lbl" x="50" y="50">相手の不利フレーム（硬直差）</text>
-      <rect x="40" y="100" width="180" height="28" fill="var(--good)" opacity="0.7"/>
-      <text class="lbl" x="50" y="142">自分の技の発生フレーム</text>
-      <line x1="220" y1="95" x2="220" y2="160" stroke="var(--good)" stroke-width="2" stroke-dasharray="4 3"/>
-      <text class="sub" x="225" y="165">技が届く</text>
-      <line x1="300" y1="55" x2="300" y2="160" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
-      <text class="sub" x="305" y="50">相手が動ける</text>
-      <text class="lbl" x="330" y="118" fill="var(--good)">余裕あり → 確定反撃成立</text>
+      <line x1="60" y1="200" x2="600" y2="200" stroke="var(--line)" stroke-width="2"/>
+      <text class="sub" x="60" y="218">0F（ガード成立）</text>
+      <text class="lbl" x="60" y="55">相手が動けない時間（不利フレーム）</text>
+      <rect x="60" y="65" width="260" height="32" fill="var(--bad)" opacity="0.6"/>
+      <text class="lbl" x="60" y="115">自分の技が当たるまで（発生フレーム）</text>
+      <rect x="60" y="125" width="170" height="32" fill="var(--good)" opacity="0.85"/>
+      <rect x="230" y="125" width="90" height="32" fill="var(--good)" opacity="0.25"/>
+      <line x1="230" y1="115" x2="230" y2="190" stroke="var(--good)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text class="sub" x="236" y="190">技が当たる</text>
+      <line x1="320" y1="55" x2="320" y2="190" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text class="sub" x="326" y="190">相手が動き出す</text>
+      <text class="lbl" x="60" y="172" fill="var(--good)">緑が赤の中に収まれば → 確定反撃が成立（余裕分）</text>
     </svg>`,
   },
   {
-    id: "g6", order: 6,
+    id: "g6", order: 5,
     title: "コンボを1つ覚えて使う",
     summary: "難しいコンボより再現性を優先する",
     body: "・最初は難易度の低い基本コンボを1つ、完璧に出せるようにする\n・ヒット確認（ヒットした時だけ繋ぐ）を意識する\n・「コンボ」タブで難易度の低いものから練習し、練習済みチェックを使う",
@@ -134,27 +141,32 @@ const SF6_GUIDE = [
     diagram: "",
   },
   {
-    id: "g7", order: 7,
+    id: "g7", order: 6,
     title: "起き攻め・セットプレイの基礎",
     summary: "ダウンを取った後の「型」を1つ持つ",
     body: "・ダウンを取ったら毎回同じ手順で攻める「型」を1つ用意する\n・打撃／投げ／シミー（一歩下がって投げ抜けを誘う）の択を使い分ける\n・「セットプレイ」タブで状況別の型を整理しておく",
     relatedView: "setplay", relatedLabel: "セットプレイタブを開く",
-    diagram: `<svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+    diagram: `<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg">
       <style>.fig{fill:var(--panel2);stroke:var(--line);stroke-width:2}
-      .lbl{fill:var(--text);font-size:13px;text-anchor:middle}
-      .sub{fill:var(--muted);font-size:11px;text-anchor:middle}</style>
-      <defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      .lbl{fill:var(--text);font-size:14px;text-anchor:middle}
+      .sub{fill:var(--muted);font-size:12px;text-anchor:middle}
+      .arrow{stroke:var(--accent2);stroke-width:2;fill:none}</style>
+      <defs><marker id="arOki" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M0,0L10,5L0,10z" fill="var(--accent2)"/></marker></defs>
-      <rect class="fig" x="20" y="160" width="70" height="20" rx="6"/>
-      <text class="lbl" x="55" y="198">ダウン中の相手</text>
-      <rect class="fig" x="150" y="120" width="40" height="60" rx="8"/>
-      <text class="lbl" x="170" y="112">前ステで近づく</text>
-      <path d="M230,140 C280,100 280,60 320,50" stroke="var(--accent2)" stroke-width="2" fill="none" marker-end="url(#ar2)"/>
-      <path d="M230,150 C300,150 300,150 320,140" stroke="var(--accent2)" stroke-width="2" fill="none" marker-end="url(#ar2)"/>
-      <path d="M230,160 C280,200 280,210 320,210" stroke="var(--accent2)" stroke-width="2" fill="none" marker-end="url(#ar2)"/>
-      <rect class="fig" x="330" y="20" width="90" height="40" rx="8"/><text class="lbl" x="375" y="44">打撃</text>
-      <rect class="fig" x="330" y="120" width="90" height="40" rx="8"/><text class="lbl" x="375" y="144">投げ</text>
-      <rect class="fig" x="330" y="195" width="90" height="22" rx="6"/><text class="sub" x="375" y="209">シミー</text>
+      <rect class="fig" x="20" y="145" width="120" height="50" rx="10"/>
+      <text class="lbl" x="80" y="175">ダウン中の相手</text>
+      <line class="arrow" x1="150" y1="170" x2="250" y2="170" marker-end="url(#arOki)"/>
+      <text class="sub" x="200" y="155">前ステで近づく</text>
+      <path class="arrow" d="M250,170 C290,120 320,80 360,60" marker-end="url(#arOki)"/>
+      <path class="arrow" d="M250,170 L360,170" marker-end="url(#arOki)"/>
+      <path class="arrow" d="M250,170 C290,220 320,260 360,280" marker-end="url(#arOki)"/>
+      <rect class="fig" x="370" y="35" width="120" height="50" rx="10"/>
+      <text class="lbl" x="430" y="65">打撃</text>
+      <rect class="fig" x="370" y="145" width="120" height="50" rx="10"/>
+      <text class="lbl" x="430" y="175">投げ</text>
+      <rect class="fig" x="370" y="255" width="120" height="50" rx="10"/>
+      <text class="lbl" x="430" y="280">シミー</text>
+      <text class="sub" x="430" y="296">（下がって誘う）</text>
     </svg>`,
   },
   {
