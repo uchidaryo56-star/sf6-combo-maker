@@ -207,6 +207,7 @@ const SF6_DATA = {
       {
         "move": "立ち弱P（ノーシ）",
         "type": "通常技",
+        "command": "弱P",
         "startup": 6,
         "active": "6-8",
         "recovery": "10",
@@ -225,6 +226,7 @@ const SF6_DATA = {
       {
         "move": "立ち弱K（ニージニイ・ウダール）",
         "type": "通常技",
+        "command": "弱K",
         "startup": 5,
         "active": "5-7",
         "recovery": "11",
@@ -243,6 +245,7 @@ const SF6_DATA = {
       {
         "move": "立ち中P（シュトゥールム）",
         "type": "通常技",
+        "command": "中P",
         "startup": 12,
         "active": "12-14",
         "recovery": "21",
@@ -261,6 +264,7 @@ const SF6_DATA = {
       {
         "move": "立ち中K（ウームヌィ・ウダール）",
         "type": "通常技",
+        "command": "中K",
         "startup": 8,
         "active": "8-10",
         "recovery": "19",
@@ -279,6 +283,7 @@ const SF6_DATA = {
       {
         "move": "立ち強P（キンターヴル）",
         "type": "通常技",
+        "command": "強P",
         "startup": 12,
         "active": "12-13",
         "recovery": "22",
@@ -297,6 +302,7 @@ const SF6_DATA = {
       {
         "move": "立ち強K（オボロートニ）",
         "type": "通常技",
+        "command": "強K",
         "startup": 12,
         "active": "12-15",
         "recovery": "17",
@@ -315,6 +321,7 @@ const SF6_DATA = {
       {
         "move": "しゃがみ弱P（ブィストルイ・ウダール）",
         "type": "通常技",
+        "command": "2+弱P",
         "startup": 4,
         "active": "4-5",
         "recovery": "11",
@@ -333,6 +340,7 @@ const SF6_DATA = {
       {
         "move": "しゃがみ弱K（リョーフキー・ウダール）",
         "type": "通常技",
+        "command": "2+弱K",
         "startup": 6,
         "active": "6-7",
         "recovery": "10",
@@ -351,6 +359,7 @@ const SF6_DATA = {
       {
         "move": "しゃがみ中P（ズミヤー）",
         "type": "通常技",
+        "command": "2+中P",
         "startup": 7,
         "active": "7-10",
         "recovery": "14",
@@ -369,6 +378,7 @@ const SF6_DATA = {
       {
         "move": "しゃがみ中K（ズローバ）",
         "type": "通常技",
+        "command": "2+中K",
         "startup": 9,
         "active": "9-11",
         "recovery": "17",
@@ -387,6 +397,7 @@ const SF6_DATA = {
       {
         "move": "しゃがみ強P（マリートヴァ）",
         "type": "通常技",
+        "command": "2+強P",
         "startup": 9,
         "active": "9-14",
         "recovery": "20",
@@ -405,6 +416,7 @@ const SF6_DATA = {
       {
         "move": "しゃがみ強K（ジョーキル）",
         "type": "通常技",
+        "command": "2+強K",
         "startup": 10,
         "active": "10-12",
         "recovery": "21",
@@ -423,6 +435,7 @@ const SF6_DATA = {
       {
         "move": "ジャンプ弱P（ルイースイ）",
         "type": "通常技",
+        "command": "（ジャンプ中に）弱P",
         "startup": 5,
         "active": "5-14",
         "recovery": "着地後3",
@@ -441,6 +454,7 @@ const SF6_DATA = {
       {
         "move": "ジャンプ弱K（ヴァローナ）",
         "type": "通常技",
+        "command": "（ジャンプ中に）弱K",
         "startup": 6,
         "active": "6-13",
         "recovery": "着地後3",
@@ -459,6 +473,7 @@ const SF6_DATA = {
       {
         "move": "ジャンプ中P（ローシャッチ）",
         "type": "通常技",
+        "command": "（ジャンプ中に）中P",
         "startup": 12,
         "active": "12-14",
         "recovery": "着地後3",
@@ -477,6 +492,7 @@ const SF6_DATA = {
       {
         "move": "ジャンプ中K（コンダ）",
         "type": "通常技",
+        "command": "（ジャンプ中に）中K",
         "startup": 7,
         "active": "7-12",
         "recovery": "着地後3",
@@ -495,6 +511,7 @@ const SF6_DATA = {
       {
         "move": "ジャンプ強P（イディナローク）",
         "type": "通常技",
+        "command": "（ジャンプ中に）強P",
         "startup": 9,
         "active": "9-13",
         "recovery": "着地後3",
@@ -513,6 +530,7 @@ const SF6_DATA = {
       {
         "move": "ジャンプ強K（ジャール・プチーツァ）",
         "type": "通常技",
+        "command": "（ジャンプ中に）強K",
         "startup": 11,
         "active": "11-16",
         "recovery": "着地後3",
@@ -531,6 +549,7 @@ const SF6_DATA = {
       {
         "move": "ギリオチーナ",
         "type": "特殊技",
+        "command": "6+中K",
         "startup": 22,
         "active": "22-23",
         "recovery": "19",
@@ -549,6 +568,7 @@ const SF6_DATA = {
       {
         "move": "シャーロスチ",
         "type": "特殊技",
+        "command": "3+強P",
         "startup": 16,
         "active": "16-18",
         "recovery": "31",
@@ -567,6 +587,7 @@ const SF6_DATA = {
       {
         "move": "ヴィリーナ",
         "type": "特殊技",
+        "command": "6+強K",
         "startup": 11,
         "active": "11-1611-12, 13-16",
         "recovery": "24",
@@ -585,6 +606,7 @@ const SF6_DATA = {
       {
         "move": "グロームストレルカ（1段目）",
         "type": "特殊技",
+        "command": "4+中P",
         "startup": 8,
         "active": "8-10",
         "recovery": "16",
@@ -603,6 +625,7 @@ const SF6_DATA = {
       {
         "move": "グロームストレルカ（2段目）",
         "type": "特殊技",
+        "command": "4+中P>中P",
         "startup": 10,
         "active": "10-12",
         "recovery": "20",
@@ -621,6 +644,7 @@ const SF6_DATA = {
       {
         "move": "ジラント",
         "type": "特殊技",
+        "command": "強K>強P",
         "startup": 20,
         "active": "20-22",
         "recovery": "20",
@@ -639,6 +663,7 @@ const SF6_DATA = {
       {
         "move": "ジラントルカー",
         "type": "特殊技",
+        "command": "強K>強P>強P",
         "startup": 21,
         "active": "21-23",
         "recovery": "22",
@@ -657,6 +682,7 @@ const SF6_DATA = {
       {
         "move": "ジラントナガー",
         "type": "特殊技",
+        "command": "強K>強P>強K",
         "startup": 21,
         "active": "21-23",
         "recovery": "22",
@@ -675,6 +701,7 @@ const SF6_DATA = {
       {
         "move": "弱 トリグラフ",
         "type": "必殺技",
+        "command": "22+弱P",
         "startup": 22,
         "active": "22-31",
         "recovery": "全体 55",
@@ -693,6 +720,7 @@ const SF6_DATA = {
       {
         "move": "中 トリグラフ",
         "type": "必殺技",
+        "command": "22+中P",
         "startup": 22,
         "active": "22-31",
         "recovery": "全体 55",
@@ -711,6 +739,7 @@ const SF6_DATA = {
       {
         "move": "強 トリグラフ",
         "type": "必殺技",
+        "command": "22+強P",
         "startup": 22,
         "active": "22-31",
         "recovery": "全体 55",
@@ -729,6 +758,7 @@ const SF6_DATA = {
       {
         "move": "OD 弱 トリグラフ",
         "type": "必殺技",
+        "command": "22+弱P中P",
         "startup": 20,
         "active": "20-39",
         "recovery": "全体 53",
@@ -747,6 +777,7 @@ const SF6_DATA = {
       {
         "move": "OD 中 トリグラフ",
         "type": "必殺技",
+        "command": "22+弱P強P",
         "startup": 20,
         "active": "20-39",
         "recovery": "全体 53",
@@ -765,6 +796,7 @@ const SF6_DATA = {
       {
         "move": "OD 強 トリグラフ",
         "type": "必殺技",
+        "command": "22+中P強P",
         "startup": 20,
         "active": "20-39",
         "recovery": "全体 53",
@@ -783,6 +815,7 @@ const SF6_DATA = {
       {
         "move": "弱 ストリボーグ",
         "type": "必殺技",
+        "command": "236+弱P",
         "startup": 16,
         "active": "16-21",
         "recovery": "全体 49",
@@ -801,6 +834,7 @@ const SF6_DATA = {
       {
         "move": "中 ストリボーグ",
         "type": "必殺技",
+        "command": "236+中P",
         "startup": 20,
         "active": "20-2620-22, 24-26",
         "recovery": "全体 53",
@@ -819,6 +853,7 @@ const SF6_DATA = {
       {
         "move": "強 ストリボーグ",
         "type": "必殺技",
+        "command": "236+強P",
         "startup": 28,
         "active": "28-4228-30, 40-42",
         "recovery": "全体 61",
@@ -837,6 +872,7 @@ const SF6_DATA = {
       {
         "move": "OD ストリボーグ",
         "type": "必殺技",
+        "command": "236+PP",
         "startup": 19,
         "active": "19-3019-21, 28-30",
         "recovery": "全体 52",
@@ -855,6 +891,7 @@ const SF6_DATA = {
       {
         "move": "弱 ヴィーハト",
         "type": "必殺技",
+        "command": "214+弱P",
         "startup": 150,
         "active": "150-159",
         "recovery": "全体 50",
@@ -873,6 +910,7 @@ const SF6_DATA = {
       {
         "move": "中 ヴィーハト",
         "type": "必殺技",
+        "command": "214+中P",
         "startup": 150,
         "active": "150-159",
         "recovery": "全体 50",
@@ -891,6 +929,7 @@ const SF6_DATA = {
       {
         "move": "強 ヴィーハト",
         "type": "必殺技",
+        "command": "214+強P",
         "startup": 150,
         "active": "150-159",
         "recovery": "全体 50",
@@ -909,6 +948,7 @@ const SF6_DATA = {
       {
         "move": "OD 弱 ヴィーハト",
         "type": "必殺技",
+        "command": "214+弱P中P",
         "startup": 110,
         "active": "110-149110-119, 140-149",
         "recovery": "全体 40",
@@ -927,6 +967,7 @@ const SF6_DATA = {
       {
         "move": "OD 中 ヴィーハト",
         "type": "必殺技",
+        "command": "214+弱P強P",
         "startup": 110,
         "active": "110-149110-119, 140-149",
         "recovery": "全体 40",
@@ -945,6 +986,7 @@ const SF6_DATA = {
       {
         "move": "OD 強 ヴィーハト",
         "type": "必殺技",
+        "command": "214+中P強P",
         "startup": 110,
         "active": "110-149110-119, 140-149",
         "recovery": "全体 40",
@@ -963,6 +1005,7 @@ const SF6_DATA = {
       {
         "move": "ヴィーハト・アクノ",
         "type": "必殺技",
+        "command": "（ヴィーハト設置中に）214+弱P / 中P",
         "startup": null,
         "active": "",
         "recovery": "全体 44",
@@ -981,6 +1024,7 @@ const SF6_DATA = {
       {
         "move": "ヴィーハト・チェーニ",
         "type": "必殺技",
+        "command": "（ヴィーハト設置中に）214+強P",
         "startup": null,
         "active": "",
         "recovery": "全体 40",
@@ -999,6 +1043,7 @@ const SF6_DATA = {
       {
         "move": "アムネジア",
         "type": "必殺技",
+        "command": "22+K",
         "startup": 3,
         "active": "3-20",
         "recovery": "35",
@@ -1017,6 +1062,7 @@ const SF6_DATA = {
       {
         "move": "OD アムネジア",
         "type": "必殺技",
+        "command": "22+KK",
         "startup": 1,
         "active": "1-20",
         "recovery": "35",
@@ -1035,6 +1081,7 @@ const SF6_DATA = {
       {
         "move": "弱 トルバラン",
         "type": "必殺技",
+        "command": "236+弱K",
         "startup": 22,
         "active": "",
         "recovery": "全体 50",
@@ -1053,6 +1100,7 @@ const SF6_DATA = {
       {
         "move": "中 トルバラン",
         "type": "必殺技",
+        "command": "236+中K",
         "startup": 26,
         "active": "",
         "recovery": "全体 50",
@@ -1071,6 +1119,7 @@ const SF6_DATA = {
       {
         "move": "強 トルバラン",
         "type": "必殺技",
+        "command": "236+強K",
         "startup": 26,
         "active": "",
         "recovery": "全体 50",
@@ -1089,6 +1138,7 @@ const SF6_DATA = {
       {
         "move": "OD トルバラン",
         "type": "必殺技",
+        "command": "236+KK",
         "startup": 22,
         "active": "",
         "recovery": "全体 50",
@@ -1107,6 +1157,7 @@ const SF6_DATA = {
       {
         "move": "アブニマーチ",
         "type": "必殺技",
+        "command": "214+K",
         "startup": 26,
         "active": "",
         "recovery": "全体 72",
@@ -1125,6 +1176,7 @@ const SF6_DATA = {
       {
         "move": "OD アブニマーチ",
         "type": "必殺技",
+        "command": "214+KK",
         "startup": 26,
         "active": "",
         "recovery": "全体 72",
@@ -1143,6 +1195,7 @@ const SF6_DATA = {
       {
         "move": "SA1 チェルノボーグ",
         "type": "スーパーアーツ",
+        "command": "236236+P",
         "startup": 8,
         "active": "",
         "recovery": "全体 84",
@@ -1161,6 +1214,7 @@ const SF6_DATA = {
       {
         "move": "SA2 ラヴーシュカ",
         "type": "スーパーアーツ",
+        "command": "214214+P",
         "startup": 29,
         "active": "",
         "recovery": "全体 13",
@@ -1179,6 +1233,7 @@ const SF6_DATA = {
       {
         "move": "SA3 ザプリェット",
         "type": "スーパーアーツ",
+        "command": "236236+K",
         "startup": 18,
         "active": "18-23",
         "recovery": "62",
@@ -1197,6 +1252,7 @@ const SF6_DATA = {
       {
         "move": "CA ザプリェット",
         "type": "スーパーアーツ",
+        "command": "（体力25%以下で）236236+K",
         "startup": 18,
         "active": "18-23",
         "recovery": "62",
@@ -1215,6 +1271,7 @@ const SF6_DATA = {
       {
         "move": "ラヴィーナ",
         "type": "通常投げ",
+        "command": "（近距離で）5 / 6+弱P弱K",
         "startup": 5,
         "active": "5-7",
         "recovery": "23",
@@ -1233,6 +1290,7 @@ const SF6_DATA = {
       {
         "move": "ウラガーン",
         "type": "通常投げ",
+        "command": "（近距離で）4+弱P弱K",
         "startup": 5,
         "active": "5-7",
         "recovery": "23",
@@ -1251,6 +1309,7 @@ const SF6_DATA = {
       {
         "move": "タルナード",
         "type": "通常投げ",
+        "command": "（ジャンプ中に）（近距離で）弱P弱K",
         "startup": 5,
         "active": "5-7",
         "recovery": "着地後3",
@@ -1269,6 +1328,7 @@ const SF6_DATA = {
       {
         "move": "前方ステップ",
         "type": "共通システム",
+        "command": "66",
         "startup": null,
         "active": "",
         "recovery": "全体 22",
@@ -1287,6 +1347,7 @@ const SF6_DATA = {
       {
         "move": "後方ステップ",
         "type": "共通システム",
+        "command": "44",
         "startup": null,
         "active": "",
         "recovery": "全体 23",
@@ -1305,6 +1366,7 @@ const SF6_DATA = {
       {
         "move": "ドライブインパクト（エスパーダ）",
         "type": "共通システム",
+        "command": "強P強K",
         "startup": 26,
         "active": "26-27",
         "recovery": "35",
@@ -1323,6 +1385,7 @@ const SF6_DATA = {
       {
         "move": "[ガード時]ドライブリバーサル（エクシリオ）",
         "type": "共通システム",
+        "command": "（ガード中 or ドライブパリィ成立中に）6+強P強K",
         "startup": 20,
         "active": "20-22",
         "recovery": "26",
@@ -1341,6 +1404,7 @@ const SF6_DATA = {
       {
         "move": "[起き上がり時]ドライブリバーサル（エクシリオ）",
         "type": "共通システム",
+        "command": "（起き上がり時に）6+強P強K",
         "startup": 18,
         "active": "18-20",
         "recovery": "26",
@@ -1359,6 +1423,7 @@ const SF6_DATA = {
       {
         "move": "ドライブパリィ",
         "type": "共通システム",
+        "command": "中P中K",
         "startup": 1,
         "active": "[※2] 1-12",
         "recovery": "33",
@@ -1377,6 +1442,7 @@ const SF6_DATA = {
       {
         "move": "ジャストパリィ（打撃）",
         "type": "共通システム",
+        "command": "ガード方向+中P中K",
         "startup": 1,
         "active": "",
         "recovery": "1",
@@ -1395,6 +1461,7 @@ const SF6_DATA = {
       {
         "move": "ジャストパリィ（飛び道具）",
         "type": "共通システム",
+        "command": "中P中K",
         "startup": 1,
         "active": "",
         "recovery": "10",
@@ -1413,6 +1480,7 @@ const SF6_DATA = {
       {
         "move": "パリィドライブラッシュ",
         "type": "共通システム",
+        "command": "（ドライブパリィ中に）66",
         "startup": null,
         "active": "",
         "recovery": "全体 45",
@@ -1431,6 +1499,7 @@ const SF6_DATA = {
       {
         "move": "キャンセルドライブラッシュ",
         "type": "共通システム",
+        "command": "（必殺技キャンセル可能な攻撃ヒット中に）66 / (5 / 6)+中P中K",
         "startup": null,
         "active": "",
         "recovery": "全体 46",

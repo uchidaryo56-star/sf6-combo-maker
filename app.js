@@ -277,7 +277,9 @@ function renderFrames(){
   const tb = document.querySelector("#frameTable tbody");
   const m = "color:var(--muted);font-size:14px";
   tb.innerHTML = data.map(f=>`<tr data-fi="${orig.indexOf(f)}">
-    <td>${esc(f.move)}</td><td style="${m}">${esc(f.type)}</td>
+    <td>${esc(f.move)}</td>
+    <td style="font-family:Consolas,monospace;font-size:13px">${esc(f.command||"-")}</td>
+    <td style="${m}">${esc(f.type)}</td>
     <td>${f.startup??"-"}</td>
     <td style="${m}">${esc(f.active||"-")}</td>
     <td style="${m}">${esc(f.recovery||"-")}</td>
@@ -729,19 +731,25 @@ document.getElementById("modalOverlay").onclick = (e)=>{ if(e.target.id==="modal
 // box内の .move-search / .move-picker を、フレーム表の技一覧で動かす。
 // 技をクリックすると targetId の入力欄末尾に sep 区切りで追記する。
 function attachMovePicker(box, targetId, sep){
-  const moves = [...new Set((SF6_DATA.frames[currentChar]||[]).map(f=>f.move))];
+  const seen = new Set();
+  const moves = (SF6_DATA.frames[currentChar]||[]).filter(f=>{
+    if(seen.has(f.move)) return false; seen.add(f.move); return true;
+  });
   const wrap = box.querySelector(".move-picker");
   const search = box.querySelector(".move-search");
   if(!wrap) return;
   function draw(q){
     const qq = (q||"").trim();
-    const list = moves.filter(m=>!qq || m.includes(qq));
+    const list = moves.filter(f=>!qq || f.move.includes(qq) || (f.command||"").includes(qq));
     wrap.innerHTML = list.length
-      ? list.map(m=>`<span class="chip" data-mv="${esc(m)}">${esc(m)}</span>`).join("")
+      ? list.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(f.command||"")}">
+          ${esc(f.move)}${f.command?` <span style="opacity:.7">（${esc(f.command)}）</span>`:""}
+        </span>`).join("")
       : `<span class="hint" style="margin:0">該当する技がありません</span>`;
     wrap.querySelectorAll("[data-mv]").forEach(ch=>ch.onclick=()=>{
       const input = box.querySelector("#"+targetId);
-      input.value = input.value.trim() ? (input.value.replace(/\s+$/,"") + sep + ch.dataset.mv) : ch.dataset.mv;
+      const token = ch.dataset.cmd || ch.dataset.mv;
+      input.value = input.value.trim() ? (input.value.replace(/\s+$/,"") + sep + token) : token;
       input.focus();
     });
   }

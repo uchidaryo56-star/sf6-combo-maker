@@ -47,9 +47,29 @@ const get = (block, prefix) => {
   return m ? strip(m[1]) : "";
 };
 
+// コマンド表記（技名セル内の「クラシック操作」アイコン列）をテンキー表記に変換する。
+// 例: key-d×2 + key-plus + icon_punch_l → "22+P"（236等のレバー方向は連結、+でボタンを繋ぐ）
+const ICON_MAP = {
+  "key-d": "2", "key-dl": "1", "key-dr": "3", "key-l": "4", "key-r": "6", "key-nutral": "5",
+  "key-or": " / ", "key-plus": "+",
+  "icon_punch_l": "P", "icon_punch_m": "P", "icon_punch_h": "P", "icon_punch": "P",
+  "icon_kick_l": "K", "icon_kick_m": "K", "icon_kick_h": "K", "icon_kick": "K",
+  "arrow_3": ">",
+};
+const getCommand = block => {
+  const m = block.match(/<p class="frame_classic___[^"]*">([\s\S]*?)<\/p>/);
+  if (!m) return "";
+  let s = m[1].replace(/<img src="[^"]*\/controller\/([a-zA-Z0-9_-]+)\.png"[^>]*\/?>/g,
+    (full, name) => (name in ICON_MAP) ? ICON_MAP[name] : "");
+  s = s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ");
+  s = s.replace(/([PK])(弱|中|強)/g, "$2$1");         // 強度はアイコン直後の文字 → 「弱P」のように前へ並べ替え
+  s = s.replace(/\s*\+\s*/g, "+").replace(/([PK])\s+(?=[PK])/g, "$1").replace(/\s+/g, " ").trim();
+  return s;
+};
+
 const out = anchors.map((a, k) => {
   const block = h.slice(a.i, (anchors[k + 1] || { i: h.length }).i);
-  const row = { move: a.name, type: catAt(a.i) };
+  const row = { move: a.name, type: catAt(a.i), command: getCommand(block) };
   for (const [field, prefix] of Object.entries(COLS)) {
     const raw = get(block, prefix);
     // フレーム系・硬直差は数値化（"D"等の表記は文字列のまま保持）
