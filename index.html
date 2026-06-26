@@ -140,7 +140,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.19.0</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.20.0</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -161,6 +161,13 @@
   <section class="view active" id="view-guide">
     <div class="hint">初心者がやるべき行動を順番にまとめたロードマップです。図解と動画つき。上から1つずつ進めてみてください。</div>
     <div id="guideList"></div>
+
+    <div class="panel-box">
+      <h3>おすすめ動画（空いてる時間に）</h3>
+      <div class="hint">URLを貼るとサムネイル付きで一覧に追加されます。練習の合間や移動中に見るのにおすすめの動画を貯めておけます。</div>
+      <button id="addRecVideo" class="ghost">＋ 動画を追加</button>
+      <div id="recVideoList" style="margin-top:12px"></div>
+    </div>
   </section>
 
   <!-- ============ コンボ ============ -->
@@ -273,9 +280,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.19.0"></script>
-<script src="glossary.js?v=1.19.0"></script>
-<script src="guide.js?v=1.19.0"></script>
-<script src="app.js?v=1.19.0"></script>
+<script src="data.js?v=1.20.0"></script>
+<script src="glossary.js?v=1.20.0"></script>
+<script src="guide.js?v=1.20.0"></script>
+<script src="app.js?v=1.20.0"></script>
 </body>
 </html>

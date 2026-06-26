@@ -24,7 +24,7 @@ function ns(key){ // キャラ別ネームスペース
 }
 function gns(key){ // キャラに依存しない全体共通のネームスペース（用語集など）
   store._global = store._global || {};
-  store._global[key] = store._global[key] || (key==="glossaryUser"?[]:{});
+  store._global[key] = store._global[key] || (["glossaryUser","recVideos"].includes(key)?[]:{});
   return store._global[key];
 }
 
@@ -751,6 +751,46 @@ function renderGuide(){
   });
 }
 
+/* -------- おすすめ動画（空き時間用。キャラに依存しない全体共通リスト） -------- */
+function renderRecVideos(){
+  const list = gns("recVideos");
+  const el = document.getElementById("recVideoList");
+  if(!Array.isArray(list) || !list.length){ el.innerHTML = `<div class="empty">まだ動画がありません</div>`; return; }
+  el.innerHTML = list.map(v=>`<div class="card">
+    <div class="card-head"><h3>${esc(v.title||"（無題）")}</h3></div>
+    ${videoHTML(v.url, null)}
+    <div class="row-actions"><button class="danger" data-delrec="${v.id}">削除</button></div>
+  </div>`).join("");
+  attachVideoHandlers(el);
+  el.querySelectorAll("[data-delrec]").forEach(b=>b.onclick=()=>{
+    if(!confirm("この動画を一覧から削除しますか？")) return;
+    const arr = gns("recVideos");
+    const idx = arr.findIndex(v=>v.id===b.dataset.delrec);
+    if(idx>=0) arr.splice(idx,1);
+    saveStore(); renderRecVideos();
+  });
+}
+document.getElementById("addRecVideo").onclick = ()=>{
+  openModal(`
+    <h3>おすすめ動画を追加</h3>
+    <label class="fld">タイトル</label><input id="mTitle" style="width:100%" placeholder="例: 中段下段の崩しの基本">
+    <label class="fld">動画URL</label><input id="mUrl" style="width:100%" placeholder="YouTube等のURL">
+    <div class="row-actions">
+      <button id="mSave">保存</button>
+      <button class="ghost" id="mCancel">キャンセル</button>
+    </div>
+  `);
+  const box = document.getElementById("modalBox");
+  box.querySelector("#mCancel").onclick = closeModal;
+  box.querySelector("#mSave").onclick = ()=>{
+    const title = box.querySelector("#mTitle").value.trim();
+    const url = box.querySelector("#mUrl").value.trim();
+    if(!url){ alert("動画URLを入力してください"); return; }
+    gns("recVideos").push({id:"rv-"+Date.now(), title, url});
+    saveStore(); renderRecVideos(); closeModal();
+  };
+};
+
 /* -------- ユーティリティ -------- */
 function esc(s){ return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m])); }
 
@@ -947,6 +987,7 @@ document.getElementById("glossarySearch").oninput = renderGlossary;
 /* -------- 全描画 -------- */
 function renderAll(){
   renderGuide();
+  renderRecVideos();
   renderComboFilters(); renderCombos();
   renderFrames();
   renderSetplayGroupFilters(); renderSetplays();
