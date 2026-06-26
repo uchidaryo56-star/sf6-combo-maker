@@ -8,14 +8,154 @@
 const SF6_DATA = {
   "characters": [
     {
-      "id": "jp",
-      "name": "JP",
-      "color": "#7b5bd6"
-    },
-    {
       "id": "ryu",
       "name": "リュウ",
       "color": "#d23b3b"
+    },
+    {
+      "id": "luke",
+      "name": "ルーク",
+      "color": "#3b78d2"
+    },
+    {
+      "id": "jamie",
+      "name": "ジェイミー",
+      "color": "#3bbf6f"
+    },
+    {
+      "id": "chunli",
+      "name": "春麗",
+      "color": "#e0a52a"
+    },
+    {
+      "id": "guile",
+      "name": "ガイル",
+      "color": "#9b59b6"
+    },
+    {
+      "id": "kimberly",
+      "name": "キンバリー",
+      "color": "#1abc9c"
+    },
+    {
+      "id": "juri",
+      "name": "ジュリ",
+      "color": "#e0533b"
+    },
+    {
+      "id": "ken",
+      "name": "ケン",
+      "color": "#5b6cd2"
+    },
+    {
+      "id": "blanka",
+      "name": "ブランカ",
+      "color": "#cc6fa8"
+    },
+    {
+      "id": "dhalsim",
+      "name": "ダルシム",
+      "color": "#4a9bd1"
+    },
+    {
+      "id": "ehonda",
+      "name": "エドモンド本田",
+      "color": "#d23b3b"
+    },
+    {
+      "id": "deejay",
+      "name": "ディージェイ",
+      "color": "#3b78d2"
+    },
+    {
+      "id": "manon",
+      "name": "マノン",
+      "color": "#3bbf6f"
+    },
+    {
+      "id": "marisa",
+      "name": "マリーザ",
+      "color": "#e0a52a"
+    },
+    {
+      "id": "jp",
+      "name": "JP",
+      "color": "#9b59b6"
+    },
+    {
+      "id": "zangief",
+      "name": "ザンギエフ",
+      "color": "#1abc9c"
+    },
+    {
+      "id": "lily",
+      "name": "リリー",
+      "color": "#e0533b"
+    },
+    {
+      "id": "cammy",
+      "name": "キャミィ",
+      "color": "#5b6cd2"
+    },
+    {
+      "id": "rashid",
+      "name": "ラシード",
+      "color": "#cc6fa8"
+    },
+    {
+      "id": "aki",
+      "name": "A.K.I.",
+      "color": "#4a9bd1"
+    },
+    {
+      "id": "ed",
+      "name": "ED",
+      "color": "#d23b3b"
+    },
+    {
+      "id": "gouki_akuma",
+      "name": "豪鬼",
+      "color": "#3b78d2"
+    },
+    {
+      "id": "vega_mbison",
+      "name": "ベガ",
+      "color": "#3bbf6f"
+    },
+    {
+      "id": "terry",
+      "name": "テリー",
+      "color": "#e0a52a"
+    },
+    {
+      "id": "mai",
+      "name": "舞",
+      "color": "#9b59b6"
+    },
+    {
+      "id": "elena",
+      "name": "エレナ",
+      "color": "#1abc9c"
+    },
+    {
+      "id": "sagat",
+      "name": "サガット",
+      "color": "#e0533b"
+    },
+    {
+      "id": "cviper",
+      "name": "C.ヴァイパー",
+      "color": "#5b6cd2"
+    },
+    {
+      "id": "alex",
+      "name": "アレックス",
+      "color": "#cc6fa8"
+    },
+    {
+      "id": "ingrid",
+      "name": "イングリッド",
+      "color": "#4a9bd1"
     }
   ],
   "combos": {

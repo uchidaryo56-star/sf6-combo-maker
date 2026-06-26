@@ -12,11 +12,20 @@ const ryuSetplays = [
   { id:"ryu-s1", situation:"中央 強昇龍ダウン後", setup:"前ステップ x2", mixup:"打撃(2中K) / 投げ の二択", video:"", timestamp:"", note:"基本の重ね。" },
 ];
 
+// 公式サイト(streetfighter.com)掲載順の全キャラクター
+// キャラ別にコンボ/セットプレイ/フレームを追加していける（未登録キャラは空リストとして動作）
+const palette = ["#d23b3b","#3b78d2","#3bbf6f","#e0a52a","#9b59b6","#1abc9c","#e0533b","#5b6cd2","#cc6fa8","#4a9bd1"];
+const characters = [
+  ["ryu","リュウ"], ["luke","ルーク"], ["jamie","ジェイミー"], ["chunli","春麗"], ["guile","ガイル"],
+  ["kimberly","キンバリー"], ["juri","ジュリ"], ["ken","ケン"], ["blanka","ブランカ"], ["dhalsim","ダルシム"],
+  ["ehonda","エドモンド本田"], ["deejay","ディージェイ"], ["manon","マノン"], ["marisa","マリーザ"], ["jp","JP"],
+  ["zangief","ザンギエフ"], ["lily","リリー"], ["cammy","キャミィ"], ["rashid","ラシード"], ["aki","A.K.I."],
+  ["ed","ED"], ["gouki_akuma","豪鬼"], ["vega_mbison","ベガ"], ["terry","テリー"], ["mai","舞"],
+  ["elena","エレナ"], ["sagat","サガット"], ["cviper","C.ヴァイパー"], ["alex","アレックス"], ["ingrid","イングリッド"],
+].map(([id,name],i)=>({ id, name, color: palette[i % palette.length] }));
+
 const data = {
-  characters: [
-    { id:"jp",  name:"JP",     color:"#7b5bd6" },
-    { id:"ryu", name:"リュウ", color:"#d23b3b" },
-  ],
+  characters,
   combos:   { jp: [], ryu: ryuCombos },
   frames:   { jp: jp, ryu: [
     { move:"5中P", type:"通常技", startup:6, active:"", recovery:"", onBlock:2, onHit:5, cancel:"C", damage:"", attribute:"上", note:"※サンプル値" },
