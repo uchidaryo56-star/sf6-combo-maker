@@ -3,6 +3,7 @@ const fs = require("fs");
 const jp = JSON.parse(fs.readFileSync("jp_parsed.json", "utf8"));
 const ryu = JSON.parse(fs.readFileSync("ryu_parsed.json", "utf8"));
 const guile = JSON.parse(fs.readFileSync("guile_parsed.json", "utf8"));
+const terry = JSON.parse(fs.readFileSync("terry_parsed.json", "utf8"));
 
 // リュウのサンプルデータ（コンボ/セットプレイの例。フレームはJPのみ実数値）
 const ryuCombos = [
@@ -29,13 +30,13 @@ const characters = [
 const data = {
   characters,
   combos:   { jp: [], ryu: ryuCombos },
-  frames:   { jp: jp, ryu: ryu, guile: guile },
+  frames:   { jp: jp, ryu: ryu, guile: guile, terry: terry },
   setplays: { jp: [], ryu: ryuSetplays },
 };
 
 const banner = `/* =====================================================================
  * スト6コンボメーカー  シードデータ
- *  - frames.jp / frames.ryu / frames.guile は公式サイト(streetfighter.com)から取得した実データ
+ *  - frames.jp / frames.ryu / frames.guile / frames.terry は公式サイト(streetfighter.com)から取得した実データ
  *  - combos / setplays はユーザーが追加していく想定（リュウは例として同梱）
  *  - 他キャラ追加: characters に1行足し、frames/combos 等にキー追加
  * ===================================================================*/
@@ -46,4 +47,4 @@ if (typeof module !== "undefined") { module.exports = SF6_DATA; }
 `;
 
 fs.writeFileSync("data.js", banner);
-console.log("data.js written. jp:", jp.length, "| ryu:", ryu.length, "| guile:", guile.length, "| chars:", data.characters.map(c=>c.id).join(","));
+console.log("data.js written. jp:", jp.length, "| ryu:", ryu.length, "| guile:", guile.length, "| terry:", terry.length, "| chars:", data.characters.map(c=>c.id).join(","));
