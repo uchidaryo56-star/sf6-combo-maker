@@ -109,7 +109,8 @@ document.querySelectorAll(".tab").forEach(t=>{
 
 /* ============ コンボ ============ */
 function allCombos(){
-  const base = SF6_DATA.combos[currentChar] || [];
+  const deleted = ns("comboDeleted");
+  const base = (SF6_DATA.combos[currentChar] || []).filter(c=>!deleted[c.id]);
   const user = store[currentChar] && store[currentChar].userCombos ? store[currentChar].userCombos : [];
   return [...base, ...user];
 }
@@ -130,6 +131,20 @@ function renderComboFilters(){
     `<span class="chip ${g===comboGroupFilter?'active':''}" data-grp="${esc(g)}">${esc(g)}</span>`).join("");
   gwrap.querySelectorAll(".chip").forEach(ch=>{
     ch.onclick = ()=>{ comboGroupFilter = ch.dataset.grp; renderComboFilters(); renderCombos(); };
+  });
+  renderComboHidden();
+}
+function renderComboHidden(){
+  const hidden = document.getElementById("comboHidden");
+  const deletedIds = Object.keys(ns("comboDeleted"));
+  if(!deletedIds.length){ hidden.style.display="none"; hidden.innerHTML=""; return; }
+  const base = SF6_DATA.combos[currentChar]||[];
+  const names = base.filter(c=>deletedIds.includes(c.id));
+  hidden.style.display = "block";
+  hidden.innerHTML = `非表示にしたコンボ（${names.length}件）: ` +
+    names.map(c=>`<button class="ghost" data-crestore="${c.id}" style="margin:2px">${esc(c.name)} を復元</button>`).join(" ");
+  hidden.querySelectorAll("[data-crestore]").forEach(b=>b.onclick=()=>{
+    delete ns("comboDeleted")[b.dataset.crestore]; saveStore(); renderComboFilters(); renderCombos();
   });
 }
 function renderCombos(){
@@ -170,7 +185,7 @@ function renderCombos(){
         <button class="ghost" data-vidurl="${c.id}">🔗 URL</button>
         ${media?`<button class="ghost" data-vidclear="${c.id}">動画を消す</button>`:""}
         ${localVideoKeys.has(vkey("comboVideos",c.id))?`<button class="ghost" data-viddl="${c.id}">📥 動画を書き出す</button>`:""}
-        ${isUser?`<button class="danger" data-delcombo="${c.id}">削除</button>`:""}
+        <button class="danger" data-delcombo="${c.id}">削除</button>
       </div>
     </div>`;
   };
@@ -192,7 +207,14 @@ function renderCombos(){
     done[c.dataset.done]=c.checked; saveStore();
   });
   el.querySelectorAll("[data-delcombo]").forEach(b=>b.onclick=()=>{
-    store[currentChar].userCombos = store[currentChar].userCombos.filter(x=>x.id!==b.dataset.delcombo);
+    const id = b.dataset.delcombo;
+    if(id.startsWith("u-")){
+      if(!confirm("このコンボを削除しますか？")) return;
+      store[currentChar].userCombos = store[currentChar].userCombos.filter(x=>x.id!==id);
+    } else {
+      if(!confirm("このコンボを一覧から非表示にしますか？（後で復元できます）")) return;
+      ns("comboDeleted")[id] = true;
+    }
     saveStore(); renderComboFilters(); renderCombos();
   });
 }
@@ -309,7 +331,8 @@ document.getElementById("punishFrame").oninput = renderPunish;
 
 /* ============ セットプレイ ============ */
 function allSetplays(){
-  const base = SF6_DATA.setplays[currentChar]||[];
+  const deleted = ns("setplayDeleted");
+  const base = (SF6_DATA.setplays[currentChar]||[]).filter(s=>!deleted[s.id]);
   const user = store[currentChar] && store[currentChar].userSetplays ? store[currentChar].userSetplays : [];
   return [...base, ...user];
 }
@@ -319,6 +342,20 @@ function renderSetplayGroupFilters(){
     `<span class="chip ${g===setplayGroupFilter?'active':''}" data-grp="${esc(g)}">${esc(g)}</span>`).join("");
   gwrap.querySelectorAll(".chip").forEach(ch=>{
     ch.onclick = ()=>{ setplayGroupFilter = ch.dataset.grp; renderSetplayGroupFilters(); renderSetplays(); };
+  });
+  renderSetplayHidden();
+}
+function renderSetplayHidden(){
+  const hidden = document.getElementById("setplayHidden");
+  const deletedIds = Object.keys(ns("setplayDeleted"));
+  if(!deletedIds.length){ hidden.style.display="none"; hidden.innerHTML=""; return; }
+  const base = SF6_DATA.setplays[currentChar]||[];
+  const names = base.filter(s=>deletedIds.includes(s.id));
+  hidden.style.display = "block";
+  hidden.innerHTML = `非表示にしたセットプレイ（${names.length}件）: ` +
+    names.map(s=>`<button class="ghost" data-srestore="${s.id}" style="margin:2px">${esc(s.situation)} を復元</button>`).join(" ");
+  hidden.querySelectorAll("[data-srestore]").forEach(b=>b.onclick=()=>{
+    delete ns("setplayDeleted")[b.dataset.srestore]; saveStore(); renderSetplayGroupFilters(); renderSetplays();
   });
 }
 function renderSetplays(){
@@ -342,7 +379,7 @@ function renderSetplays(){
         <button class="ghost" data-vidurl="${s.id}">🔗 URL</button>
         ${media?`<button class="ghost" data-vidclear="${s.id}">動画を消す</button>`:""}
         ${localVideoKeys.has(vkey("setplayVideos",s.id))?`<button class="ghost" data-viddl="${s.id}">📥 動画を書き出す</button>`:""}
-        ${isUser?`<button class="danger" data-delsp="${s.id}">削除</button>`:""}</div>
+        <button class="danger" data-delsp="${s.id}">削除</button></div>
     </div>`;
   };
   el.innerHTML = wrapGroups("setplay", list, setplayCardHtml);
@@ -356,7 +393,14 @@ function renderSetplays(){
   el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("setplayVideos", b.dataset.vidclear, renderSetplays));
   el.querySelectorAll("[data-viddl]").forEach(b=>b.onclick=()=>downloadLocalVideo("setplayVideos", b.dataset.viddl, list.find(x=>x.id===b.dataset.viddl).situation));
   el.querySelectorAll("[data-delsp]").forEach(b=>b.onclick=()=>{
-    store[currentChar].userSetplays = store[currentChar].userSetplays.filter(x=>x.id!==b.dataset.delsp);
+    const id = b.dataset.delsp;
+    if(id.startsWith("u-")){
+      if(!confirm("このセットプレイを削除しますか？")) return;
+      store[currentChar].userSetplays = store[currentChar].userSetplays.filter(x=>x.id!==id);
+    } else {
+      if(!confirm("このセットプレイを一覧から非表示にしますか？（後で復元できます）")) return;
+      ns("setplayDeleted")[id] = true;
+    }
     saveStore(); renderSetplayGroupFilters(); renderSetplays();
   });
 }
