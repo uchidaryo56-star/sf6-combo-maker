@@ -9,29 +9,55 @@ const SF6_GUIDE = [
     id: "g1", order: 1,
     title: "操作に慣れる（トレーニングモード）",
     summary: "まずは操作とレバー表記に慣れる",
-    body: "・モダン操作とクラシック操作の違いを理解し、自分に合う方を選ぶ\n・レバー表記（テンキー）の見方を覚える（下の図解参照）\n・トレーニングモードのコンボトライアルで基本入力に慣れる",
-    diagram: `<svg viewBox="-40 0 380 300" xmlns="http://www.w3.org/2000/svg">
+    body: "・モダン操作とクラシック操作の違いを理解し、自分に合う方を選ぶ\n・レバー表記（テンキー）の見方を覚える。数字と意味（前/後など）は1P・2Pどちらでも同じだが、実際にレバーを倒す方向は左右反転する（下の図解参照）\n・トレーニングモードのコンボトライアルで基本入力に慣れる",
+    diagram: `<svg viewBox="-30 0 630 345" xmlns="http://www.w3.org/2000/svg">
       <style>.cell{fill:var(--panel2);stroke:var(--line);stroke-width:2}
-      .num{fill:var(--text);font-size:30px;font-weight:700;text-anchor:middle}
-      .lbl{fill:var(--muted);font-size:12px;text-anchor:middle}</style>
-      <rect class="cell" x="0" y="0" width="100" height="100"/>
-      <rect class="cell" x="100" y="0" width="100" height="100"/>
-      <rect class="cell" x="200" y="0" width="100" height="100"/>
-      <rect class="cell" x="0" y="100" width="100" height="100"/>
-      <rect class="cell" x="100" y="100" width="100" height="100" fill="var(--accent2)" opacity="0.18"/>
-      <rect class="cell" x="200" y="100" width="100" height="100"/>
-      <rect class="cell" x="0" y="200" width="100" height="100"/>
-      <rect class="cell" x="100" y="200" width="100" height="100"/>
-      <rect class="cell" x="200" y="200" width="100" height="100"/>
-      <text class="num" x="50" y="45">7 ↖</text><text class="lbl" x="50" y="70">斜め後ジャンプ</text>
-      <text class="num" x="150" y="45">8 ↑</text><text class="lbl" x="150" y="70">ジャンプ</text>
-      <text class="num" x="250" y="45">9 ↗</text><text class="lbl" x="250" y="70">斜め前ジャンプ</text>
-      <text class="num" x="50" y="145">4 ←</text><text class="lbl" x="50" y="170">後ろ<tspan x="50" dy="15">（ガード）</tspan></text>
-      <text class="num" x="150" y="150">5</text><text class="lbl" x="150" y="172">ニュートラル</text>
-      <text class="num" x="250" y="145">6 →</text><text class="lbl" x="250" y="170">前<tspan x="250" dy="15">（前進）</tspan></text>
-      <text class="num" x="50" y="240">1 ↙</text><text class="lbl" x="50" y="265">後ろしゃがみ<tspan x="50" dy="15">（ガード）</tspan></text>
-      <text class="num" x="150" y="245">2 ↓</text><text class="lbl" x="150" y="270">しゃがみ</text>
-      <text class="num" x="250" y="245">3 ↘</text><text class="lbl" x="250" y="270">前しゃがみ</text>
+      .num{fill:var(--text);font-size:22px;font-weight:700;text-anchor:middle}
+      .lbl{fill:var(--muted);font-size:11px;text-anchor:middle}
+      .hdr{fill:var(--text);font-size:15px;font-weight:700;text-anchor:middle}
+      .note{fill:var(--muted);font-size:12px;text-anchor:middle}</style>
+      <text class="hdr" x="129" y="22">1P（画面左側）</text>
+      <text class="hdr" x="437" y="22">2P（画面右側）</text>
+
+      <rect class="cell" x="0" y="50" width="86" height="86"/>
+      <rect class="cell" x="86" y="50" width="86" height="86"/>
+      <rect class="cell" x="172" y="50" width="86" height="86"/>
+      <rect class="cell" x="0" y="136" width="86" height="86"/>
+      <rect class="cell" x="86" y="136" width="86" height="86" fill="var(--accent2)" opacity="0.18"/>
+      <rect class="cell" x="172" y="136" width="86" height="86"/>
+      <rect class="cell" x="0" y="222" width="86" height="86"/>
+      <rect class="cell" x="86" y="222" width="86" height="86"/>
+      <rect class="cell" x="172" y="222" width="86" height="86"/>
+      <text class="num" x="43" y="92">7 ↖</text><text class="lbl" x="43" y="112">斜め後ジャンプ</text>
+      <text class="num" x="129" y="92">8 ↑</text><text class="lbl" x="129" y="112">ジャンプ</text>
+      <text class="num" x="215" y="92">9 ↗</text><text class="lbl" x="215" y="112">斜め前ジャンプ</text>
+      <text class="num" x="43" y="178">4 ←</text><text class="lbl" x="43" y="198">後ろ<tspan x="43" dy="13">（ガード）</tspan></text>
+      <text class="num" x="129" y="183">5</text><text class="lbl" x="129" y="200">ニュートラル</text>
+      <text class="num" x="215" y="178">6 →</text><text class="lbl" x="215" y="198">前<tspan x="215" dy="13">（前進）</tspan></text>
+      <text class="num" x="43" y="264">1 ↙</text><text class="lbl" x="43" y="284">後ろしゃがみ<tspan x="43" dy="13">（ガード）</tspan></text>
+      <text class="num" x="129" y="269">2 ↓</text><text class="lbl" x="129" y="286">しゃがみ</text>
+      <text class="num" x="215" y="264">3 ↘</text><text class="lbl" x="215" y="284">前しゃがみ</text>
+
+      <rect class="cell" x="308" y="50" width="86" height="86"/>
+      <rect class="cell" x="394" y="50" width="86" height="86"/>
+      <rect class="cell" x="480" y="50" width="86" height="86"/>
+      <rect class="cell" x="308" y="136" width="86" height="86"/>
+      <rect class="cell" x="394" y="136" width="86" height="86" fill="var(--accent2)" opacity="0.18"/>
+      <rect class="cell" x="480" y="136" width="86" height="86"/>
+      <rect class="cell" x="308" y="222" width="86" height="86"/>
+      <rect class="cell" x="394" y="222" width="86" height="86"/>
+      <rect class="cell" x="480" y="222" width="86" height="86"/>
+      <text class="num" x="351" y="92">7 ↗</text><text class="lbl" x="351" y="112">斜め後ジャンプ</text>
+      <text class="num" x="437" y="92">8 ↑</text><text class="lbl" x="437" y="112">ジャンプ</text>
+      <text class="num" x="523" y="92">9 ↖</text><text class="lbl" x="523" y="112">斜め前ジャンプ</text>
+      <text class="num" x="351" y="178">4 →</text><text class="lbl" x="351" y="198">後ろ<tspan x="351" dy="13">（ガード）</tspan></text>
+      <text class="num" x="437" y="183">5</text><text class="lbl" x="437" y="200">ニュートラル</text>
+      <text class="num" x="523" y="178">6 ←</text><text class="lbl" x="523" y="198">前<tspan x="523" dy="13">（前進）</tspan></text>
+      <text class="num" x="351" y="264">1 ↘</text><text class="lbl" x="351" y="284">後ろしゃがみ<tspan x="351" dy="13">（ガード）</tspan></text>
+      <text class="num" x="437" y="269">2 ↓</text><text class="lbl" x="437" y="286">しゃがみ</text>
+      <text class="num" x="523" y="264">3 ↙</text><text class="lbl" x="523" y="284">前しゃがみ</text>
+
+      <text class="note" x="283" y="332">数字と意味（前/後など）は1P・2Pで共通。実際にレバーを倒す方向（矢印）だけ左右反転する</text>
     </svg>`,
   },
   {
