@@ -748,7 +748,7 @@ function attachMovePicker(box, targetId, sep){
       : `<span class="hint" style="margin:0">該当する技がありません</span>`;
     wrap.querySelectorAll("[data-mv]").forEach(ch=>ch.onclick=()=>{
       const input = box.querySelector("#"+targetId);
-      const token = ch.dataset.cmd || ch.dataset.mv;
+      const token = ch.dataset.cmd ? `${ch.dataset.mv}（${ch.dataset.cmd}）` : ch.dataset.mv;
       input.value = input.value.trim() ? (input.value.replace(/\s+$/,"") + sep + token) : token;
       input.focus();
     });
