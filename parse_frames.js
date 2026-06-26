@@ -50,7 +50,9 @@ const get = (block, prefix) => {
 // コマンド表記（技名セル内の「クラシック操作」アイコン列）をテンキー表記に変換する。
 // 例: key-d×2 + key-plus + icon_punch_l → "22+P"（236等のレバー方向は連結、+でボタンを繋ぐ）
 const ICON_MAP = {
-  "key-d": "2", "key-dl": "1", "key-dr": "3", "key-l": "4", "key-r": "6", "key-nutral": "5",
+  "key-d": "2", "key-dl": "1", "key-dr": "3", "key-l": "4", "key-r": "6", "key-u": "8",
+  "key-ul": "7", "key-ur": "9", "key-nutral": "5",
+  "key-dc": "[2]", "key-lc": "[4]", "key-rc": "[6]", "key-uc": "[8]",   // 溜め（チャージ）
   "key-or": " / ", "key-plus": "+",
   "icon_punch_l": "P", "icon_punch_m": "P", "icon_punch_h": "P", "icon_punch": "P",
   "icon_kick_l": "K", "icon_kick_m": "K", "icon_kick_h": "K", "icon_kick": "K",
