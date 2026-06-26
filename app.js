@@ -48,16 +48,18 @@ function setGroupOverride(kind, item, after){
   }
   saveStore(); after();
 }
-function groupsOf(kind, items){
+function groupsOf(kind, items, groupFn){
+  const gf = groupFn || (it=>groupOf(kind, it));
   const set = new Set(["全て"]);
-  items.forEach(it=>set.add(groupOf(kind, it)));
+  items.forEach(it=>set.add(gf(it)));
   return [...set];
 }
-// 表示中の一覧をグループ名でまとめる（出現順、「未分類」は最後）
-function groupItems(kind, list){
+// 表示中の一覧をグループ名でまとめる（出現順、「未分類」は最後）。groupFnを省略するとgroupOf(kind,it)を使う。
+function groupItems(kind, list, groupFn){
+  const gf = groupFn || (it=>groupOf(kind, it));
   const map = new Map();
   list.forEach(it=>{
-    const g = groupOf(kind, it);
+    const g = gf(it);
     if(!map.has(g)) map.set(g, []);
     map.get(g).push(it);
   });
@@ -68,9 +70,9 @@ function groupItems(kind, list){
   });
 }
 // グループの開閉状態（再描画をまたいで維持。既定は開いた状態）
-const closedGroups = { combo:new Set(), setplay:new Set() };
-function wrapGroups(kind, list, cardHtmlFn){
-  return groupItems(kind, list).map(([gname, items])=>{
+const closedGroups = { combo:new Set(), setplay:new Set(), recvideo:new Set() };
+function wrapGroups(kind, list, cardHtmlFn, groupFn){
+  return groupItems(kind, list, groupFn).map(([gname, items])=>{
     const isOpen = !closedGroups[kind].has(gname);
     return `<details class="group-section" data-gname="${esc(gname)}" ${isOpen?"open":""}>
       <summary>🏷️ ${esc(gname)} <span class="gcount">${items.length}件</span><span class="arrow">▶</span></summary>
@@ -752,22 +754,46 @@ function renderGuide(){
 }
 
 /* -------- おすすめ動画（空き時間用。キャラに依存しない全体共通リスト） -------- */
+const recVideoGroupOf = v => v.group || "未分類";
+let recVideoGroupFilter = "全て";
+function renderRecVideoGroupFilters(){
+  const wrap = document.getElementById("recVideoGroupFilters");
+  const groups = groupsOf(null, gns("recVideos"), recVideoGroupOf);
+  wrap.innerHTML = groups.map(g=>
+    `<span class="chip ${g===recVideoGroupFilter?'active':''}" data-grp="${esc(g)}">${esc(g)}</span>`).join("");
+  wrap.querySelectorAll(".chip").forEach(ch=>{
+    ch.onclick = ()=>{ recVideoGroupFilter = ch.dataset.grp; renderRecVideoGroupFilters(); renderRecVideos(); };
+  });
+}
 function renderRecVideos(){
-  const list = gns("recVideos");
+  let list = gns("recVideos");
+  if(recVideoGroupFilter!=="全て") list = list.filter(v=>recVideoGroupOf(v)===recVideoGroupFilter);
   const el = document.getElementById("recVideoList");
-  if(!Array.isArray(list) || !list.length){ el.innerHTML = `<div class="empty">まだ動画がありません</div>`; return; }
-  el.innerHTML = list.map(v=>`<div class="card">
+  if(!list.length){ el.innerHTML = `<div class="empty">まだ動画がありません</div>`; return; }
+  const cardHtml = v=>`<div class="card">
     <div class="card-head"><h3>${esc(v.title||"（無題）")}</h3></div>
     ${videoHTML(v.url, null)}
-    <div class="row-actions"><button class="danger" data-delrec="${v.id}">削除</button></div>
-  </div>`).join("");
+    <div class="row-actions">
+      <button class="ghost" data-grpeditrv="${v.id}">🏷️ グループ変更</button>
+      <button class="danger" data-delrec="${v.id}">削除</button>
+    </div>
+  </div>`;
+  el.innerHTML = wrapGroups("recvideo", list, cardHtml, recVideoGroupOf);
+  attachGroupToggleHandlers(el, "recvideo");
   attachVideoHandlers(el);
+  el.querySelectorAll("[data-grpeditrv]").forEach(b=>b.onclick=()=>{
+    const v = list.find(x=>x.id===b.dataset.grpeditrv);
+    const name = prompt("グループ名（自由入力。例: キャラ名 / 差し合い / コンボ）", recVideoGroupOf(v));
+    if(name===null) return;
+    v.group = name.trim() || "未分類";
+    saveStore(); renderRecVideoGroupFilters(); renderRecVideos();
+  });
   el.querySelectorAll("[data-delrec]").forEach(b=>b.onclick=()=>{
     if(!confirm("この動画を一覧から削除しますか？")) return;
     const arr = gns("recVideos");
     const idx = arr.findIndex(v=>v.id===b.dataset.delrec);
     if(idx>=0) arr.splice(idx,1);
-    saveStore(); renderRecVideos();
+    saveStore(); renderRecVideoGroupFilters(); renderRecVideos();
   });
 }
 document.getElementById("addRecVideo").onclick = ()=>{
@@ -775,6 +801,7 @@ document.getElementById("addRecVideo").onclick = ()=>{
     <h3>おすすめ動画を追加</h3>
     <label class="fld">タイトル</label><input id="mTitle" style="width:100%" placeholder="例: 中段下段の崩しの基本">
     <label class="fld">動画URL</label><input id="mUrl" style="width:100%" placeholder="YouTube等のURL">
+    <label class="fld">グループ</label><input id="mGroup" style="width:100%" placeholder="自由入力。例: キャラ名 / ジャンル。空欄で未分類">
     <div class="row-actions">
       <button id="mSave">保存</button>
       <button class="ghost" id="mCancel">キャンセル</button>
@@ -786,8 +813,9 @@ document.getElementById("addRecVideo").onclick = ()=>{
     const title = box.querySelector("#mTitle").value.trim();
     const url = box.querySelector("#mUrl").value.trim();
     if(!url){ alert("動画URLを入力してください"); return; }
-    gns("recVideos").push({id:"rv-"+Date.now(), title, url});
-    saveStore(); renderRecVideos(); closeModal();
+    const group = box.querySelector("#mGroup").value.trim() || "未分類";
+    gns("recVideos").push({id:"rv-"+Date.now(), title, url, group});
+    saveStore(); renderRecVideoGroupFilters(); renderRecVideos(); closeModal();
   };
 };
 
@@ -987,7 +1015,7 @@ document.getElementById("glossarySearch").oninput = renderGlossary;
 /* -------- 全描画 -------- */
 function renderAll(){
   renderGuide();
-  renderRecVideos();
+  renderRecVideoGroupFilters(); renderRecVideos();
   renderComboFilters(); renderCombos();
   renderFrames();
   renderSetplayGroupFilters(); renderSetplays();
