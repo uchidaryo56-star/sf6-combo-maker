@@ -220,19 +220,42 @@ function renderCombos(){
 }
 document.getElementById("favOnly").onchange = renderCombos;
 document.getElementById("addCombo").onclick = ()=>{
-  const name = prompt("コンボ名"); if(!name) return;
-  const start = prompt("始動カテゴリ（例: 通常ヒット / パニッシュカウンター / ドライブラッシュ）","通常ヒット")||"その他";
-  const group = prompt("グループ（自由に入力。例: 端コンボ / 対戦相手用。空欄で未分類）","")||"未分類";
-  const notation = prompt("入力（例: 2中K > 弱波動拳）")||"";
-  const damage = parseInt(prompt("ダメージ","2000"))||0;
-  const video = prompt("動画URL（YouTube等・任意）")||"";
-  store[currentChar] = store[currentChar]||{};
-  store[currentChar].userCombos = store[currentChar].userCombos||[];
-  store[currentChar].userCombos.push({
-    id:"u-"+Date.now(), name, start, group, notation, damage, drive:0, super:0,
-    difficulty:1, position:"中央", video, note:"（自作）"
-  });
-  saveStore(); renderComboFilters(); renderCombos();
+  openModal(`
+    <h3>コンボを追加</h3>
+    <label class="fld">コンボ名</label><input id="mName" style="width:100%">
+    <label class="fld">始動カテゴリ</label><input id="mStart" value="通常ヒット" style="width:100%" placeholder="例: 通常ヒット / パニッシュカウンター / ドライブラッシュ">
+    <label class="fld">グループ</label><input id="mGroup" style="width:100%" placeholder="自由入力。空欄で未分類">
+    <label class="fld">レシピ（コンボの入力）</label>
+    <input id="mNotation" style="width:100%" placeholder="例: 2中K > 弱波動拳">
+    <input class="move-search" style="width:100%;margin-top:6px" placeholder="🔍 技を検索して下から選ぶ">
+    <div class="move-picker"></div>
+    <div class="hint" style="margin-bottom:10px">技をクリックするとレシピ欄の末尾に追加されます（フレーム表に登録されている技）。OD技やDR等は手入力で追記してください。</div>
+    <label class="fld">ダメージ</label><input id="mDamage" type="number" value="2000" style="width:100%">
+    <label class="fld">動画URL（任意）</label><input id="mVideo" style="width:100%">
+    <div class="row-actions">
+      <button id="mSave">保存</button>
+      <button class="ghost" id="mCancel">キャンセル</button>
+    </div>
+  `);
+  const box = document.getElementById("modalBox");
+  attachMovePicker(box, "mNotation", " > ");
+  box.querySelector("#mCancel").onclick = closeModal;
+  box.querySelector("#mSave").onclick = ()=>{
+    const name = box.querySelector("#mName").value.trim();
+    if(!name){ alert("コンボ名を入力してください"); return; }
+    const start = box.querySelector("#mStart").value.trim() || "その他";
+    const group = box.querySelector("#mGroup").value.trim() || "未分類";
+    const notation = box.querySelector("#mNotation").value.trim();
+    const damage = parseInt(box.querySelector("#mDamage").value) || 0;
+    const video = box.querySelector("#mVideo").value.trim();
+    store[currentChar] = store[currentChar]||{};
+    store[currentChar].userCombos = store[currentChar].userCombos||[];
+    store[currentChar].userCombos.push({
+      id:"u-"+Date.now(), name, start, group, notation, damage, drive:0, super:0,
+      difficulty:1, position:"中央", video, note:"（自作）"
+    });
+    saveStore(); renderComboFilters(); renderCombos(); closeModal();
+  };
 };
 
 /* ============ フレーム ============ */
@@ -405,16 +428,39 @@ function renderSetplays(){
   });
 }
 document.getElementById("addSetplay").onclick = ()=>{
-  const situation = prompt("状況（例: 端 強昇龍ダウン後）"); if(!situation) return;
-  const setup = prompt("手順（例: 前ステ x2）")||"";
-  const mixup = prompt("択（例: 打撃 / 投げ）")||"";
-  const group = prompt("グループ（自由に入力。例: 中央 / 端 / 対戦相手用。空欄で未分類）","")||"未分類";
-  const video = prompt("動画URL（任意）")||"";
-  const timestamp = video? (prompt("動画の時間（例: 1:23）")||"") : "";
-  store[currentChar] = store[currentChar]||{};
-  store[currentChar].userSetplays = store[currentChar].userSetplays||[];
-  store[currentChar].userSetplays.push({id:"u-"+Date.now(),situation,setup,mixup,group,video,timestamp,note:"（自作）"});
-  saveStore(); renderSetplayGroupFilters(); renderSetplays();
+  openModal(`
+    <h3>セットプレイを追加</h3>
+    <label class="fld">状況</label><input id="mSituation" style="width:100%" placeholder="例: 端 強昇龍ダウン後">
+    <label class="fld">手順</label><input id="mSetup" style="width:100%" placeholder="例: 前ステ x2">
+    <label class="fld">グループ</label><input id="mGroup" style="width:100%" placeholder="自由入力。空欄で未分類">
+    <label class="fld">択（レシピ）</label>
+    <input id="mMixup" style="width:100%" placeholder="例: 打撃(2中K) / 投げ">
+    <input class="move-search" style="width:100%;margin-top:6px" placeholder="🔍 技を検索して下から選ぶ">
+    <div class="move-picker"></div>
+    <div class="hint" style="margin-bottom:10px">技をクリックすると択欄の末尾に追加されます（フレーム表に登録されている技）。</div>
+    <label class="fld">動画URL（任意）</label><input id="mVideo" style="width:100%">
+    <label class="fld">動画の時間（例: 1:23、任意）</label><input id="mTimestamp" style="width:100%">
+    <div class="row-actions">
+      <button id="mSave">保存</button>
+      <button class="ghost" id="mCancel">キャンセル</button>
+    </div>
+  `);
+  const box = document.getElementById("modalBox");
+  attachMovePicker(box, "mMixup", " / ");
+  box.querySelector("#mCancel").onclick = closeModal;
+  box.querySelector("#mSave").onclick = ()=>{
+    const situation = box.querySelector("#mSituation").value.trim();
+    if(!situation){ alert("状況を入力してください"); return; }
+    const setup = box.querySelector("#mSetup").value.trim();
+    const mixup = box.querySelector("#mMixup").value.trim();
+    const group = box.querySelector("#mGroup").value.trim() || "未分類";
+    const video = box.querySelector("#mVideo").value.trim();
+    const timestamp = video ? box.querySelector("#mTimestamp").value.trim() : "";
+    store[currentChar] = store[currentChar]||{};
+    store[currentChar].userSetplays = store[currentChar].userSetplays||[];
+    store[currentChar].userSetplays.push({id:"u-"+Date.now(),situation,setup,mixup,group,video,timestamp,note:"（自作）"});
+    saveStore(); renderSetplayGroupFilters(); renderSetplays(); closeModal();
+  };
 };
 
 /* ============ マッチアップメモ（相手キャラ別） ============ */
@@ -669,6 +715,39 @@ function renderGuide(){
 
 /* -------- ユーティリティ -------- */
 function esc(s){ return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m])); }
+
+/* -------- モーダル & 技ピッカー（フレーム表の技からレシピを作る） -------- */
+function openModal(html){
+  document.getElementById("modalBox").innerHTML = html;
+  document.getElementById("modalOverlay").style.display = "flex";
+}
+function closeModal(){
+  document.getElementById("modalOverlay").style.display = "none";
+  document.getElementById("modalBox").innerHTML = "";
+}
+document.getElementById("modalOverlay").onclick = (e)=>{ if(e.target.id==="modalOverlay") closeModal(); };
+// box内の .move-search / .move-picker を、フレーム表の技一覧で動かす。
+// 技をクリックすると targetId の入力欄末尾に sep 区切りで追記する。
+function attachMovePicker(box, targetId, sep){
+  const moves = [...new Set((SF6_DATA.frames[currentChar]||[]).map(f=>f.move))];
+  const wrap = box.querySelector(".move-picker");
+  const search = box.querySelector(".move-search");
+  if(!wrap) return;
+  function draw(q){
+    const qq = (q||"").trim();
+    const list = moves.filter(m=>!qq || m.includes(qq));
+    wrap.innerHTML = list.length
+      ? list.map(m=>`<span class="chip" data-mv="${esc(m)}">${esc(m)}</span>`).join("")
+      : `<span class="hint" style="margin:0">該当する技がありません</span>`;
+    wrap.querySelectorAll("[data-mv]").forEach(ch=>ch.onclick=()=>{
+      const input = box.querySelector("#"+targetId);
+      input.value = input.value.trim() ? (input.value.replace(/\s+$/,"") + sep + ch.dataset.mv) : ch.dataset.mv;
+      input.focus();
+    });
+  }
+  draw("");
+  if(search) search.oninput = ()=>draw(search.value);
+}
 
 /* -------- 動画 -------- */
 // "1:23" や "83" → 秒
