@@ -53,6 +53,39 @@ function groupsOf(kind, items){
   items.forEach(it=>set.add(groupOf(kind, it)));
   return [...set];
 }
+// 表示中の一覧をグループ名でまとめる（出現順、「未分類」は最後）
+function groupItems(kind, list){
+  const map = new Map();
+  list.forEach(it=>{
+    const g = groupOf(kind, it);
+    if(!map.has(g)) map.set(g, []);
+    map.get(g).push(it);
+  });
+  return [...map.entries()].sort((a,b)=>{
+    if(a[0]==="未分類") return 1;
+    if(b[0]==="未分類") return -1;
+    return 0;
+  });
+}
+// グループの開閉状態（再描画をまたいで維持。既定は開いた状態）
+const closedGroups = { combo:new Set(), setplay:new Set() };
+function wrapGroups(kind, list, cardHtmlFn){
+  return groupItems(kind, list).map(([gname, items])=>{
+    const isOpen = !closedGroups[kind].has(gname);
+    return `<details class="group-section" data-gname="${esc(gname)}" ${isOpen?"open":""}>
+      <summary>🏷️ ${esc(gname)} <span class="gcount">${items.length}件</span><span class="arrow">▶</span></summary>
+      <div class="group-body">${items.map(cardHtmlFn).join("")}</div>
+    </details>`;
+  }).join("");
+}
+function attachGroupToggleHandlers(container, kind){
+  container.querySelectorAll("details.group-section").forEach(d=>{
+    d.addEventListener("toggle", ()=>{
+      const g = d.dataset.gname;
+      if(d.open) closedGroups[kind].delete(g); else closedGroups[kind].add(g);
+    });
+  });
+}
 
 /* -------- キャラセレクタ＆タブ -------- */
 function initChars(){
@@ -111,7 +144,7 @@ function renderCombos(){
   const el = document.getElementById("comboList");
   if(!list.length){ el.innerHTML = `<div class="empty">該当するコンボがありません</div>`; return; }
 
-  el.innerHTML = list.map(c=>{
+  const comboCardHtml = c=>{
     const isUser = c.id.startsWith("u-");
     const media = hasMedia("comboVideos", c);
     return `<div class="card">
@@ -120,7 +153,6 @@ function renderCombos(){
         <h3>${esc(c.name)}</h3>
         <span class="badge">${esc(c.start)}</span>
         <span class="badge">${esc(c.position||"中央")}</span>
-        <span class="badge" style="color:var(--accent2);border-color:var(--accent2)">🏷️ ${esc(groupOf("combo",c))}</span>
         <span class="stars" title="難易度">${"●".repeat(c.difficulty||1)}${"○".repeat(5-(c.difficulty||1))}</span>
       </div>
       <div class="notation">${esc(c.notation)}</div>
@@ -141,7 +173,9 @@ function renderCombos(){
         ${isUser?`<button class="danger" data-delcombo="${c.id}">削除</button>`:""}
       </div>
     </div>`;
-  }).join("");
+  };
+  el.innerHTML = wrapGroups("combo", list, comboCardHtml);
+  attachGroupToggleHandlers(el, "combo");
 
   attachVideoHandlers(el); fillLocalVideos(el);
   el.querySelectorAll("[data-grpedit]").forEach(b=>b.onclick=()=>{
@@ -292,12 +326,11 @@ function renderSetplays(){
   if(setplayGroupFilter!=="全て") list = list.filter(s=>groupOf("setplay",s)===setplayGroupFilter);
   const el = document.getElementById("setplayList");
   if(!list.length){ el.innerHTML=`<div class="empty">セットプレイがありません</div>`; return; }
-  el.innerHTML = list.map(s=>{
+  const setplayCardHtml = s=>{
     const isUser = s.id.startsWith("u-");
     const media = hasMedia("setplayVideos", s);
     return `<div class="card">
       <div class="card-head"><h3>${esc(s.situation)}</h3>
-        <span class="badge" style="color:var(--accent2);border-color:var(--accent2)">🏷️ ${esc(groupOf("setplay",s))}</span>
         ${s.timestamp?`<span class="badge">⏱ ${esc(s.timestamp)}</span>`:""}</div>
       <div class="stats"><span>手順 <b>${esc(s.setup)}</b></span></div>
       <div class="stats"><span>択 <b>${esc(s.mixup)}</b></span></div>
@@ -311,7 +344,9 @@ function renderSetplays(){
         ${localVideoKeys.has(vkey("setplayVideos",s.id))?`<button class="ghost" data-viddl="${s.id}">📥 動画を書き出す</button>`:""}
         ${isUser?`<button class="danger" data-delsp="${s.id}">削除</button>`:""}</div>
     </div>`;
-  }).join("");
+  };
+  el.innerHTML = wrapGroups("setplay", list, setplayCardHtml);
+  attachGroupToggleHandlers(el, "setplay");
   attachVideoHandlers(el); fillLocalVideos(el);
   el.querySelectorAll("[data-grpedit]").forEach(b=>b.onclick=()=>{
     setGroupOverride("setplay", list.find(x=>x.id===b.dataset.grpedit), ()=>{renderSetplayGroupFilters(); renderSetplays();});

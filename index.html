@@ -28,6 +28,17 @@
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
   .chip{padding:7px 14px;border-radius:20px;background:var(--panel2);border:1px solid var(--line);cursor:pointer;font-size:15px;color:var(--muted)}
   .filter-label{font-size:13px;color:var(--muted);align-self:center;white-space:nowrap}
+  /* グループの開閉セクション */
+  .group-section{margin-bottom:14px}
+  .group-section summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
+    padding:10px 14px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    font-weight:600;font-size:15px;color:var(--text);user-select:none}
+  .group-section summary::-webkit-details-marker{display:none}
+  .group-section summary::marker{content:""}
+  .group-section .gcount{color:var(--muted);font-weight:400;font-size:13px}
+  .group-section summary .arrow{margin-left:auto;transition:transform .15s;color:var(--muted);font-size:12px}
+  .group-section[open] summary .arrow{transform:rotate(90deg)}
+  .group-section .group-body{padding-top:10px}
   .chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px}
   .card-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
@@ -123,7 +134,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.7.0</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.8.0</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -236,9 +247,9 @@
 </main>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.7.0"></script>
-<script src="glossary.js?v=1.7.0"></script>
-<script src="guide.js?v=1.7.0"></script>
-<script src="app.js?v=1.7.0"></script>
+<script src="data.js?v=1.8.0"></script>
+<script src="glossary.js?v=1.8.0"></script>
+<script src="guide.js?v=1.8.0"></script>
+<script src="app.js?v=1.8.0"></script>
 </body>
 </html>
