@@ -135,7 +135,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.10.0</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.11.0</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -228,14 +228,23 @@
     <div class="panel-box">
       <h3>対戦相手キャラ別メモ</h3>
       <div class="hint">対戦相手のキャラを選ぶと、そのキャラ専用の対策メモが書けます（✎ は記入済み）。データはこのブラウザに保存されます。</div>
+      <div class="toolbar"><span class="filter-label">グループ:</span><div id="matchupGroupFilters" style="display:contents"></div></div>
       <div class="toolbar" id="opponentGrid"></div>
     </div>
     <div class="panel-box" id="noteEditorBox" style="display:none">
       <h3 id="noteEditorTitle"></h3>
       <div class="hint" id="noteEditorMeta"></div>
+      <label class="fld">グループ</label>
+      <input id="noteGroup" placeholder="例: 要注意 / 得意 / 苦手（空欄で未分類）" style="width:100%;margin-bottom:6px">
+      <label class="fld">メモ</label>
       <textarea id="noteBody" placeholder="例: 昇竜ぶっぱ多い / 端の起き攻めは投げ重め / DI見てから返せる"></textarea>
+      <div id="noteMedia"></div>
       <div class="row-actions">
         <button id="saveNote">保存</button>
+        <button class="ghost" id="noteVidFile">📁 動画ファイル</button>
+        <button class="ghost" id="noteVidUrl">🔗 URL</button>
+        <button class="ghost" id="noteVidClear" style="display:none">動画を消す</button>
+        <button class="ghost" id="noteVidDl" style="display:none">📥 動画を書き出す</button>
         <button class="danger" id="clearNote">このメモを削除</button>
       </div>
     </div>
@@ -254,9 +263,9 @@
 </main>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.10.0"></script>
-<script src="glossary.js?v=1.10.0"></script>
-<script src="guide.js?v=1.10.0"></script>
-<script src="app.js?v=1.10.0"></script>
+<script src="data.js?v=1.11.0"></script>
+<script src="glossary.js?v=1.11.0"></script>
+<script src="guide.js?v=1.11.0"></script>
+<script src="app.js?v=1.11.0"></script>
 </body>
 </html>

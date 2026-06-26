@@ -94,7 +94,7 @@ function initChars(){
   sel.value = currentChar;
   sel.onchange = ()=>{
     currentChar = sel.value;
-    comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て"; selectedOpponent = null;
+    comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て"; matchupGroupFilter = "全て"; selectedOpponent = null;
     renderAll();
   };
 }
@@ -419,10 +419,28 @@ document.getElementById("addSetplay").onclick = ()=>{
 
 /* ============ マッチアップメモ（相手キャラ別） ============ */
 let selectedOpponent = null;
+let matchupGroupFilter = "全て";
+function matchupGroupOf(oppId){
+  const rec = ns("matchupNotes")[oppId];
+  return (rec && rec.group) || "未分類";
+}
+function renderMatchupGroupFilters(){
+  const notesMap = ns("matchupNotes");
+  const set = new Set(["全て"]);
+  Object.keys(notesMap).forEach(id=>{ if(notesMap[id].body) set.add(matchupGroupOf(id)); });
+  const wrap = document.getElementById("matchupGroupFilters");
+  wrap.innerHTML = [...set].map(g=>
+    `<span class="chip ${g===matchupGroupFilter?'active':''}" data-grp="${esc(g)}">${esc(g)}</span>`).join("");
+  wrap.querySelectorAll(".chip").forEach(ch=>{
+    ch.onclick = ()=>{ matchupGroupFilter = ch.dataset.grp; renderMatchupGroupFilters(); renderOpponentGrid(); };
+  });
+}
 function renderOpponentGrid(){
   const wrap = document.getElementById("opponentGrid");
   const notesMap = ns("matchupNotes");
-  wrap.innerHTML = SF6_DATA.characters.map(c=>{
+  let chars = SF6_DATA.characters;
+  if(matchupGroupFilter!=="全て") chars = chars.filter(c=>notesMap[c.id] && notesMap[c.id].body && matchupGroupOf(c.id)===matchupGroupFilter);
+  wrap.innerHTML = chars.map(c=>{
     const has = notesMap[c.id] && notesMap[c.id].body;
     return `<span class="chip opp-chip ${c.id===selectedOpponent?'active':''}" data-opp="${c.id}" style="border-color:${c.color}">${has?"✎ ":""}${esc(c.name)}</span>`;
   }).join("");
@@ -435,22 +453,47 @@ function renderNoteEditor(){
   if(!selectedOpponent){ box.style.display="none"; return; }
   box.style.display = "block";
   const opp = SF6_DATA.characters.find(c=>c.id===selectedOpponent);
-  const rec = ns("matchupNotes")[selectedOpponent] || {body:"", updated:""};
+  const rec = ns("matchupNotes")[selectedOpponent] || {body:"", updated:"", group:""};
   document.getElementById("noteEditorTitle").textContent = `対 ${opp.name}`;
   document.getElementById("noteEditorMeta").textContent = rec.updated ? `最終更新: ${rec.updated}` : "まだメモがありません";
+  document.getElementById("noteGroup").value = rec.group || "";
   document.getElementById("noteBody").value = rec.body;
+  const pseudoItem = { id: selectedOpponent, video: "" };
+  const media = hasMedia("matchupVideos", pseudoItem);
+  document.getElementById("noteMedia").innerHTML = media ? mediaHTML("matchupVideos", pseudoItem) : "";
+  attachVideoHandlers(box); fillLocalVideos(box);
+  document.getElementById("noteVidClear").style.display = media ? "" : "none";
+  document.getElementById("noteVidDl").style.display = localVideoKeys.has(vkey("matchupVideos", selectedOpponent)) ? "" : "none";
 }
 document.getElementById("saveNote").onclick = ()=>{
   if(!selectedOpponent) return;
   const body = document.getElementById("noteBody").value.trim();
-  ns("matchupNotes")[selectedOpponent] = {body, updated:new Date().toLocaleDateString("ja-JP")};
-  saveStore(); renderOpponentGrid(); renderNoteEditor();
+  const group = document.getElementById("noteGroup").value.trim() || "未分類";
+  ns("matchupNotes")[selectedOpponent] = {body, group, updated:new Date().toLocaleDateString("ja-JP")};
+  saveStore(); renderMatchupGroupFilters(); renderOpponentGrid(); renderNoteEditor();
 };
 document.getElementById("clearNote").onclick = ()=>{
   if(!selectedOpponent) return;
   if(!confirm("このメモを削除しますか？")) return;
   delete ns("matchupNotes")[selectedOpponent];
-  saveStore(); renderOpponentGrid(); renderNoteEditor();
+  saveStore(); renderMatchupGroupFilters(); renderOpponentGrid(); renderNoteEditor();
+};
+document.getElementById("noteVidFile").onclick = ()=>{
+  if(!selectedOpponent) return;
+  pickVideoFile("matchupVideos", selectedOpponent, renderNoteEditor);
+};
+document.getElementById("noteVidUrl").onclick = ()=>{
+  if(!selectedOpponent) return;
+  editVideo("matchupVideos", { id: selectedOpponent, video:"" }, renderNoteEditor);
+};
+document.getElementById("noteVidClear").onclick = ()=>{
+  if(!selectedOpponent) return;
+  clearVideo("matchupVideos", selectedOpponent, renderNoteEditor);
+};
+document.getElementById("noteVidDl").onclick = ()=>{
+  if(!selectedOpponent) return;
+  const opp = SF6_DATA.characters.find(c=>c.id===selectedOpponent);
+  downloadLocalVideo("matchupVideos", selectedOpponent, opp.name);
 };
 
 /* ============ 用語集 ============ */
@@ -784,10 +827,10 @@ function renderAll(){
   renderComboFilters(); renderCombos();
   renderFrames();
   renderSetplayGroupFilters(); renderSetplays();
-  renderOpponentGrid(); renderNoteEditor();
+  renderMatchupGroupFilters(); renderOpponentGrid(); renderNoteEditor();
   renderGlossaryFilters(); renderGlossary();
 }
 initChars();
 renderAll();
 // 保存済みローカル動画のキーを読み込んでから再描画（再読み込み後も動画が出るように）
-idbKeys().then(keys=>{ localVideoKeys = new Set(keys); renderCombos(); renderSetplays(); renderGuide(); }).catch(()=>{});
+idbKeys().then(keys=>{ localVideoKeys = new Set(keys); renderCombos(); renderSetplays(); renderGuide(); renderNoteEditor(); }).catch(()=>{});
