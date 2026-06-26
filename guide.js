@@ -82,8 +82,8 @@ const SF6_GUIDE = [
   {
     id: "g4", order: 3,
     title: "ドライブゲージを理解する",
-    summary: "5つの行動が同じゲージを消費すると知る",
-    body: "・パリィ／ジャストパリィ／ドライブインパクト／ドライブラッシュ／OD技は全部Dゲージを消費する共通リソース\n・0本になるとバーンアウト。OD技が使えなくなり、壁際でドライブインパクトを受けるとスタンしてしまう危険がある\n・むやみに使わず、攻めと守りでバランス良く配分する",
+    summary: "6つの行動が同じゲージを消費すると知る",
+    body: "・パリィ／ジャストパリィ／ドライブインパクト／ドライブラッシュ／OD技／ドライブリバーサルは全部Dゲージを消費する共通リソース\n・0本になるとバーンアウト。OD技が使えなくなり、壁際でドライブインパクトを受けるとスタンしてしまう危険がある\n・むやみに使わず、攻めと守りでバランス良く配分する",
     diagram: `<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg">
       <style>.seg{fill:var(--accent2);opacity:0.7}
       .segline{stroke:var(--bg);stroke-width:3}
@@ -99,12 +99,13 @@ const SF6_GUIDE = [
       <line x1="420" y1="20" x2="420" y2="60" class="segline"/>
       <line x1="520" y1="20" x2="520" y2="60" class="segline"/>
       <text class="sub" x="320" y="78">ドライブゲージ（6本）</text>
-      <text class="lbl" x="320" y="105" font-weight="700">この5つの行動が同じゲージを消費する</text>
+      <text class="lbl" x="320" y="105" font-weight="700">この6つの行動が同じゲージを消費する</text>
       <rect class="chip" x="40"  y="120" width="170" height="36" rx="8"/><text class="chiptxt" x="125" y="143">パリィ</text>
       <rect class="chip" x="230" y="120" width="170" height="36" rx="8"/><text class="chiptxt" x="315" y="143">ジャストパリィ</text>
       <rect class="chip" x="420" y="120" width="170" height="36" rx="8"/><text class="chiptxt" x="505" y="143">ドライブインパクト</text>
-      <rect class="chip" x="135" y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="220" y="189">ドライブラッシュ</text>
-      <rect class="chip" x="325" y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="410" y="189">OD技</text>
+      <rect class="chip" x="40"  y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="125" y="189">ドライブラッシュ</text>
+      <rect class="chip" x="230" y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="315" y="189">OD技</text>
+      <rect class="chip" x="420" y="166" width="170" height="36" rx="8"/><text class="chiptxt" x="505" y="189">ドライブリバーサル</text>
       <rect x="20" y="212" width="600" height="22" fill="var(--bad)" opacity="0.25"/>
       <text class="sub" x="320" y="228">0本＝バーンアウト（OD技不可・壁際でドライブインパクトを受けるとスタンの危険）</text>
     </svg>`,
