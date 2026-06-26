@@ -1,6 +1,7 @@
-// jp_parsed.json と既存サンプルから data.js を生成
+// jp_parsed.json / ryu_parsed.json と既存サンプルから data.js を生成
 const fs = require("fs");
 const jp = JSON.parse(fs.readFileSync("jp_parsed.json", "utf8"));
+const ryu = JSON.parse(fs.readFileSync("ryu_parsed.json", "utf8"));
 
 // リュウのサンプルデータ（コンボ/セットプレイの例。フレームはJPのみ実数値）
 const ryuCombos = [
@@ -27,15 +28,13 @@ const characters = [
 const data = {
   characters,
   combos:   { jp: [], ryu: ryuCombos },
-  frames:   { jp: jp, ryu: [
-    { move:"5中P", type:"通常技", startup:6, active:"", recovery:"", onBlock:2, onHit:5, cancel:"C", damage:"", attribute:"上", note:"※サンプル値" },
-  ]},
+  frames:   { jp: jp, ryu: ryu },
   setplays: { jp: [], ryu: ryuSetplays },
 };
 
 const banner = `/* =====================================================================
  * スト6コンボメーカー  シードデータ
- *  - frames.jp は公式サイト(streetfighter.com)から取得した実データ
+ *  - frames.jp / frames.ryu は公式サイト(streetfighter.com)から取得した実データ
  *  - combos / setplays はユーザーが追加していく想定（リュウは例として同梱）
  *  - 他キャラ追加: characters に1行足し、frames/combos 等にキー追加
  * ===================================================================*/
@@ -46,4 +45,4 @@ if (typeof module !== "undefined") { module.exports = SF6_DATA; }
 `;
 
 fs.writeFileSync("data.js", banner);
-console.log("data.js written. jp frames:", jp.length, "| chars:", data.characters.map(c=>c.id).join(","));
+console.log("data.js written. jp frames:", jp.length, "| ryu frames:", ryu.length, "| chars:", data.characters.map(c=>c.id).join(","));
