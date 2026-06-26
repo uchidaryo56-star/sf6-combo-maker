@@ -8,6 +8,8 @@ const LS_KEY = "sf6companion.v1";
 let store = loadStore();
 let currentChar = SF6_DATA.characters[0].id;
 let comboFilter = "全て";
+let comboGroupFilter = "全て";
+let setplayGroupFilter = "全て";
 
 function loadStore(){
   try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
@@ -26,12 +28,42 @@ function gns(key){ // キャラに依存しない全体共通のネームスペ�
   return store._global[key];
 }
 
+/* -------- 自由グループ分け（コンボ／セットプレイ共通） --------
+ * kind: "combo" | "setplay"。既定データの項目も含めて、好きなグループ名を
+ * 付けられる。上書きは ns(kind+"Groups") にキャラ別保存（自作項目はitem.group直書き）。 */
+function groupOf(kind, item){
+  const ov = ns(kind+"Groups");
+  if(item.id in ov) return ov[item.id];
+  return item.group || "未分類";
+}
+function setGroupOverride(kind, item, after){
+  const cur = groupOf(kind, item);
+  const name = prompt("グループ名（自由に入力。例: 端コンボ / 対戦相手用 / 練習中）", cur);
+  if(name===null) return;
+  const g = name.trim() || "未分類";
+  if(item.id.startsWith("u-")){
+    item.group = g; // 自作項目はデータ自体を直接書き換え
+  } else {
+    ns(kind+"Groups")[item.id] = g;
+  }
+  saveStore(); after();
+}
+function groupsOf(kind, items){
+  const set = new Set(["全て"]);
+  items.forEach(it=>set.add(groupOf(kind, it)));
+  return [...set];
+}
+
 /* -------- キャラセレクタ＆タブ -------- */
 function initChars(){
   const sel = document.getElementById("charSelect");
   sel.innerHTML = SF6_DATA.characters.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
   sel.value = currentChar;
-  sel.onchange = ()=>{ currentChar = sel.value; renderAll(); };
+  sel.onchange = ()=>{
+    currentChar = sel.value;
+    comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て";
+    renderAll();
+  };
 }
 document.querySelectorAll(".tab").forEach(t=>{
   t.onclick = ()=>{
@@ -60,6 +92,12 @@ function renderComboFilters(){
   wrap.querySelectorAll(".chip").forEach(ch=>{
     ch.onclick = ()=>{ comboFilter = ch.dataset.cat; renderComboFilters(); renderCombos(); };
   });
+  const gwrap = document.getElementById("comboGroupFilters");
+  gwrap.innerHTML = groupsOf("combo", allCombos()).map(g=>
+    `<span class="chip ${g===comboGroupFilter?'active':''}" data-grp="${esc(g)}">${esc(g)}</span>`).join("");
+  gwrap.querySelectorAll(".chip").forEach(ch=>{
+    ch.onclick = ()=>{ comboGroupFilter = ch.dataset.grp; renderComboFilters(); renderCombos(); };
+  });
 }
 function renderCombos(){
   const favs = ns("favCombos");
@@ -67,6 +105,7 @@ function renderCombos(){
   const favOnly = document.getElementById("favOnly").checked;
   let list = allCombos();
   if(comboFilter!=="全て") list = list.filter(c=>c.start===comboFilter);
+  if(comboGroupFilter!=="全て") list = list.filter(c=>groupOf("combo",c)===comboGroupFilter);
   if(favOnly) list = list.filter(c=>favs[c.id]);
 
   const el = document.getElementById("comboList");
@@ -81,6 +120,7 @@ function renderCombos(){
         <h3>${esc(c.name)}</h3>
         <span class="badge">${esc(c.start)}</span>
         <span class="badge">${esc(c.position||"中央")}</span>
+        <span class="badge" style="color:var(--accent2);border-color:var(--accent2)">🏷️ ${esc(groupOf("combo",c))}</span>
         <span class="stars" title="難易度">${"●".repeat(c.difficulty||1)}${"○".repeat(5-(c.difficulty||1))}</span>
       </div>
       <div class="notation">${esc(c.notation)}</div>
@@ -93,6 +133,7 @@ function renderCombos(){
       ${mediaHTML("comboVideos", c)}
       <div class="row-actions">
         <label class="check"><input type="checkbox" data-done="${c.id}" ${done[c.id]?"checked":""}> 練習済み</label>
+        <button class="ghost" data-grpedit="${c.id}">🏷️ グループ変更</button>
         <button class="ghost" data-vidfile="${c.id}">📁 動画ファイル</button>
         <button class="ghost" data-vidurl="${c.id}">🔗 URL</button>
         ${media?`<button class="ghost" data-vidclear="${c.id}">動画を消す</button>`:""}
@@ -103,6 +144,9 @@ function renderCombos(){
   }).join("");
 
   attachVideoHandlers(el); fillLocalVideos(el);
+  el.querySelectorAll("[data-grpedit]").forEach(b=>b.onclick=()=>{
+    setGroupOverride("combo", list.find(x=>x.id===b.dataset.grpedit), ()=>{renderComboFilters(); renderCombos();});
+  });
   el.querySelectorAll("[data-vidfile]").forEach(b=>b.onclick=()=>pickVideoFile("comboVideos", b.dataset.vidfile, renderCombos));
   el.querySelectorAll("[data-vidurl]").forEach(b=>b.onclick=()=>editVideo("comboVideos", list.find(x=>x.id===b.dataset.vidurl), renderCombos));
   el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("comboVideos", b.dataset.vidclear, renderCombos));
@@ -122,13 +166,14 @@ document.getElementById("favOnly").onchange = renderCombos;
 document.getElementById("addCombo").onclick = ()=>{
   const name = prompt("コンボ名"); if(!name) return;
   const start = prompt("始動カテゴリ（例: 通常ヒット / パニッシュカウンター / ドライブラッシュ）","通常ヒット")||"その他";
+  const group = prompt("グループ（自由に入力。例: 端コンボ / 対戦相手用。空欄で未分類）","")||"未分類";
   const notation = prompt("入力（例: 2中K > 弱波動拳）")||"";
   const damage = parseInt(prompt("ダメージ","2000"))||0;
   const video = prompt("動画URL（YouTube等・任意）")||"";
   store[currentChar] = store[currentChar]||{};
   store[currentChar].userCombos = store[currentChar].userCombos||[];
   store[currentChar].userCombos.push({
-    id:"u-"+Date.now(), name, start, notation, damage, drive:0, super:0,
+    id:"u-"+Date.now(), name, start, group, notation, damage, drive:0, super:0,
     difficulty:1, position:"中央", video, note:"（自作）"
   });
   saveStore(); renderComboFilters(); renderCombos();
@@ -234,8 +279,17 @@ function allSetplays(){
   const user = store[currentChar] && store[currentChar].userSetplays ? store[currentChar].userSetplays : [];
   return [...base, ...user];
 }
+function renderSetplayGroupFilters(){
+  const gwrap = document.getElementById("setplayGroupFilters");
+  gwrap.innerHTML = groupsOf("setplay", allSetplays()).map(g=>
+    `<span class="chip ${g===setplayGroupFilter?'active':''}" data-grp="${esc(g)}">${esc(g)}</span>`).join("");
+  gwrap.querySelectorAll(".chip").forEach(ch=>{
+    ch.onclick = ()=>{ setplayGroupFilter = ch.dataset.grp; renderSetplayGroupFilters(); renderSetplays(); };
+  });
+}
 function renderSetplays(){
-  const list = allSetplays();
+  let list = allSetplays();
+  if(setplayGroupFilter!=="全て") list = list.filter(s=>groupOf("setplay",s)===setplayGroupFilter);
   const el = document.getElementById("setplayList");
   if(!list.length){ el.innerHTML=`<div class="empty">セットプレイがありません</div>`; return; }
   el.innerHTML = list.map(s=>{
@@ -243,12 +297,14 @@ function renderSetplays(){
     const media = hasMedia("setplayVideos", s);
     return `<div class="card">
       <div class="card-head"><h3>${esc(s.situation)}</h3>
+        <span class="badge" style="color:var(--accent2);border-color:var(--accent2)">🏷️ ${esc(groupOf("setplay",s))}</span>
         ${s.timestamp?`<span class="badge">⏱ ${esc(s.timestamp)}</span>`:""}</div>
       <div class="stats"><span>手順 <b>${esc(s.setup)}</b></span></div>
       <div class="stats"><span>択 <b>${esc(s.mixup)}</b></span></div>
       ${s.note?`<div class="note">${esc(s.note)}</div>`:""}
       ${mediaHTML("setplayVideos", s)}
       <div class="row-actions">
+        <button class="ghost" data-grpedit="${s.id}">🏷️ グループ変更</button>
         <button class="ghost" data-vidfile="${s.id}">📁 動画ファイル</button>
         <button class="ghost" data-vidurl="${s.id}">🔗 URL</button>
         ${media?`<button class="ghost" data-vidclear="${s.id}">動画を消す</button>`:""}
@@ -257,25 +313,29 @@ function renderSetplays(){
     </div>`;
   }).join("");
   attachVideoHandlers(el); fillLocalVideos(el);
+  el.querySelectorAll("[data-grpedit]").forEach(b=>b.onclick=()=>{
+    setGroupOverride("setplay", list.find(x=>x.id===b.dataset.grpedit), ()=>{renderSetplayGroupFilters(); renderSetplays();});
+  });
   el.querySelectorAll("[data-vidfile]").forEach(b=>b.onclick=()=>pickVideoFile("setplayVideos", b.dataset.vidfile, renderSetplays));
   el.querySelectorAll("[data-vidurl]").forEach(b=>b.onclick=()=>editVideo("setplayVideos", list.find(x=>x.id===b.dataset.vidurl), renderSetplays));
   el.querySelectorAll("[data-vidclear]").forEach(b=>b.onclick=()=>clearVideo("setplayVideos", b.dataset.vidclear, renderSetplays));
   el.querySelectorAll("[data-viddl]").forEach(b=>b.onclick=()=>downloadLocalVideo("setplayVideos", b.dataset.viddl, list.find(x=>x.id===b.dataset.viddl).situation));
   el.querySelectorAll("[data-delsp]").forEach(b=>b.onclick=()=>{
     store[currentChar].userSetplays = store[currentChar].userSetplays.filter(x=>x.id!==b.dataset.delsp);
-    saveStore(); renderSetplays();
+    saveStore(); renderSetplayGroupFilters(); renderSetplays();
   });
 }
 document.getElementById("addSetplay").onclick = ()=>{
   const situation = prompt("状況（例: 端 強昇龍ダウン後）"); if(!situation) return;
   const setup = prompt("手順（例: 前ステ x2）")||"";
   const mixup = prompt("択（例: 打撃 / 投げ）")||"";
+  const group = prompt("グループ（自由に入力。例: 中央 / 端 / 対戦相手用。空欄で未分類）","")||"未分類";
   const video = prompt("動画URL（任意）")||"";
   const timestamp = video? (prompt("動画の時間（例: 1:23）")||"") : "";
   store[currentChar] = store[currentChar]||{};
   store[currentChar].userSetplays = store[currentChar].userSetplays||[];
-  store[currentChar].userSetplays.push({id:"u-"+Date.now(),situation,setup,mixup,video,timestamp,note:"（自作）"});
-  saveStore(); renderSetplays();
+  store[currentChar].userSetplays.push({id:"u-"+Date.now(),situation,setup,mixup,group,video,timestamp,note:"（自作）"});
+  saveStore(); renderSetplayGroupFilters(); renderSetplays();
 };
 
 /* ============ マッチアップメモ ============ */
@@ -635,7 +695,7 @@ function renderAll(){
   renderGuide();
   renderComboFilters(); renderCombos();
   renderFrames();
-  renderSetplays();
+  renderSetplayGroupFilters(); renderSetplays();
   renderNotes();
   renderGlossaryFilters(); renderGlossary();
 }
