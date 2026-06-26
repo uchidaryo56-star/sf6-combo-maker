@@ -220,6 +220,8 @@ function renderCombos(){
 }
 document.getElementById("favOnly").onchange = renderCombos;
 document.getElementById("addCombo").onclick = ()=>{
+  const newId = "u-"+Date.now();
+  let localPicked = false;
   openModal(`
     <h3>コンボを追加</h3>
     <label class="fld">コンボ名</label><input id="mName" style="width:100%">
@@ -231,7 +233,12 @@ document.getElementById("addCombo").onclick = ()=>{
     <div class="move-picker"></div>
     <div class="hint" style="margin-bottom:10px">技をクリックするとレシピ欄の末尾に追加されます（フレーム表に登録されている技）。OD技やDR等は手入力で追記してください。</div>
     <label class="fld">ダメージ</label><input id="mDamage" type="number" value="2000" style="width:100%">
-    <label class="fld">動画URL（任意）</label><input id="mVideo" style="width:100%">
+    <label class="fld">動画</label>
+    <input id="mVideo" style="width:100%" placeholder="動画URL（YouTube等・任意）">
+    <div class="row-actions" style="margin-top:6px">
+      <button class="ghost" id="mVidFile">📁 動画ファイルを選ぶ</button>
+      <span class="hint" id="mVidStatus" style="display:none;margin:0"></span>
+    </div>
     <div class="row-actions">
       <button id="mSave">保存</button>
       <button class="ghost" id="mCancel">キャンセル</button>
@@ -239,7 +246,18 @@ document.getElementById("addCombo").onclick = ()=>{
   `);
   const box = document.getElementById("modalBox");
   attachMovePicker(box, "mNotation", " > ");
-  box.querySelector("#mCancel").onclick = closeModal;
+  box.querySelector("#mVidFile").onclick = ()=>{
+    pickVideoFile("comboVideos", newId, ()=>{
+      localPicked = true;
+      const st = box.querySelector("#mVidStatus");
+      st.textContent = "✓ 動画ファイルを選択しました（保存時に登録されます）";
+      st.style.display = "";
+    });
+  };
+  box.querySelector("#mCancel").onclick = ()=>{
+    if(localPicked){ const k = vkey("comboVideos", newId); idbDel(k).then(()=>localVideoKeys.delete(k)); }
+    closeModal();
+  };
   box.querySelector("#mSave").onclick = ()=>{
     const name = box.querySelector("#mName").value.trim();
     if(!name){ alert("コンボ名を入力してください"); return; }
@@ -251,7 +269,7 @@ document.getElementById("addCombo").onclick = ()=>{
     store[currentChar] = store[currentChar]||{};
     store[currentChar].userCombos = store[currentChar].userCombos||[];
     store[currentChar].userCombos.push({
-      id:"u-"+Date.now(), name, start, group, notation, damage, drive:0, super:0,
+      id:newId, name, start, group, notation, damage, drive:0, super:0,
       difficulty:1, position:"中央", video, note:"（自作）"
     });
     saveStore(); renderComboFilters(); renderCombos(); closeModal();
@@ -430,6 +448,8 @@ function renderSetplays(){
   });
 }
 document.getElementById("addSetplay").onclick = ()=>{
+  const newId = "u-"+Date.now();
+  let localPicked = false;
   openModal(`
     <h3>セットプレイを追加</h3>
     <label class="fld">状況</label><input id="mSituation" style="width:100%" placeholder="例: 端 強昇龍ダウン後">
@@ -440,8 +460,13 @@ document.getElementById("addSetplay").onclick = ()=>{
     <input class="move-search" style="width:100%;margin-top:6px" placeholder="🔍 技を検索して下から選ぶ">
     <div class="move-picker"></div>
     <div class="hint" style="margin-bottom:10px">技をクリックすると択欄の末尾に追加されます（フレーム表に登録されている技）。</div>
-    <label class="fld">動画URL（任意）</label><input id="mVideo" style="width:100%">
-    <label class="fld">動画の時間（例: 1:23、任意）</label><input id="mTimestamp" style="width:100%">
+    <label class="fld">動画</label>
+    <input id="mVideo" style="width:100%" placeholder="動画URL（任意）">
+    <label class="fld">動画の時間（URL動画の場合のみ。例: 1:23、任意）</label><input id="mTimestamp" style="width:100%">
+    <div class="row-actions" style="margin-top:6px">
+      <button class="ghost" id="mVidFile">📁 動画ファイルを選ぶ</button>
+      <span class="hint" id="mVidStatus" style="display:none;margin:0"></span>
+    </div>
     <div class="row-actions">
       <button id="mSave">保存</button>
       <button class="ghost" id="mCancel">キャンセル</button>
@@ -449,7 +474,18 @@ document.getElementById("addSetplay").onclick = ()=>{
   `);
   const box = document.getElementById("modalBox");
   attachMovePicker(box, "mMixup", " / ");
-  box.querySelector("#mCancel").onclick = closeModal;
+  box.querySelector("#mVidFile").onclick = ()=>{
+    pickVideoFile("setplayVideos", newId, ()=>{
+      localPicked = true;
+      const st = box.querySelector("#mVidStatus");
+      st.textContent = "✓ 動画ファイルを選択しました（保存時に登録されます）";
+      st.style.display = "";
+    });
+  };
+  box.querySelector("#mCancel").onclick = ()=>{
+    if(localPicked){ const k = vkey("setplayVideos", newId); idbDel(k).then(()=>localVideoKeys.delete(k)); }
+    closeModal();
+  };
   box.querySelector("#mSave").onclick = ()=>{
     const situation = box.querySelector("#mSituation").value.trim();
     if(!situation){ alert("状況を入力してください"); return; }
@@ -460,7 +496,7 @@ document.getElementById("addSetplay").onclick = ()=>{
     const timestamp = video ? box.querySelector("#mTimestamp").value.trim() : "";
     store[currentChar] = store[currentChar]||{};
     store[currentChar].userSetplays = store[currentChar].userSetplays||[];
-    store[currentChar].userSetplays.push({id:"u-"+Date.now(),situation,setup,mixup,group,video,timestamp,note:"（自作）"});
+    store[currentChar].userSetplays.push({id:newId,situation,setup,mixup,group,video,timestamp,note:"（自作）"});
     saveStore(); renderSetplayGroupFilters(); renderSetplays(); closeModal();
   };
 };
