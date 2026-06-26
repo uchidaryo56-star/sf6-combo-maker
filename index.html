@@ -39,6 +39,7 @@
   .group-section summary .arrow{margin-left:auto;transition:transform .15s;color:var(--muted);font-size:12px}
   .group-section[open] summary .arrow{transform:rotate(90deg)}
   .group-section .group-body{padding-top:10px}
+  .opp-chip{border-width:2px}
   .chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px}
   .card-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
@@ -134,7 +135,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.9.0</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.10.0</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -226,14 +227,18 @@
   <section class="view" id="view-notes">
     <div class="panel-box">
       <h3>対戦相手キャラ別メモ</h3>
-      <div class="hint">対戦後に「効いた行動／やられた行動」を書き溜めて、後で見返せます。データはこのブラウザに保存されます。</div>
-      <label class="fld">相手キャラ名</label>
-      <input id="noteOpponent" placeholder="例: ケン" style="width:100%;margin-bottom:6px">
-      <label class="fld">メモ</label>
-      <textarea id="noteBody" placeholder="例: 昇竜ぶっぱ多い / 端の起き攻めは投げ重め / DI見てから返せる"></textarea>
-      <div class="row-actions"><button id="saveNote">保存</button></div>
+      <div class="hint">対戦相手のキャラを選ぶと、そのキャラ専用の対策メモが書けます（✎ は記入済み）。データはこのブラウザに保存されます。</div>
+      <div class="toolbar" id="opponentGrid"></div>
     </div>
-    <div id="noteList"></div>
+    <div class="panel-box" id="noteEditorBox" style="display:none">
+      <h3 id="noteEditorTitle"></h3>
+      <div class="hint" id="noteEditorMeta"></div>
+      <textarea id="noteBody" placeholder="例: 昇竜ぶっぱ多い / 端の起き攻めは投げ重め / DI見てから返せる"></textarea>
+      <div class="row-actions">
+        <button id="saveNote">保存</button>
+        <button class="danger" id="clearNote">このメモを削除</button>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 用語集 ============ -->
@@ -249,9 +254,9 @@
 </main>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.9.0"></script>
-<script src="glossary.js?v=1.9.0"></script>
-<script src="guide.js?v=1.9.0"></script>
-<script src="app.js?v=1.9.0"></script>
+<script src="data.js?v=1.10.0"></script>
+<script src="glossary.js?v=1.10.0"></script>
+<script src="guide.js?v=1.10.0"></script>
+<script src="app.js?v=1.10.0"></script>
 </body>
 </html>

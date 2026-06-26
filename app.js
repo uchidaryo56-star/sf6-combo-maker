@@ -18,7 +18,7 @@ function loadStore(){
 function saveStore(){ localStorage.setItem(LS_KEY, JSON.stringify(store)); }
 function ns(key){ // キャラ別ネームスペース
   store[currentChar] = store[currentChar] || {};
-  store[currentChar][key] = store[currentChar][key] || (key==="notes"?[]:{});
+  store[currentChar][key] = store[currentChar][key] || {};
   if(key==="userCombos"||key==="userSetplays") store[currentChar][key] = store[currentChar][key] || [];
   return store[currentChar][key];
 }
@@ -94,7 +94,7 @@ function initChars(){
   sel.value = currentChar;
   sel.onchange = ()=>{
     currentChar = sel.value;
-    comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て";
+    comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て"; selectedOpponent = null;
     renderAll();
   };
 }
@@ -417,31 +417,40 @@ document.getElementById("addSetplay").onclick = ()=>{
   saveStore(); renderSetplayGroupFilters(); renderSetplays();
 };
 
-/* ============ マッチアップメモ ============ */
-function renderNotes(){
-  const notes = ns("notes");
-  const el = document.getElementById("noteList");
-  if(!notes.length){ el.innerHTML=`<div class="empty">まだメモがありません</div>`; return; }
-  el.innerHTML = notes.map((n,i)=>`<div class="card">
-    <div class="card-head"><h3>対 ${esc(n.opponent)}</h3>
-      <span class="badge">${esc(n.date)}</span></div>
-    <div class="note" style="white-space:pre-wrap;color:var(--text)">${esc(n.body)}</div>
-    <div class="row-actions"><button class="danger" data-delnote="${i}">削除</button></div>
-  </div>`).join("");
-  el.querySelectorAll("[data-delnote]").forEach(b=>b.onclick=()=>{
-    notes.splice(parseInt(b.dataset.delnote),1); saveStore(); renderNotes();
+/* ============ マッチアップメモ（相手キャラ別） ============ */
+let selectedOpponent = null;
+function renderOpponentGrid(){
+  const wrap = document.getElementById("opponentGrid");
+  const notesMap = ns("matchupNotes");
+  wrap.innerHTML = SF6_DATA.characters.map(c=>{
+    const has = notesMap[c.id] && notesMap[c.id].body;
+    return `<span class="chip opp-chip ${c.id===selectedOpponent?'active':''}" data-opp="${c.id}" style="border-color:${c.color}">${has?"✎ ":""}${esc(c.name)}</span>`;
+  }).join("");
+  wrap.querySelectorAll("[data-opp]").forEach(ch=>{
+    ch.onclick = ()=>{ selectedOpponent = ch.dataset.opp; renderOpponentGrid(); renderNoteEditor(); };
   });
 }
+function renderNoteEditor(){
+  const box = document.getElementById("noteEditorBox");
+  if(!selectedOpponent){ box.style.display="none"; return; }
+  box.style.display = "block";
+  const opp = SF6_DATA.characters.find(c=>c.id===selectedOpponent);
+  const rec = ns("matchupNotes")[selectedOpponent] || {body:"", updated:""};
+  document.getElementById("noteEditorTitle").textContent = `対 ${opp.name}`;
+  document.getElementById("noteEditorMeta").textContent = rec.updated ? `最終更新: ${rec.updated}` : "まだメモがありません";
+  document.getElementById("noteBody").value = rec.body;
+}
 document.getElementById("saveNote").onclick = ()=>{
-  const opp = document.getElementById("noteOpponent").value.trim();
+  if(!selectedOpponent) return;
   const body = document.getElementById("noteBody").value.trim();
-  if(!opp||!body){ alert("相手キャラ名とメモを入力してください"); return; }
-  const notes = ns("notes");
-  notes.unshift({opponent:opp, body, date:new Date().toLocaleDateString("ja-JP")});
-  saveStore();
-  document.getElementById("noteOpponent").value="";
-  document.getElementById("noteBody").value="";
-  renderNotes();
+  ns("matchupNotes")[selectedOpponent] = {body, updated:new Date().toLocaleDateString("ja-JP")};
+  saveStore(); renderOpponentGrid(); renderNoteEditor();
+};
+document.getElementById("clearNote").onclick = ()=>{
+  if(!selectedOpponent) return;
+  if(!confirm("このメモを削除しますか？")) return;
+  delete ns("matchupNotes")[selectedOpponent];
+  saveStore(); renderOpponentGrid(); renderNoteEditor();
 };
 
 /* ============ 用語集 ============ */
@@ -775,7 +784,7 @@ function renderAll(){
   renderComboFilters(); renderCombos();
   renderFrames();
   renderSetplayGroupFilters(); renderSetplays();
-  renderNotes();
+  renderOpponentGrid(); renderNoteEditor();
   renderGlossaryFilters(); renderGlossary();
 }
 initChars();
