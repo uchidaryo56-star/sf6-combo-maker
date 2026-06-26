@@ -9,7 +9,7 @@ const SF6_GUIDE = [
     id: "g1", order: 1,
     title: "操作に慣れる（トレーニングモード）",
     summary: "まずは操作とレバー表記に慣れる",
-    body: "・モダン操作とクラシック操作の違いを理解し、自分に合う方を選ぶ\n・レバー表記（テンキー）の見方を覚える。2Pは1Pと左右反転した操作になり、「前（6）」「後ろ（4）」の位置が入れ替わる（下の図解参照）\n・トレーニングモードのコンボトライアルで基本入力に慣れる",
+    body: "・モダン操作とクラシック操作の違いを理解し、自分に合う方を選ぶ\n・レバー表記（テンキー）の見方を覚える。数字とレバーを倒す方向（矢印）は1P・2Pで同じだが、「前」「後ろ」の意味だけ左右で入れ替わる（下の図解参照）\n・トレーニングモードのコンボトライアルで基本入力に慣れる",
     diagram: `<svg viewBox="-30 0 630 345" xmlns="http://www.w3.org/2000/svg">
       <style>.cell{fill:var(--panel2);stroke:var(--line);stroke-width:2}
       .num{fill:var(--text);font-size:22px;font-weight:700;text-anchor:middle}
@@ -47,17 +47,17 @@ const SF6_GUIDE = [
       <rect class="cell" x="308" y="222" width="86" height="86"/>
       <rect class="cell" x="394" y="222" width="86" height="86"/>
       <rect class="cell" x="480" y="222" width="86" height="86"/>
-      <text class="num" x="351" y="92">9 ↖</text><text class="lbl" x="351" y="112">斜め前ジャンプ</text>
+      <text class="num" x="351" y="92">7 ↖</text><text class="lbl" x="351" y="112">斜め前ジャンプ</text>
       <text class="num" x="437" y="92">8 ↑</text><text class="lbl" x="437" y="112">ジャンプ</text>
-      <text class="num" x="523" y="92">7 ↗</text><text class="lbl" x="523" y="112">斜め後ジャンプ</text>
-      <text class="num" x="351" y="178">6 ←</text><text class="lbl" x="351" y="198">前<tspan x="351" dy="13">（前進）</tspan></text>
+      <text class="num" x="523" y="92">9 ↗</text><text class="lbl" x="523" y="112">斜め後ジャンプ</text>
+      <text class="num" x="351" y="178">4 ←</text><text class="lbl" x="351" y="198">前<tspan x="351" dy="13">（前進）</tspan></text>
       <text class="num" x="437" y="183">5</text><text class="lbl" x="437" y="200">ニュートラル</text>
-      <text class="num" x="523" y="178">4 →</text><text class="lbl" x="523" y="198">後ろ<tspan x="523" dy="13">（ガード）</tspan></text>
-      <text class="num" x="351" y="264">3 ↙</text><text class="lbl" x="351" y="284">前しゃがみ</text>
+      <text class="num" x="523" y="178">6 →</text><text class="lbl" x="523" y="198">後ろ<tspan x="523" dy="13">（ガード）</tspan></text>
+      <text class="num" x="351" y="264">1 ↙</text><text class="lbl" x="351" y="284">前しゃがみ</text>
       <text class="num" x="437" y="269">2 ↓</text><text class="lbl" x="437" y="286">しゃがみ</text>
-      <text class="num" x="523" y="264">1 ↘</text><text class="lbl" x="523" y="284">後ろしゃがみ<tspan x="523" dy="13">（ガード）</tspan></text>
+      <text class="num" x="523" y="264">3 ↘</text><text class="lbl" x="523" y="284">後ろしゃがみ<tspan x="523" dy="13">（ガード）</tspan></text>
 
-      <text class="note" x="283" y="332">2Pは1Pを左右反転した配置。矢印は常にその位置通りの方向で、前(6)・後ろ(4)の位置が入れ替わる</text>
+      <text class="note" x="283" y="332">数字と矢印は1P・2Pで同じ。「前」「後ろ」の意味（ラベル）だけが左右で入れ替わる</text>
     </svg>`,
   },
   {
