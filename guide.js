@@ -61,10 +61,34 @@ const SF6_GUIDE = [
     </svg>`,
   },
   {
-    id: "g2", order: 8,
-    title: "差し合い・間合いの基礎（応用）",
+    id: "g10", order: 8,
+    title: "読み合いの基本（三すくみ・通称じゃんけん）",
+    summary: "打撃・投げ・ガードはじゃんけんと同じ三すくみ",
+    body: "・打撃は投げに勝つ（投げようとした相手に技を当てられる）\n・投げはガードに勝つ（投げはガードでは防げない）\n・ガードは打撃に勝つ（ガードしていれば打撃は防げる）\n・SF6ではガードの代わりに「パリィ」も選べるが、パリィも投げには弱い（投げられてしまう）ので、結局この三すくみが土台になる\n・読み合いは「相手キャラの性能」「残りゲージ・体力」「画面位置」などから次の一手を予測して的を絞ると勝率が上がる",
+    diagram: `<svg viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg">
+      <style>.node{fill:var(--panel2);stroke:var(--accent2);stroke-width:2}
+      .lbl{fill:var(--text);font-size:18px;font-weight:700;text-anchor:middle}
+      .arc{stroke:var(--accent2);stroke-width:2.5;fill:none}
+      .at{fill:var(--muted);font-size:13px;text-anchor:middle}</style>
+      <defs><marker id="arJk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,0L10,5L0,10z" fill="var(--accent2)"/></marker></defs>
+      <circle class="node" cx="280" cy="60" r="55"/><text class="lbl" x="280" y="66">ガード</text>
+      <circle class="node" cx="110" cy="300" r="55"/><text class="lbl" x="110" y="306">打撃</text>
+      <circle class="node" cx="450" cy="300" r="55"/><text class="lbl" x="450" y="306">投げ</text>
+      <path class="arc" d="M250,105 C190,170 160,220 135,250" marker-end="url(#arJk)"/>
+      <text class="at" x="155" y="190">ガードは打撃に勝つ</text>
+      <path class="arc" d="M165,300 C260,300 300,300 395,300" marker-end="url(#arJk)"/>
+      <text class="at" x="280" y="325">打撃は投げに勝つ</text>
+      <path class="arc" d="M425,250 C400,220 370,170 310,105" marker-end="url(#arJk)"/>
+      <text class="at" x="405" y="190">投げはガードに勝つ</text>
+      <text class="at" x="280" y="385" fill="var(--bad)">※パリィもこの三すくみに乗っている（投げには弱い）</text>
+    </svg>`,
+  },
+  {
+    id: "g2", order: 9,
+    title: "差し合い・間合いの基礎（立ち回り応用）",
     summary: "中距離の駆け引きの基本を知る",
-    body: "・自分の技が当たり相手の技が当たらない距離（間合い）を意識する\n・リーチのある牽制技を置いて相手の接近を抑える\n・相手の技の空振りに差し返す（後で当てる）意識を持つ",
+    body: "・自分の技が当たり相手の技が当たらない距離（間合い）を意識する\n・リーチのある牽制技を置いて相手の接近を抑える\n・相手の技の空振りに差し返す（後で当てる）意識を持つ\n・読み合いは「相手キャラの性能」「残りドライブゲージ・体力」「画面位置（端に近いか）」から相手の行動を予測すると精度が上がる\n・前歩きで届かない／相手の牽制が長すぎて差し合いにならない距離は、ドライブラッシュで一気に詰めるのも有効",
     diagram: `<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
       <style>.fig{fill:var(--panel2);stroke:var(--line);stroke-width:2}
       .lbl{fill:var(--text);font-size:15px;text-anchor:middle}
@@ -221,7 +245,7 @@ const SF6_GUIDE = [
     </svg>`,
   },
   {
-    id: "g8", order: 9,
+    id: "g8", order: 10,
     title: "対戦して振り返る",
     summary: "対戦数を増やし、負けをデータにする",
     body: "・初心者の練習は、対戦数を増やすこと自体が一番の練習になる\n・負けても気にしすぎず、原因を一言でメモしてデータとして残す\n・「マッチアップメモ」タブで対キャラごとの気づきを書き溜める",
