@@ -24,7 +24,7 @@ const characters = [
 // group は自由入力（例: "入門", "リュウ", "差し合い" など）
 const seedRecVideos = [
   { id:"rvs-1", title:"【SF6、スト6】初心者向け！まず最初に覚えるべき事＆おすすめゲーム内設定！", url:"https://www.youtube.com/watch?v=MXhbzQYukHM&source_ve_path=MTc4NDI0", group:"始めたら見る動画" },
-  { id:"rvs-2", title:"「選択肢が少ないんじゃなく有効に使えていないだけ」格闘ゲームの基本の戦い方を解説するマゴさん【ストリートファイター6】", url:"https://www.youtube.com/watch?v=EWz-LHZWYlQ&source_ve_path=MTc4NDI0", group:"慣れてきたら必ず一度は見る動画" },
+  { id:"rvs-2", title:"「選択肢が少ないんじゃなく有効に使えていないだけ」格闘ゲームの基本の戦い方を解説するマゴさん【ストリートファイター6】", url:"https://www.youtube.com/watch?v=EWz-LHZWYlQ&source_ve_path=MTc4NDI0", group:"初心者から上級者まで必ず一度は見る動画" },
   { id:"rvs-3", title:"【スト6、SF6】脱初心者のためにやめるべき事5選！", url:"https://www.youtube.com/watch?v=Qi4kyyYcpgI", group:"始めたら見る動画" },
 ];
 

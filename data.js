@@ -7011,7 +7011,7 @@ const SF6_DATA = {
       "id": "rvs-2",
       "title": "「選択肢が少ないんじゃなく有効に使えていないだけ」格闘ゲームの基本の戦い方を解説するマゴさん【ストリートファイター6】",
       "url": "https://www.youtube.com/watch?v=EWz-LHZWYlQ&source_ve_path=MTc4NDI0",
-      "group": "慣れてきたら必ず一度は見る動画"
+      "group": "初心者から上級者まで必ず一度は見る動画"
     },
     {
       "id": "rvs-3",
