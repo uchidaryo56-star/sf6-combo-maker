@@ -4,16 +4,7 @@ const jp = JSON.parse(fs.readFileSync("jp_parsed.json", "utf8"));
 const ryu = JSON.parse(fs.readFileSync("ryu_parsed.json", "utf8"));
 const guile = JSON.parse(fs.readFileSync("guile_parsed.json", "utf8"));
 const terry = JSON.parse(fs.readFileSync("terry_parsed.json", "utf8"));
-
-// リュウのサンプルデータ（コンボ/セットプレイの例。フレームはJPのみ実数値）
-const ryuCombos = [
-  { id:"ryu-c1", name:"基本中央ヒット確認", start:"通常ヒット", notation:"2中K > 弱波動拳", damage:1300, drive:0, super:1, difficulty:1, position:"中央", video:"", note:"削り・牽制から。安全に締める基本。" },
-  { id:"ryu-c2", name:"パニカン standard", start:"パニッシュカウンター", notation:"中P > 5中P > 強昇龍拳", damage:2600, drive:1, super:2, difficulty:2, position:"中央", video:"", note:"確反からの基本火力。" },
-  { id:"ryu-c3", name:"ドライブラッシュ始動", start:"ドライブラッシュ", notation:"DR中P > 大P > 中竜巻 > OD昇龍", damage:3400, drive:3, super:2, difficulty:3, position:"中央", video:"", note:"ゲージ使用の主力。運び込み。" },
-];
-const ryuSetplays = [
-  { id:"ryu-s1", situation:"中央 強昇龍ダウン後", setup:"前ステップ x2", mixup:"打撃(2中K) / 投げ の二択", video:"", timestamp:"", note:"基本の重ね。" },
-];
+const cviper = JSON.parse(fs.readFileSync("cviper_parsed.json", "utf8"));
 
 // 公式サイト(streetfighter.com)掲載順の全キャラクター
 // キャラ別にコンボ/セットプレイ/フレームを追加していける（未登録キャラは空リストとして動作）
@@ -39,16 +30,16 @@ const seedRecVideos = [
 
 const data = {
   characters,
-  combos:     { jp: [], ryu: ryuCombos },
-  frames:     { jp: jp, ryu: ryu, guile: guile, terry: terry },
-  setplays:   { jp: [], ryu: ryuSetplays },
+  combos:     { jp: [], ryu: [] },
+  frames:     { jp: jp, ryu: ryu, guile: guile, terry: terry, cviper: cviper },
+  setplays:   { jp: [], ryu: [] },
   recVideos:  seedRecVideos,
 };
 
 const banner = `/* =====================================================================
  * スト6コンボメーカー  シードデータ
- *  - frames.jp / frames.ryu / frames.guile / frames.terry は公式サイト(streetfighter.com)から取得した実データ
- *  - combos / setplays はユーザーが追加していく想定（リュウは例として同梱）
+ *  - frames.jp / frames.ryu / frames.guile / frames.terry / frames.cviper は公式サイト(streetfighter.com)から取得した実データ
+ *  - combos / setplays はユーザーが追加していく想定（初期状態は空）
  *  - recVideos: gen_data.js の seedRecVideos に追記 → node gen_data.js → push で全ユーザーに反映
  *  - 他キャラ追加: characters に1行足し、frames/combos 等にキー追加
  * ===================================================================*/
@@ -59,4 +50,4 @@ if (typeof module !== "undefined") { module.exports = SF6_DATA; }
 `;
 
 fs.writeFileSync("data.js", banner);
-console.log("data.js written. jp:", jp.length, "| ryu:", ryu.length, "| guile:", guile.length, "| terry:", terry.length, "| chars:", data.characters.map(c=>c.id).join(","));
+console.log("data.js written. jp:", jp.length, "| ryu:", ryu.length, "| guile:", guile.length, "| terry:", terry.length, "| cviper:", cviper.length, "| chars:", data.characters.map(c=>c.id).join(","));
