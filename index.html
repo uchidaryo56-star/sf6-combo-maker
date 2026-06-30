@@ -95,7 +95,9 @@
   /* フレーム表パネルはウィンドウ幅いっぱいに広げる（全項目を一目で） */
   .panel-box.wide{width:96vw;margin-left:calc(50% - 48vw);max-width:96vw}
   /* フレーム表は余白を詰めて全列が収まりやすく */
-  #frameTable th,#frameTable td{padding:6px 8px;font-size:14px}
+  #frameTable{border-collapse:collapse}
+  #frameTable th,#frameTable td{padding:6px 8px;font-size:14px;border-right:1px solid var(--line)}
+  #frameTable th:last-child,#frameTable td:last-child{border-right:none}
   #frameTable td:nth-child(2){font-size:13px}                 /* 区分 */
   #frameTable th:last-child,#frameTable td:last-child{min-width:200px;max-width:280px;white-space:normal}
   /* 見出しは折り返さず1行で表示（縦に潰れて読めなくなるのを防ぐ） */
@@ -144,7 +146,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.2</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.3</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -298,9 +300,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.2"></script>
-<script src="glossary.js?v=1.25.2"></script>
-<script src="guide.js?v=1.25.2"></script>
-<script src="app.js?v=1.25.2"></script>
+<script src="data.js?v=1.25.3"></script>
+<script src="glossary.js?v=1.25.3"></script>
+<script src="guide.js?v=1.25.3"></script>
+<script src="app.js?v=1.25.3"></script>
 </body>
 </html>
