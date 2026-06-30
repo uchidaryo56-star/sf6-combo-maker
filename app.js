@@ -826,6 +826,37 @@ function renderRecVideos(){
     saveStore(); renderRecVideoGroupFilters(); renderRecVideos();
   });
 }
+document.getElementById("exportRecVideos").onclick = ()=>{
+  const user = gns("recVideos");
+  if(!user.length){ alert("追加した動画がありません"); return; }
+  let nextId = (SF6_DATA.recVideos||[]).length + 1;
+  const lines = user.map(v=>{
+    const entry = `  { id:"rvs-${nextId++}", title:${JSON.stringify(v.title||"")}, url:${JSON.stringify(v.url||"")}, group:${JSON.stringify(v.group||"未分類")} }`;
+    return entry;
+  });
+  const code = `const seedRecVideos = [\n${lines.join(",\n")},\n];`;
+  openModal(`
+    <h3>gen_data.js へ貼り付けるコード</h3>
+    <div class="hint" style="margin-bottom:8px">以下をコピーして <b>gen_data.js</b> の <code>const seedRecVideos = [...]</code> 部分と差し替えてください。その後 <code>node gen_data.js</code> を実行してpushすると全員に反映されます。</div>
+    <textarea id="exportCode" style="width:100%;height:220px;font-family:Consolas,monospace;font-size:13px" readonly>${esc(code)}</textarea>
+    <div class="row-actions" style="margin-top:10px">
+      <button id="mCopyCode">📋 コピー</button>
+      <button class="ghost" id="mCancel">閉じる</button>
+    </div>
+  `);
+  const box = document.getElementById("modalBox");
+  box.querySelector("#mCancel").onclick = closeModal;
+  box.querySelector("#mCopyCode").onclick = ()=>{
+    const ta = box.querySelector("#exportCode");
+    ta.select();
+    navigator.clipboard.writeText(ta.value).then(()=>{
+      box.querySelector("#mCopyCode").textContent = "✓ コピーしました";
+    }).catch(()=>{
+      document.execCommand("copy");
+      box.querySelector("#mCopyCode").textContent = "✓ コピーしました";
+    });
+  };
+};
 document.getElementById("addRecVideo").onclick = ()=>{
   openModal(`
     <h3>おすすめ動画を追加</h3>
