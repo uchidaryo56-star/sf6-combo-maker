@@ -563,7 +563,7 @@ function renderOpponentGrid(){
   if(matchupGroupFilter!=="全て") chars = chars.filter(c=>notesMap[c.id] && notesMap[c.id].body && matchupGroupOf(c.id)===matchupGroupFilter);
   wrap.innerHTML = chars.map(c=>{
     const has = notesMap[c.id] && notesMap[c.id].body;
-    return `<span class="chip opp-chip ${c.id===selectedOpponent?'active':''}" data-opp="${c.id}" style="border-color:${c.color}">${has?"✎ ":""}${esc(c.name)}</span>`;
+    return `<span class="chip opp-chip ${c.id===selectedOpponent?'active':''}" data-opp="${c.id}">${has?"✎ ":""}${esc(c.name)}</span>`;
   }).join("");
   wrap.querySelectorAll("[data-opp]").forEach(ch=>{
     ch.onclick = ()=>{ selectedOpponent = ch.dataset.opp; renderOpponentGrid(); renderNoteEditor(); };
