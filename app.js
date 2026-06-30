@@ -928,17 +928,36 @@ function attachMovePicker(box, targetId, sep){
   const moves = (SF6_DATA.frames[currentChar]||[]).filter(f=>{
     if(seen.has(f.move)) return false; seen.add(f.move); return true;
   });
+  const types = ["全て", ...new Set(moves.map(f=>f.type))];
   const wrap = box.querySelector(".move-picker");
   const search = box.querySelector(".move-search");
   if(!wrap) return;
+  let typeFilter = "全て";
+  const typeWrap = document.createElement("div");
+  typeWrap.className = "chips move-type-filters";
+  typeWrap.style.marginTop = "6px";
+  search.insertAdjacentElement("afterend", typeWrap);
+  function drawTypes(){
+    typeWrap.innerHTML = types.map(t=>
+      `<span class="chip ${t===typeFilter?'active':''}" data-mtype="${esc(t)}">${esc(t)}</span>`).join("");
+    typeWrap.querySelectorAll("[data-mtype]").forEach(ch=>ch.onclick=()=>{
+      typeFilter = ch.dataset.mtype; drawTypes(); draw(search.value);
+    });
+  }
   function draw(q){
     const qq = (q||"").trim();
-    const list = moves.filter(f=>!qq || f.move.includes(qq) || (f.command||"").includes(qq));
-    wrap.innerHTML = list.length
-      ? list.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(f.command||"")}">
+    let list = moves.filter(f=>!qq || f.move.includes(qq) || (f.command||"").includes(qq));
+    if(typeFilter!=="全て") list = list.filter(f=>f.type===typeFilter);
+    if(!list.length){ wrap.innerHTML = `<span class="hint" style="margin:0">該当する技がありません</span>`; return; }
+    const groups = new Map();
+    list.forEach(f=>{ if(!groups.has(f.type)) groups.set(f.type, []); groups.get(f.type).push(f); });
+    wrap.innerHTML = [...groups.entries()].map(([type, items])=>`
+      <div class="move-group">
+        <div class="move-group-label">${esc(type)}</div>
+        ${items.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(f.command||"")}">
           ${esc(f.move)}${f.command?` <span style="opacity:.7">（${esc(f.command)}）</span>`:""}
-        </span>`).join("")
-      : `<span class="hint" style="margin:0">該当する技がありません</span>`;
+        </span>`).join("")}
+      </div>`).join("");
     wrap.querySelectorAll("[data-mv]").forEach(ch=>ch.onclick=()=>{
       const input = box.querySelector("#"+targetId);
       const token = ch.dataset.cmd ? `${ch.dataset.mv}（${ch.dataset.cmd}）` : ch.dataset.mv;
@@ -946,6 +965,7 @@ function attachMovePicker(box, targetId, sep){
       input.focus();
     });
   }
+  drawTypes();
   draw("");
   if(search) search.oninput = ()=>draw(search.value);
 }
