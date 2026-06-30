@@ -98,14 +98,17 @@
   #frameTable th,#frameTable td{padding:6px 8px;font-size:14px}
   #frameTable td:nth-child(2){font-size:13px}                 /* 区分 */
   #frameTable th:last-child,#frameTable td:last-child{min-width:200px;max-width:280px;white-space:normal}
+  /* 見出しは折り返さず1行で表示（縦に潰れて読めなくなるのを防ぐ） */
+  #frameTable thead th{white-space:nowrap;font-size:13px;cursor:default}
+  #frameTable thead th[data-sort]{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
   /* 表を縦横スクロール可能な枠に収める */
   .frame-scroll{max-height:72vh;overflow:auto;border:1px solid var(--line);border-radius:8px}
   .frame-scroll::-webkit-scrollbar{height:12px;width:12px}
   .frame-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
   /* 列見出しを上部に固定（下へスクロールしても消えない） */
   #frameTable thead th{position:sticky;background:var(--panel2);z-index:3}
-  #frameTable thead tr:first-child th{top:0;height:34px}
-  #frameTable thead tr:nth-child(2) th{top:34px}
+  #frameTable thead tr:first-child th{top:0;height:36px}
+  #frameTable thead tr:nth-child(2) th{top:36px}
   /* 技名列を左に固定（右へスクロールしても消えない） */
   #frameTable th:first-child,#frameTable td:first-child{min-width:170px;position:sticky;left:0}
   #frameTable td:first-child{background:var(--panel);z-index:2}
@@ -141,7 +144,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.1</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.2</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -295,9 +298,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.1"></script>
-<script src="glossary.js?v=1.25.1"></script>
-<script src="guide.js?v=1.25.1"></script>
-<script src="app.js?v=1.25.1"></script>
+<script src="data.js?v=1.25.2"></script>
+<script src="glossary.js?v=1.25.2"></script>
+<script src="guide.js?v=1.25.2"></script>
+<script src="app.js?v=1.25.2"></script>
 </body>
 </html>
