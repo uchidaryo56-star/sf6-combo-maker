@@ -756,20 +756,41 @@ function renderGuide(){
 /* -------- おすすめ動画（空き時間用。キャラに依存しない全体共通リスト） -------- */
 const recVideoGroupOf = v => v.group || "未分類";
 let recVideoGroupFilter = "全て";
+function allRecVideos(){
+  const deleted = gns("recVideosDeleted");
+  const seed = (SF6_DATA.recVideos||[]).filter(v=>!deleted[v.id]);
+  const user = gns("recVideos");
+  return [...seed, ...user];
+}
 function renderRecVideoGroupFilters(){
   const wrap = document.getElementById("recVideoGroupFilters");
-  const groups = groupsOf(null, gns("recVideos"), recVideoGroupOf);
+  const groups = groupsOf(null, allRecVideos(), recVideoGroupOf);
   wrap.innerHTML = groups.map(g=>
     `<span class="chip ${g===recVideoGroupFilter?'active':''}" data-grp="${esc(g)}">${esc(g)}</span>`).join("");
   wrap.querySelectorAll(".chip").forEach(ch=>{
     ch.onclick = ()=>{ recVideoGroupFilter = ch.dataset.grp; renderRecVideoGroupFilters(); renderRecVideos(); };
   });
 }
+function renderRecVideoHidden(){
+  const hidden = document.getElementById("recVideoHidden");
+  if(!hidden) return;
+  const deletedIds = Object.keys(gns("recVideosDeleted"));
+  if(!deletedIds.length){ hidden.style.display="none"; hidden.innerHTML=""; return; }
+  const seed = SF6_DATA.recVideos||[];
+  const names = seed.filter(v=>deletedIds.includes(v.id));
+  hidden.style.display = "block";
+  hidden.innerHTML = `非表示にした動画（${names.length}件）: ` +
+    names.map(v=>`<button class="ghost" data-rvrrestore="${v.id}" style="margin:2px">${esc(v.title||v.id)} を復元</button>`).join(" ");
+  hidden.querySelectorAll("[data-rvrrestore]").forEach(b=>b.onclick=()=>{
+    delete gns("recVideosDeleted")[b.dataset.rvrrestore];
+    saveStore(); renderRecVideoGroupFilters(); renderRecVideos();
+  });
+}
 function renderRecVideos(){
-  let list = gns("recVideos");
+  let list = allRecVideos();
   if(recVideoGroupFilter!=="全て") list = list.filter(v=>recVideoGroupOf(v)===recVideoGroupFilter);
   const el = document.getElementById("recVideoList");
-  if(!list.length){ el.innerHTML = `<div class="empty">まだ動画がありません</div>`; return; }
+  if(!list.length){ el.innerHTML = `<div class="empty">まだ動画がありません</div>`; renderRecVideoHidden(); return; }
   const cardHtml = v=>`<div class="card">
     <div class="card-head"><h3>${esc(v.title||"（無題）")}</h3></div>
     ${videoHTML(v.url, null)}
@@ -781,18 +802,27 @@ function renderRecVideos(){
   el.innerHTML = wrapGroups("recvideo", list, cardHtml, recVideoGroupOf);
   attachGroupToggleHandlers(el, "recvideo");
   attachVideoHandlers(el);
+  renderRecVideoHidden();
   el.querySelectorAll("[data-grpeditrv]").forEach(b=>b.onclick=()=>{
     const v = list.find(x=>x.id===b.dataset.grpeditrv);
+    if(!v) return;
     const name = prompt("グループ名（自由入力。例: キャラ名 / 差し合い / コンボ）", recVideoGroupOf(v));
     if(name===null) return;
     v.group = name.trim() || "未分類";
-    saveStore(); renderRecVideoGroupFilters(); renderRecVideos();
+    if(!v.id.startsWith("rvs-")) saveStore();
+    renderRecVideoGroupFilters(); renderRecVideos();
   });
   el.querySelectorAll("[data-delrec]").forEach(b=>b.onclick=()=>{
-    if(!confirm("この動画を一覧から削除しますか？")) return;
-    const arr = gns("recVideos");
-    const idx = arr.findIndex(v=>v.id===b.dataset.delrec);
-    if(idx>=0) arr.splice(idx,1);
+    const id = b.dataset.delrec;
+    if(id.startsWith("rvs-")){
+      if(!confirm("この動画を一覧から非表示にしますか？（後で復元できます）")) return;
+      gns("recVideosDeleted")[id] = true;
+    } else {
+      if(!confirm("この動画を一覧から削除しますか？")) return;
+      const arr = gns("recVideos");
+      const idx = arr.findIndex(v=>v.id===id);
+      if(idx>=0) arr.splice(idx,1);
+    }
     saveStore(); renderRecVideoGroupFilters(); renderRecVideos();
   });
 }

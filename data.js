@@ -2,6 +2,7 @@
  * スト6コンボメーカー  シードデータ
  *  - frames.jp / frames.ryu / frames.guile / frames.terry は公式サイト(streetfighter.com)から取得した実データ
  *  - combos / setplays はユーザーが追加していく想定（リュウは例として同梱）
+ *  - recVideos: gen_data.js の seedRecVideos に追記 → node gen_data.js → push で全ユーザーに反映
  *  - 他キャラ追加: characters に1行足し、frames/combos 等にキー追加
  * ===================================================================*/
 
@@ -5735,7 +5736,8 @@ const SF6_DATA = {
         "note": "基本の重ね。"
       }
     ]
-  }
+  },
+  "recVideos": []
 };
 
 if (typeof module !== "undefined") { module.exports = SF6_DATA; }

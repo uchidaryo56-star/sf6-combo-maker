@@ -27,17 +27,28 @@ const characters = [
   ["elena","エレナ"], ["sagat","サガット"], ["cviper","C.ヴァイパー"], ["alex","アレックス"], ["ingrid","イングリッド"],
 ].map(([id,name],i)=>({ id, name, color: palette[i % palette.length] }));
 
+// ---- おすすめ動画 シードデータ ----
+// ここに追加したURLはGitHub Pagesにpushすると全ユーザーに表示される。
+// id は "rvs-数字" 形式を使うこと（ユーザー追加の "rv-" と区別するため）。
+// group は自由入力（例: "入門", "リュウ", "差し合い" など）
+const seedRecVideos = [
+  // 例: { id:"rvs-1", title:"動画タイトル", url:"https://www.youtube.com/watch?v=XXXXXXXXXXX", group:"入門" },
+  // ← ここにURLを追記してから `node gen_data.js` を実行すると data.js に反映される
+];
+
 const data = {
   characters,
-  combos:   { jp: [], ryu: ryuCombos },
-  frames:   { jp: jp, ryu: ryu, guile: guile, terry: terry },
-  setplays: { jp: [], ryu: ryuSetplays },
+  combos:     { jp: [], ryu: ryuCombos },
+  frames:     { jp: jp, ryu: ryu, guile: guile, terry: terry },
+  setplays:   { jp: [], ryu: ryuSetplays },
+  recVideos:  seedRecVideos,
 };
 
 const banner = `/* =====================================================================
  * スト6コンボメーカー  シードデータ
  *  - frames.jp / frames.ryu / frames.guile / frames.terry は公式サイト(streetfighter.com)から取得した実データ
  *  - combos / setplays はユーザーが追加していく想定（リュウは例として同梱）
+ *  - recVideos: gen_data.js の seedRecVideos に追記 → node gen_data.js → push で全ユーザーに反映
  *  - 他キャラ追加: characters に1行足し、frames/combos 等にキー追加
  * ===================================================================*/
 
