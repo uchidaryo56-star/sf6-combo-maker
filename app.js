@@ -953,10 +953,12 @@ function attachMovePicker(box, targetId, sep){
     list.forEach(f=>{ if(!groups.has(f.type)) groups.set(f.type, []); groups.get(f.type).push(f); });
     wrap.innerHTML = [...groups.entries()].map(([type, items])=>`
       <div class="move-group">
-        <div class="move-group-label">${esc(type)}</div>
-        ${items.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(f.command||"")}">
-          ${esc(f.move)}${f.command?` <span style="opacity:.7">（${esc(f.command)}）</span>`:""}
-        </span>`).join("")}
+        <span class="move-group-label">${esc(type)}（${items.length}）</span>
+        <div class="move-group-chips">
+          ${items.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(f.command||"")}">
+            ${esc(f.move)}${f.command?` <span style="opacity:.7">（${esc(f.command)}）</span>`:""}
+          </span>`).join("")}
+        </div>
       </div>`).join("");
     wrap.querySelectorAll("[data-mv]").forEach(ch=>ch.onclick=()=>{
       const input = box.querySelector("#"+targetId);
