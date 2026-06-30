@@ -102,14 +102,21 @@ function initChars(){
     renderAll();
   };
 }
+// キャラ選択はキャラごとにデータが変わるタブ（コンボ/フレーム/セットプレイ/マッチアップメモ）でのみ表示
+const charselViews = new Set(["combo","frame","setplay","notes"]);
+function updateCharselVisibility(view){
+  document.querySelector(".charsel").style.display = charselViews.has(view) ? "" : "none";
+}
 document.querySelectorAll(".tab").forEach(t=>{
   t.onclick = ()=>{
     document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
     document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
     t.classList.add("active");
     document.getElementById("view-"+t.dataset.view).classList.add("active");
+    updateCharselVisibility(t.dataset.view);
   };
 });
+updateCharselVisibility(document.querySelector(".tab.active").dataset.view);
 
 /* ============ コンボ ============ */
 function allCombos(){
