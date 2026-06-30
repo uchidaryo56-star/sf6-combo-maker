@@ -69,11 +69,13 @@ function groupItems(kind, list, groupFn){
     return 0;
   });
 }
-// グループの開閉状態（再描画をまたいで維持。既定は開いた状態）
-const closedGroups = { combo:new Set(), setplay:new Set(), recvideo:new Set() };
+// グループの開閉状態（再描画をまたいで維持。既定は開いた状態。recvideoのみ既定で閉じる）
+const groupDefaultOpen = { combo:true, setplay:true, recvideo:false };
+const groupOverride = { combo:new Map(), setplay:new Map(), recvideo:new Map() };
 function wrapGroups(kind, list, cardHtmlFn, groupFn){
   return groupItems(kind, list, groupFn).map(([gname, items])=>{
-    const isOpen = !closedGroups[kind].has(gname);
+    const ov = groupOverride[kind];
+    const isOpen = ov.has(gname) ? ov.get(gname) : groupDefaultOpen[kind];
     return `<details class="group-section" data-gname="${esc(gname)}" ${isOpen?"open":""}>
       <summary>🏷️ ${esc(gname)} <span class="gcount">${items.length}件</span><span class="arrow">▶</span></summary>
       <div class="group-body">${items.map(cardHtmlFn).join("")}</div>
@@ -84,7 +86,7 @@ function attachGroupToggleHandlers(container, kind){
   container.querySelectorAll("details.group-section").forEach(d=>{
     d.addEventListener("toggle", ()=>{
       const g = d.dataset.gname;
-      if(d.open) closedGroups[kind].delete(g); else closedGroups[kind].add(g);
+      groupOverride[kind].set(g, d.open);
     });
   });
 }
