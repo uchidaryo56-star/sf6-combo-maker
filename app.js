@@ -958,15 +958,18 @@ function attachMovePicker(box, targetId, sep){
     if(!list.length){ wrap.innerHTML = `<span class="hint" style="margin:0">該当する技がありません</span>`; return; }
     const groups = new Map();
     list.forEach(f=>{ if(!groups.has(f.type)) groups.set(f.type, []); groups.get(f.type).push(f); });
-    wrap.innerHTML = [...groups.entries()].map(([type, items])=>`
+    wrap.innerHTML = [...groups.entries()].map(([type, items])=>{
+      const showCmd = type!=="共通システム";
+      return `
       <div class="move-group">
         <span class="move-group-label">${esc(type)}（${items.length}）</span>
         <div class="move-group-chips">
-          ${items.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(f.command||"")}">
-            ${esc(f.move)}${f.command?` <span style="opacity:.7">（${esc(f.command)}）</span>`:""}
+          ${items.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(showCmd?(f.command||""):"")}">
+            ${esc(f.move)}${showCmd&&f.command?` <span style="opacity:.85">（${esc(f.command)}）</span>`:""}
           </span>`).join("")}
         </div>
-      </div>`).join("");
+      </div>`;
+    }).join("");
     wrap.querySelectorAll("[data-mv]").forEach(ch=>ch.onclick=()=>{
       const input = box.querySelector("#"+targetId);
       const token = ch.dataset.cmd ? `${ch.dataset.mv}（${ch.dataset.cmd}）` : ch.dataset.mv;
