@@ -96,7 +96,7 @@ function initChars(){
   sel.value = currentChar;
   sel.onchange = ()=>{
     currentChar = sel.value;
-    comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て"; matchupGroupFilter = "全て"; selectedOpponent = null;
+    comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て"; matchupGroupFilter = "全て"; selectedOpponent = null; frameTypeFilter = "全て";
     renderAll();
   };
 }
@@ -280,9 +280,26 @@ document.getElementById("addCombo").onclick = ()=>{
 
 /* ============ フレーム ============ */
 let frameSort = null; // null = 公式ページの掲載順を維持
+let frameTypeFilter = "全て";
+function frameTypes(){
+  const set = new Set(["全て"]);
+  (SF6_DATA.frames[currentChar]||[]).forEach(f=>set.add(f.type));
+  return [...set];
+}
+function renderFrameTypeFilters(){
+  const wrap = document.getElementById("frameTypeFilters");
+  wrap.innerHTML = frameTypes().map(t=>
+    `<span class="chip ${t===frameTypeFilter?'active':''}" data-ftype="${esc(t)}">${esc(t)}</span>`).join("");
+  wrap.querySelectorAll(".chip").forEach(ch=>{
+    ch.onclick = ()=>{ frameTypeFilter = ch.dataset.ftype; renderFrameTypeFilters(); renderFrames(); };
+  });
+}
 function renderFrames(){
   const orig = SF6_DATA.frames[currentChar]||[];
-  const data = orig.slice();
+  let data = orig.slice();
+  if(frameTypeFilter!=="全て") data = data.filter(f=>f.type===frameTypeFilter);
+  const q = (document.getElementById("frameSearch").value||"").trim();
+  if(q) data = data.filter(f=>(f.move+" "+(f.command||"")).includes(q));
   if(frameSort){
     data.sort((a,b)=>{
       let x=a[frameSort.key], y=b[frameSort.key];
@@ -296,6 +313,7 @@ function renderFrames(){
   }
   const tb = document.querySelector("#frameTable tbody");
   const m = "color:var(--muted);font-size:14px";
+  if(!data.length){ tb.innerHTML = `<tr><td colspan="17" class="empty">該当する技がありません</td></tr>`; renderPunish(); return; }
   tb.innerHTML = data.map(f=>`<tr data-fi="${orig.indexOf(f)}">
     <td>${esc(f.move)}</td>
     <td style="font-family:Consolas,monospace;font-size:13px">${esc(f.command||"-")}</td>
@@ -373,6 +391,7 @@ document.querySelectorAll("#frameTable th[data-sort]").forEach(th=>{
   };
 });
 document.getElementById("punishFrame").oninput = renderPunish;
+document.getElementById("frameSearch").oninput = renderFrames;
 
 /* ============ セットプレイ ============ */
 function allSetplays(){
@@ -1079,7 +1098,7 @@ function renderAll(){
   renderGuide();
   renderRecVideoGroupFilters(); renderRecVideos();
   renderComboFilters(); renderCombos();
-  renderFrames();
+  renderFrameTypeFilters(); renderFrames();
   renderSetplayGroupFilters(); renderSetplays();
   renderMatchupGroupFilters(); renderOpponentGrid(); renderNoteEditor();
   renderGlossaryFilters(); renderGlossary();
