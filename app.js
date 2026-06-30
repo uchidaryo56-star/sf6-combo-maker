@@ -366,8 +366,9 @@ function renderPunish(){
   res.innerHTML = judged.map(({f,idx,adv})=>{
     const okk = adv>=0;
     const meta = okk ? `発生${f.startup}F ・ 猶予+${adv}` : `発生${f.startup}F ・ ${adv}`;
-    return `<div class="pmove ${okk?'ok':'ng'}" title="${esc(f.move)}" ${okk?`data-goto="${idx}"`:""}>
+    return `<div class="pmove ${okk?'ok':'ng'}" title="${esc(f.move)}（${esc(f.command||"")}）" ${okk?`data-goto="${idx}"`:""}>
       <span class="pname">${esc(f.move)}</span>
+      ${f.command?`<span class="pcmd">${esc(f.command)}</span>`:""}
       <span class="pmeta">${meta}</span>
     </div>`;
   }).join("") || `<div class="empty">確反に使える技がありません</div>`;
