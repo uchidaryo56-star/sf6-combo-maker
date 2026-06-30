@@ -98,7 +98,7 @@
   #frameTable{border-collapse:collapse}
   #frameTable th,#frameTable td{padding:6px 8px;font-size:14px;border-right:1px solid var(--line)}
   #frameTable th:last-child,#frameTable td:last-child{border-right:none}
-  #frameTable td:nth-child(2){font-size:13px;white-space:nowrap}  /* コマンド（折り返さず1行で表示） */
+  #frameTable td:nth-child(2){font-size:13px;white-space:normal;min-width:130px;max-width:190px;line-height:1.4}  /* コマンド（条件と本体の間で改行） */
   #frameTable td:nth-child(3){white-space:nowrap;min-width:64px}  /* 区分（縦に折り返されないように） */
   #frameTable th:last-child,#frameTable td:last-child{min-width:200px;max-width:280px;white-space:normal}
   /* 見出しは折り返さず1行で表示（縦に潰れて読めなくなるのを防ぐ） */
@@ -147,7 +147,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.5</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.6</span></h1>
   <div class="charsel">
     <span style="color:var(--muted);font-size:15px">キャラ</span>
     <select id="charSelect"></select>
@@ -301,9 +301,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.5"></script>
-<script src="glossary.js?v=1.25.5"></script>
-<script src="guide.js?v=1.25.5"></script>
-<script src="app.js?v=1.25.5"></script>
+<script src="data.js?v=1.25.6"></script>
+<script src="glossary.js?v=1.25.6"></script>
+<script src="guide.js?v=1.25.6"></script>
+<script src="app.js?v=1.25.6"></script>
 </body>
 </html>

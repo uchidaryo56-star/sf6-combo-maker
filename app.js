@@ -316,7 +316,7 @@ function renderFrames(){
   if(!data.length){ tb.innerHTML = `<tr><td colspan="17" class="empty">該当する技がありません</td></tr>`; renderPunish(); return; }
   tb.innerHTML = data.map(f=>`<tr data-fi="${orig.indexOf(f)}">
     <td>${esc(f.move)}</td>
-    <td style="font-family:Consolas,monospace;font-size:13px">${esc(f.command||"-")}</td>
+    <td style="font-family:Consolas,monospace">${fmtCommand(f.command)}</td>
     <td style="${m}">${esc(f.type)}</td>
     <td>${f.startup??"-"}</td>
     <td style="${m}">${esc(f.active||"-")}</td>
@@ -336,6 +336,12 @@ function renderFrames(){
   renderPunish();
 }
 function cls(n){ if(typeof n!=="number") return "zero"; return n>0?"pos":(n<0?"neg":"zero"); }
+// コマンド表記：「（条件）本体」の形なら条件と本体の間で改行し、横に伸びすぎず自然な位置で折り返す
+function fmtCommand(cmd){
+  if(!cmd) return "-";
+  const e = esc(cmd);
+  return e.replace(/）\s*/, "）<br>");
+}
 function fmt(n){ if(n==null||n==="") return "-"; if(typeof n!=="number") return esc(n); return n>0?("+"+n):(""+n); }
 
 // 確反候補にする技：地上の打撃/投げ技で発生が数値のもの
