@@ -161,7 +161,22 @@ const SF6_DATA = {
   ],
   "combos": {
     "jp": [],
-    "ryu": []
+    "ryu": [],
+    "ed": [
+      {
+        "id": "ed-sample-1",
+        "name": "作例",
+        "notation": "パリィDR > 立強P（ボディ）強P > しゃがみ中P（しゃがみストレート）2+中P > 中バーンナックル 214+中P",
+        "start": "立ち",
+        "position": "中央",
+        "difficulty": 2,
+        "damage": 2200,
+        "drive": 0,
+        "super": 0,
+        "group": "作例",
+        "video": "videos/ed_sample.mp4"
+      }
+    ]
   },
   "frames": {
     "jp": [

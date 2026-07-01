@@ -995,6 +995,7 @@ function tsToSec(ts){
 function parseVideo(url){
   if(!url) return null;
   url=String(url).trim();
+  if(/^videos\/[^<>"]+\.(mp4|webm|ogg|mov)$/i.test(url)) return {type:"file", url};
   if(!/^https?:\/\//i.test(url)) return null; // javascript: 等の危険なスキームを拒否
   const m=url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
   if(m){
