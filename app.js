@@ -571,7 +571,7 @@ function renderMatchupGroupFilters(){
 function renderOpponentGrid(){
   const wrap = document.getElementById("opponentGrid");
   const notesMap = ns("matchupNotes");
-  let chars = SF6_DATA.characters;
+  let chars = SF6_DATA.characters.filter(c=>c.id!=="sakurei");
   if(matchupGroupFilter!=="全て") chars = chars.filter(c=>notesMap[c.id] && notesMap[c.id].body && matchupGroupOf(c.id)===matchupGroupFilter);
   wrap.innerHTML = chars.map(c=>{
     const has = notesMap[c.id] && notesMap[c.id].body;
