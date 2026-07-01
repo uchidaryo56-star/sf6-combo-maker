@@ -189,24 +189,24 @@ const SF6_GUIDE = [
   {
     id: "g5", order: 5,
     title: "確定反撃（確反）の考え方",
-    summary: "発生フレームと硬直差を見て判断する",
-    body: "・相手の技をガードした時の硬直差と、自分の技の発生フレームを比べる\n・自分の技の発生が、相手の不利フレームより速ければ確定反撃が入る\n・「フレーム」タブの確反逆引きに数値を入れると、使える技が自動で分かる",
+    summary: "「相手が動けない時間」に技を当てる",
+    body: "■ 確定反撃とは\n相手の技をガードした後、「絶対に当たる反撃」を入れること。\nたとえるなら野球のピッチャーが投げた後の一瞬の「腕が下がったスキ」を打つ感覚。相手が技を振ると、振り終わった直後に必ず「動けない時間（不利フレーム）」が生まれる。その間に自分の技を出せば、確実にヒットする。\n\n■ 見方（シンプル版）\n・ガード後に表示される「相手の不利F」 ＝ 相手が固まっている時間\n・自分の技の「発生F」 ＝ 技が当たるまでの時間\n・発生F ≦ 不利F なら → 確定で当たる！\n\n■ 例\n相手が -10F の技をガードされた場合 → 発生9F以内の技なら確定で当たる。逆に発生14Fの技は届かない（相手が先に動ける）。\n\n■ やること\n最初は「ガードしたらとりあえず最速の弱攻撃を1発入れる」だけでOK。フレームタブの「確反逆引き」に相手の不利Fを入力すると、使える技が一覧で出てくる。",
     relatedView: "frame", relatedLabel: "フレームタブの確反逆引きを開く",
-    diagram: `<svg viewBox="0 0 760 350" xmlns="http://www.w3.org/2000/svg" style="overflow:visible" preserveAspectRatio="xMidYMid meet">
-      <style>.lbl{fill:var(--text);font-size:13px}.sub{fill:var(--muted);font-size:12px}</style>
-      <text class="lbl" x="120" y="50">相手が動けない時間（不利フレーム）</text>
-      <rect x="120" y="60" width="260" height="32" fill="var(--bad)" opacity="0.6"/>
-      <text class="lbl" x="120" y="125">自分の技が当たるまで（発生フレーム）</text>
-      <rect x="120" y="135" width="170" height="32" fill="var(--good)" opacity="0.85"/>
-      <rect x="290" y="135" width="90" height="32" fill="var(--good)" opacity="0.25"/>
-      <line x1="290" y1="125" x2="290" y2="240" stroke="var(--good)" stroke-width="2" stroke-dasharray="4 3"/>
-      <text class="sub" x="296" y="240">技が当たる</text>
-      <line x1="380" y1="50" x2="380" y2="240" stroke="var(--bad)" stroke-width="2" stroke-dasharray="4 3"/>
-      <text class="sub" x="386" y="240">相手が動き出す</text>
-      <line x1="120" y1="260" x2="690" y2="260" stroke="var(--line)" stroke-width="2"/>
-      <text class="sub" x="120" y="278">0F（ガード成立）</text>
-      <text class="lbl" x="120" y="305" fill="var(--good)">緑が赤の中に収まれば</text>
-      <text class="lbl" x="120" y="323" fill="var(--good)">→ 確定反撃が成立（余裕分）</text>
+    diagram: `<svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <style>.lbl{fill:var(--text);font-size:13px;font-weight:600}.sub{fill:var(--muted);font-size:12px}.note{fill:var(--text);font-size:12px}</style>
+      <text class="lbl" x="20" y="30">【相手の不利F（動けない時間）】</text>
+      <rect x="20" y="42" width="300" height="34" fill="var(--bad)" opacity="0.55" rx="4"/>
+      <text class="sub" x="25" y="64">ここは相手が固まっている　▶ この間に当てれば確定！</text>
+      <text class="lbl" x="20" y="110">【自分の技の発生F（技が当たるまで）】</text>
+      <rect x="20" y="122" width="190" height="34" fill="var(--good)" opacity="0.8" rx="4"/>
+      <text class="sub" x="25" y="144">発生が短い技　→　収まる　→　確定○</text>
+      <rect x="20" y="172" width="360" height="34" fill="var(--accent2)" opacity="0.35" rx="4"/>
+      <text class="sub" x="25" y="194">発生が長い技　→　はみ出す　→　確定×（相手が先に動く）</text>
+      <line x1="20" y1="224" x2="600" y2="224" stroke="var(--line)" stroke-width="1.5"/>
+      <text class="sub" x="20" y="244">ガード成立（0F）</text>
+      <rect x="20" y="258" width="640" height="42" fill="var(--panel2)" rx="6" stroke="var(--line)" stroke-width="1"/>
+      <text class="note" x="30" y="275">例：相手が -10F の技をガード</text>
+      <text class="note" x="30" y="293" fill="var(--good)">→ 発生9F以内の技なら確定　／　発生14Fは間に合わない</text>
     </svg>`,
   },
   {
@@ -219,29 +219,31 @@ const SF6_GUIDE = [
   },
   {
     id: "g7", order: 7,
-    title: "起き攻め・セットプレイの基礎（択の考え方）",
-    summary: "ダウンを取った後の「型」を1つ持つ",
-    body: "・起き攻めとは、相手の起き上がりに技を重ねて「択」をかけ続ける攻めのこと\n・基本の3択は打撃／投げ／シミー：打撃は投げに勝ち、投げはガード（やパリィ）に勝ち、シミー（一歩下がる）は相手の投げ抜け（暴れ投げ）に勝つ\n・さらに打撃には中段／下段の二択も絡む。相手が暴れがちなら投げ、待ちがちなら打撃、というように相手の傾向で選ぶ択を変える\n・ダウンを取ったら毎回同じ手順で攻める「型」を1つ用意すると、考える負担が減って安定する\n・「セットプレイ」タブで状況別の型を整理しておく",
+    title: "起き攻め・セットプレイの考え方",
+    summary: "3択それぞれが「何に勝つか」を知る",
+    body: "ダウンを取った後に仕掛ける攻めのこと。基本は3択で、それぞれ「勝てる相手の行動」が違う。\n\n● 打撃を重ねる\n→ 起き上がりにボタンを押してくる相手に勝つ\n（例：相手が暴れで技を出そうとした瞬間に打撃が当たる）\n\n● 投げる\n→ ガードして固まっている相手に勝つ\n（例：怖くてじっとしている相手を掴む）\n\n● シミー（わざと一歩下がる）\n→ 無敵技・投げ抜け・遅らせ投げをしてくる相手に勝つ\n（例：相手が投げ抜けや無敵技を出した瞬間を空振りさせ、その硬直に反撃する）\n\n相手の癖に合わせて3択を使い分けるのが起き攻め。毎回同じ「型」で攻めると考える負担が減って安定する。",
     relatedView: "setplay", relatedLabel: "セットプレイタブを開く",
-    diagram: `<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg">
+    diagram: `<svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg">
       <style>.fig{fill:var(--panel2);stroke:var(--line);stroke-width:2}
-      .lbl{fill:var(--text);font-size:14px;text-anchor:middle}
-      .sub{fill:var(--muted);font-size:12px;text-anchor:middle}
+      .lbl{fill:var(--text);font-size:14px;font-weight:700;text-anchor:middle}
+      .win{fill:var(--good);font-size:11px;text-anchor:middle}
       .arrow{stroke:var(--accent2);stroke-width:2;fill:none}</style>
-      <defs><marker id="arOki" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <defs><marker id="arOki2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M0,0L10,5L0,10z" fill="var(--accent2)"/></marker></defs>
-      <rect class="fig" x="20" y="145" width="140" height="50" rx="10"/>
-      <text class="lbl" x="90" y="175">ダウン中の相手</text>
-      <path class="arrow" d="M160,170 C220,120 280,80 360,60" marker-end="url(#arOki)"/>
-      <path class="arrow" d="M160,170 L360,170" marker-end="url(#arOki)"/>
-      <path class="arrow" d="M160,170 C220,220 280,260 360,280" marker-end="url(#arOki)"/>
-      <rect class="fig" x="370" y="35" width="120" height="50" rx="10"/>
-      <text class="lbl" x="430" y="65">打撃</text>
-      <rect class="fig" x="370" y="145" width="120" height="50" rx="10"/>
-      <text class="lbl" x="430" y="175">投げ</text>
-      <rect class="fig" x="370" y="255" width="120" height="50" rx="10"/>
-      <text class="lbl" x="430" y="280">シミー</text>
-      <text class="sub" x="430" y="296">（下がって誘う）</text>
+      <rect class="fig" x="20" y="120" width="130" height="48" rx="10"/>
+      <text class="lbl" x="85" y="149">ダウンした相手</text>
+      <path class="arrow" d="M150,130 C210,90 280,70 340,60" marker-end="url(#arOki2)"/>
+      <path class="arrow" d="M150,144 L340,144" marker-end="url(#arOki2)"/>
+      <path class="arrow" d="M150,158 C210,200 280,220 340,232" marker-end="url(#arOki2)"/>
+      <rect class="fig" x="350" y="36" width="210" height="48" rx="10"/>
+      <text class="lbl" x="455" y="58">打撃を重ねる</text>
+      <text class="win" x="455" y="75">→ 暴れてくる相手に勝つ</text>
+      <rect class="fig" x="350" y="120" width="210" height="48" rx="10"/>
+      <text class="lbl" x="455" y="142">投げる</text>
+      <text class="win" x="455" y="159">→ 固まってる相手に勝つ</text>
+      <rect class="fig" x="350" y="208" width="210" height="48" rx="10"/>
+      <text class="lbl" x="455" y="228">シミー（下がる）</text>
+      <text class="win" x="455" y="245">→ 無敵・投げ抜けに勝つ</text>
     </svg>`,
   },
   {
