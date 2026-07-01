@@ -190,23 +190,24 @@ const SF6_GUIDE = [
     id: "g5", order: 5,
     title: "確定反撃（確反）の考え方",
     summary: "「相手が動けない時間」に技を当てる",
-    body: "■ 確定反撃とは\n相手の技をガードした後、「絶対に当たる反撃」を入れること。\nたとえるなら野球のピッチャーが投げた後の一瞬の「腕が下がったスキ」を打つ感覚。相手が技を振ると、振り終わった直後に必ず「動けない時間（不利フレーム）」が生まれる。その間に自分の技を出せば、確実にヒットする。\n\n■ 見方（シンプル版）\n・ガード後に表示される「相手の不利F」 ＝ 相手が固まっている時間\n・自分の技の「発生F」 ＝ 技が当たるまでの時間\n・発生F ≦ 不利F なら → 確定で当たる！\n\n■ 例\n相手が -10F の技をガードされた場合 → 発生9F以内の技なら確定で当たる。逆に発生14Fの技は届かない（相手が先に動ける）。\n\n■ やること\n最初は「ガードしたらとりあえず最速の弱攻撃を1発入れる」だけでOK。フレームタブの「確反逆引き」に相手の不利Fを入力すると、使える技が一覧で出てくる。",
+    body: "■ 確定反撃とは\n相手の技をガードした後、「絶対に当たる反撃」を入れること。\n相手が技を振ると、振り終わった直後に必ず「動けない時間（不利フレーム）」が生まれる。その間に自分の技を出せば、確実にヒットする。\n\n■ 見方（シンプル版）\n・「相手の不利F」 ＝ 相手が固まっている時間（フレームタブのガード欄のマイナス値）\n・「発生F」 ＝ 自分の技が当たるまでの時間\n・発生F ≦ 不利F の絶対値 → 確定で当たる！\n\n■ 具体例\n相手が -10F の技をガードされた → 発生10F以内の技なら確定で当たる。発生14Fの技は間に合わない（相手が先に動ける）。\n\n■ まず覚えること\n「ガードしたらとりあえず最速の弱攻撃を1発入れる」だけでOK。フレームタブの「確反逆引き」に相手の不利Fを入力すると、使える技が一覧で出てくる。",
     relatedView: "frame", relatedLabel: "フレームタブの確反逆引きを開く",
-    diagram: `<svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    diagram: `<svg viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <style>.lbl{fill:var(--text);font-size:13px;font-weight:600}.sub{fill:var(--muted);font-size:12px}.note{fill:var(--text);font-size:12px}</style>
-      <text class="lbl" x="20" y="30">【相手の不利F（動けない時間）】</text>
-      <rect x="20" y="42" width="300" height="34" fill="var(--bad)" opacity="0.55" rx="4"/>
-      <text class="sub" x="25" y="64">ここは相手が固まっている　▶ この間に当てれば確定！</text>
-      <text class="lbl" x="20" y="110">【自分の技の発生F（技が当たるまで）】</text>
-      <rect x="20" y="122" width="190" height="34" fill="var(--good)" opacity="0.8" rx="4"/>
-      <text class="sub" x="25" y="144">発生が短い技　→　収まる　→　確定○</text>
-      <rect x="20" y="172" width="360" height="34" fill="var(--accent2)" opacity="0.35" rx="4"/>
-      <text class="sub" x="25" y="194">発生が長い技　→　はみ出す　→　確定×（相手が先に動く）</text>
-      <line x1="20" y1="224" x2="600" y2="224" stroke="var(--line)" stroke-width="1.5"/>
-      <text class="sub" x="20" y="244">ガード成立（0F）</text>
-      <rect x="20" y="258" width="640" height="42" fill="var(--panel2)" rx="6" stroke="var(--line)" stroke-width="1"/>
-      <text class="note" x="30" y="275">例：相手が -10F の技をガード</text>
-      <text class="note" x="30" y="293" fill="var(--good)">→ 発生9F以内の技なら確定　／　発生14Fは間に合わない</text>
+      <text class="lbl" x="10" y="24">相手の不利F（動けない時間）</text>
+      <rect x="10" y="32" width="280" height="30" fill="var(--bad)" opacity="0.55" rx="4"/>
+      <text class="sub" x="15" y="52">相手が固まっている ▶ この間に当てれば確定！</text>
+      <text class="lbl" x="10" y="90">自分の技の発生F（技が当たるまで）</text>
+      <rect x="10" y="98" width="180" height="30" fill="var(--good)" opacity="0.8" rx="4"/>
+      <text class="sub" x="15" y="118">短い技 → 収まる → 確定○</text>
+      <rect x="10" y="140" width="340" height="30" fill="var(--accent2)" opacity="0.35" rx="4"/>
+      <text class="sub" x="15" y="160">長い技 → はみ出す → 確定×（相手が先に動く）</text>
+      <line x1="10" y1="186" x2="610" y2="186" stroke="var(--line)" stroke-width="1.5"/>
+      <text class="sub" x="10" y="202">ガード成立（0F）</text>
+      <rect x="10" y="214" width="600" height="56" fill="var(--panel2)" rx="6" stroke="var(--line)" stroke-width="1"/>
+      <text class="note" x="20" y="234">【例】相手が -10F の技をガードされた</text>
+      <text class="note" x="20" y="252" fill="var(--good)">→ 発生10F以内の技なら確定で入る</text>
+      <text class="note" x="20" y="268" fill="var(--bad)">→ 発生14Fの技は間に合わない（相手が先に動ける）</text>
     </svg>`,
   },
   {
