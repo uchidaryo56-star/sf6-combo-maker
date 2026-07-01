@@ -195,12 +195,12 @@ function renderCombos(){
         <span class="badge">${esc(c.position||"中央")}</span>
         <span class="stars" title="難易度">${"●".repeat(c.difficulty||1)}${"○".repeat(5-(c.difficulty||1))}</span>
       </div>
-      <div class="notation">${esc(c.notation)}</div>
-      <div class="stats">
-        <span>ダメージ <b>${c.damage??"-"}</b></span>
-        <span>Dゲージ <b>${c.drive??0}</b></span>
-        <span>SAゲージ <b>${c.super??0}</b></span>
+      <div class="combo-stats">
+        <div class="stat-block stat-dmg"><span class="stat-num">${c.damage??"-"}</span><span class="stat-lbl">ダメージ</span></div>
+        <div class="stat-block stat-drive"><span class="stat-num">${c.drive??0}</span><span class="stat-lbl">Dゲージ</span></div>
+        <div class="stat-block stat-super"><span class="stat-num">${c.super??0}</span><span class="stat-lbl">SAゲージ</span></div>
       </div>
+      <div class="notation">${esc(c.notation)}</div>
       ${c.note?`<div class="note">${esc(c.note)}</div>`:""}
       ${mediaHTML("comboVideos", c)}
       <div class="row-actions">

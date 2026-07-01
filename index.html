@@ -60,9 +60,16 @@
   .card-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
   .card-head h3{margin:0;font-size:19px}
   .badge{font-size:13px;padding:3px 9px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--line)}
-  .notation{font-family:"Consolas",monospace;font-size:17px;background:var(--panel2);padding:8px 12px;border-radius:8px;display:inline-block;margin:6px 0;letter-spacing:.5px}
+  .notation{font-family:"Consolas",monospace;font-size:17px;background:var(--panel2);padding:8px 12px;border-radius:8px;display:block;margin:6px 0;letter-spacing:.5px;word-break:break-all}
   .stats{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;color:var(--muted);margin-top:6px}
   .stats b{color:var(--text)}
+  .combo-stats{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 8px}
+  .stat-block{display:flex;flex-direction:column;align-items:center;background:var(--panel2);border-radius:8px;padding:5px 14px;min-width:68px;border-top:3px solid var(--line)}
+  .stat-block.stat-dmg{border-top-color:#e55}
+  .stat-block.stat-drive{border-top-color:#4af}
+  .stat-block.stat-super{border-top-color:#fa0}
+  .stat-num{font-size:20px;font-weight:700;line-height:1.2}
+  .stat-lbl{font-size:11px;color:var(--muted);margin-top:1px}
   .note{font-size:15px;color:var(--muted);margin-top:6px}
   .row-actions{display:flex;gap:6px;margin-top:10px;align-items:center;flex-wrap:wrap}
   /* カード内の編集/削除/動画系ボタンは控えめに小さくして本文を読みやすくする */
@@ -157,7 +164,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.33</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.34</span></h1>
 </header>
 
 <div class="tabs">
@@ -315,9 +322,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.33"></script>
-<script src="glossary.js?v=1.25.33"></script>
-<script src="guide.js?v=1.25.33"></script>
-<script src="app.js?v=1.25.33"></script>
+<script src="data.js?v=1.25.34"></script>
+<script src="glossary.js?v=1.25.34"></script>
+<script src="guide.js?v=1.25.34"></script>
+<script src="app.js?v=1.25.34"></script>
 </body>
 </html>
