@@ -200,7 +200,7 @@ function renderCombos(){
         <div class="stat-block stat-drive"><span class="stat-num">${c.drive??0}</span><span class="stat-lbl">Dゲージ</span></div>
         <div class="stat-block stat-super"><span class="stat-num">${c.super??0}</span><span class="stat-lbl">SAゲージ</span></div>
       </div>
-      <div class="notation">${esc(c.notation)}</div>
+      <div class="notation">${renderNotation(c.notation)}</div>
       ${c.note?`<div class="note">${esc(c.note)}</div>`:""}
       ${mediaHTML("comboVideos", c)}
       <div class="row-actions">
@@ -981,6 +981,12 @@ document.getElementById("addRecVideo").onclick = ()=>{
 
 /* -------- ユーティリティ -------- */
 function esc(s){ return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m])); }
+function renderNotation(text){
+  if(!text) return "";
+  const parts = String(text).split(/\s*>\s*/);
+  if(parts.length <= 1) return `<span class="move-chip">${esc(text)}</span>`;
+  return parts.map(p=>`<span class="move-chip">${esc(p.trim())}</span>`).join('<span class="move-arrow">→</span>');
+}
 
 /* -------- モーダル & 技ピッカー（フレーム表の技からレシピを作る） -------- */
 function openModal(html){
