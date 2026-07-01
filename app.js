@@ -93,14 +93,28 @@ function attachGroupToggleHandlers(container, kind){
 
 /* -------- キャラセレクタ＆タブ -------- */
 function initChars(){
+  const settings = gns("settings");
+  const hide = !!settings.hideSakurei;
+  const chars = SF6_DATA.characters.filter(c => !hide || c.id !== "sakurei");
   const sel = document.getElementById("charSelect");
-  sel.innerHTML = SF6_DATA.characters.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+  sel.innerHTML = chars.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+  if(hide && currentChar === "sakurei") currentChar = chars[0]?.id || currentChar;
   sel.value = currentChar;
   sel.onchange = ()=>{
     currentChar = sel.value;
     comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て"; matchupGroupFilter = "全て"; selectedOpponent = null; frameTypeFilter = "全て";
     renderAll();
   };
+  const cb = document.getElementById("hideSakurei");
+  if(cb){
+    cb.checked = hide;
+    cb.onchange = ()=>{
+      gns("settings").hideSakurei = cb.checked;
+      saveStore();
+      initChars();
+      renderAll();
+    };
+  }
 }
 // キャラ選択はキャラごとにデータが変わるタブ（コンボ/フレーム/セットプレイ/マッチアップメモ）でのみ表示
 const charselViews = new Set(["combo","frame","setplay","notes"]);
