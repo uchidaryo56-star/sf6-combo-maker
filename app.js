@@ -233,14 +233,13 @@ function renderCombos(){
   });
   el.querySelectorAll("[data-delcombo]").forEach(b=>b.onclick=()=>{
     const id = b.dataset.delcombo;
-    if(id.startsWith("u-")){
-      if(!confirm("このコンボを削除しますか？")) return;
-      store[currentChar].userCombos = store[currentChar].userCombos.filter(x=>x.id!==id);
-    } else {
-      if(!confirm("このコンボを一覧から非表示にしますか？（後で復元できます）")) return;
-      ns("comboDeleted")[id] = true;
-    }
-    saveStore(); renderComboFilters(); renderCombos();
+    const isUser = id.startsWith("u-");
+    const msg = isUser ? "このコンボを削除しますか？" : "このコンボを一覧から非表示にしますか？\n（後で復元できます）";
+    confirmModal(msg, ()=>{
+      if(isUser) store[currentChar].userCombos = store[currentChar].userCombos.filter(x=>x.id!==id);
+      else ns("comboDeleted")[id] = true;
+      saveStore(); renderComboFilters(); renderCombos();
+    }, isUser ? "削除する" : "非表示にする");
   });
 }
 document.getElementById("favOnly").onchange = renderCombos;
@@ -488,14 +487,13 @@ function renderSetplays(){
   el.querySelectorAll("[data-viddl]").forEach(b=>b.onclick=()=>downloadLocalVideo("setplayVideos", b.dataset.viddl, list.find(x=>x.id===b.dataset.viddl).situation));
   el.querySelectorAll("[data-delsp]").forEach(b=>b.onclick=()=>{
     const id = b.dataset.delsp;
-    if(id.startsWith("u-")){
-      if(!confirm("このセットプレイを削除しますか？")) return;
-      store[currentChar].userSetplays = store[currentChar].userSetplays.filter(x=>x.id!==id);
-    } else {
-      if(!confirm("このセットプレイを一覧から非表示にしますか？（後で復元できます）")) return;
-      ns("setplayDeleted")[id] = true;
-    }
-    saveStore(); renderSetplayGroupFilters(); renderSetplays();
+    const isUser = id.startsWith("u-");
+    const msg = isUser ? "このセットプレイを削除しますか？" : "このセットプレイを一覧から非表示にしますか？\n（後で復元できます）";
+    confirmModal(msg, ()=>{
+      if(isUser) store[currentChar].userSetplays = store[currentChar].userSetplays.filter(x=>x.id!==id);
+      else ns("setplayDeleted")[id] = true;
+      saveStore(); renderSetplayGroupFilters(); renderSetplays();
+    }, isUser ? "削除する" : "非表示にする");
   });
 }
 document.getElementById("addSetplay").onclick = ()=>{
@@ -994,6 +992,20 @@ function closeModal(){
   document.getElementById("modalBox").innerHTML = "";
 }
 document.getElementById("modalOverlay").onclick = (e)=>{ if(e.target.id==="modalOverlay") closeModal(); };
+function confirmModal(message, onOk, okLabel="削除する"){
+  openModal(`
+    <div style="text-align:center;padding:8px 0 4px">
+      <p style="margin:0 0 20px;font-size:15px;white-space:pre-wrap">${esc(message)}</p>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <button id="mConfirmOk" class="danger" style="min-width:96px">${esc(okLabel)}</button>
+        <button id="mConfirmCancel" class="ghost" style="min-width:96px">キャンセル</button>
+      </div>
+    </div>
+  `);
+  const box = document.getElementById("modalBox");
+  box.querySelector("#mConfirmCancel").onclick = closeModal;
+  box.querySelector("#mConfirmOk").onclick = ()=>{ closeModal(); onOk(); };
+}
 // box内の .move-search / .move-picker を、フレーム表の技一覧で動かす。
 // 技をクリックすると targetId の入力欄末尾に sep 区切りで追記する。
 function attachMovePicker(box, targetId, sep){
@@ -1193,10 +1205,11 @@ function downloadLocalVideo(kind, id, niceName){
   });
 }
 function clearVideo(kind, id, after){
-  if(!confirm("この動画を削除しますか？")) return;
-  const ov = videoStore(kind); delete ov[id]; saveStore();
-  const k = vkey(kind, id);
-  idbDel(k).then(()=>{ localVideoKeys.delete(k); delete objURLcache[k]; after(); });
+  confirmModal("この動画を削除しますか？", ()=>{
+    const ov = videoStore(kind); delete ov[id]; saveStore();
+    const k = vkey(kind, id);
+    idbDel(k).then(()=>{ localVideoKeys.delete(k); delete objURLcache[k]; after(); });
+  });
 }
 
 document.getElementById("glossarySearch").oninput = renderGlossary;
