@@ -192,38 +192,59 @@ const SF6_GUIDE = [
     summary: "「相手が動けない時間」に技を当てる",
     body: "■ 確定反撃とは\n相手の技をガードした後、「絶対に当たる反撃」を入れること。\n相手が技を振ると、振り終わった直後に必ず「動けない時間（不利フレーム）」が生まれる。その間に自分の技を出せば、確実にヒットする。\n\n■ 見方（シンプル版）\n・「相手の不利F」 ＝ 相手が固まっている時間（フレームタブのガード欄のマイナス値）\n・「発生F」 ＝ 自分の技が当たるまでの時間\n・発生F ≦ 不利F の絶対値 → 確定で当たる！\n\n■ 具体例\n相手が -10F の技をガードされた → 発生10F以内の技なら確定で当たる。発生14Fの技は間に合わない（相手が先に動ける）。\n\n■ まず覚えること\n「ガードしたらとりあえず最速の弱攻撃を1発入れる」だけでOK。フレームタブの「確反逆引き」に相手の不利Fを入力すると、使える技が一覧で出てくる。",
     relatedView: "frame", relatedLabel: "フレームタブの確反逆引きを開く",
-    diagram: `<svg viewBox="0 0 430 188" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-      <style>
-        .hdr{fill:var(--text);font-size:12px;font-weight:700}
-        .rowlbl{fill:var(--text);font-size:11px}
-        .sub{fill:var(--muted);font-size:10px}
-        .ok{fill:var(--good);font-size:11px;font-weight:700}
-        .ng{fill:var(--bad);font-size:11px;font-weight:700}
-      </style>
-      <!-- ヘッダー -->
-      <text class="hdr" x="5" y="15">ガード後のフレーム（1マス＝1F）</text>
-      <!-- 境界線（-10F終了地点） -->
-      <line x1="288" y1="20" x2="288" y2="126" stroke="var(--accent2)" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <!-- Row 1: 相手の硬直 -10F -->
-      <text class="rowlbl" x="5" y="39">相手の硬直</text>
-      <rect x="130" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="146" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="162" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="178" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="194" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="210" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="226" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="242" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="258" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/><rect x="274" y="25" width="14" height="17" fill="var(--bad)" opacity="0.75" rx="1"/>
-      <text class="sub" x="292" y="37">← -10F（動けない）</text>
-      <!-- Row 2: 発生10F ○ -->
-      <text class="rowlbl" x="5" y="75">発生10F</text>
-      <rect x="130" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="146" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="162" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="178" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="194" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="210" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="226" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="242" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="258" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/><rect x="274" y="61" width="14" height="17" fill="var(--good)" opacity="0.85" rx="1"/>
-      <text class="ok" x="292" y="73">✓ 確定○（収まる）</text>
-      <!-- Row 3: 発生14F × -->
-      <text class="rowlbl" x="5" y="111">発生14F</text>
-      <rect x="130" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="146" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="162" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="178" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="194" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="210" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="226" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="242" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="258" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/><rect x="274" y="97" width="14" height="17" fill="var(--panel2)" stroke="var(--line)" stroke-width="1" rx="1"/>
-      <rect x="290" y="97" width="14" height="17" fill="var(--bad)" opacity="0.5" rx="1"/><rect x="306" y="97" width="14" height="17" fill="var(--bad)" opacity="0.5" rx="1"/><rect x="322" y="97" width="14" height="17" fill="var(--bad)" opacity="0.5" rx="1"/><rect x="338" y="97" width="14" height="17" fill="var(--bad)" opacity="0.5" rx="1"/>
-      <text class="ng" x="356" y="109">✗ 確定×</text>
-      <!-- 区切り線 -->
-      <line x1="5" y1="128" x2="425" y2="128" stroke="var(--line)" stroke-width="1"/>
-      <!-- 説明 -->
-      <text class="hdr" x="5" y="146">例：相手が -10F の技をガードした場合</text>
-      <text class="ok" x="5" y="164">→ 発生10F以内の技は確定で当たる</text>
-      <text class="ng" x="5" y="182">→ 発生11F以上は間に合わない（相手が先に動ける）</text>
-    </svg>`,
+    diagram: `<div style="font-size:13px;font-family:inherit">
+  <div style="font-weight:700;margin-bottom:10px;color:var(--text)">ガード後のフレーム（1マス＝1F）</div>
+  <div style="display:flex;align-items:center;gap:6px;margin:5px 0;flex-wrap:nowrap">
+    <span style="min-width:72px;font-size:11px;color:var(--text);flex:none">相手の硬直</span>
+    <div style="display:flex;gap:2px;flex:none"><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.75;border-radius:2px"></div></div>
+    <div style="width:2px;height:24px;background:var(--accent2);border-radius:1px;flex:none"></div>
+    <div style="width:78px;flex:none"></div>
+    <span style="font-size:10px;color:var(--muted)">← -10F（動けない）</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;margin:5px 0;flex-wrap:nowrap">
+    <span style="min-width:72px;font-size:11px;color:var(--text);flex:none">発生10F</span>
+    <div style="display:flex;gap:2px;flex:none"><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--good);opacity:.85;border-radius:2px"></div></div>
+    <div style="width:2px;height:24px;background:var(--accent2);border-radius:1px;flex:none"></div>
+    <div style="width:78px;flex:none"></div>
+    <span style="font-size:11px;font-weight:700;color:var(--good)">✓ 確定○（収まる）</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;margin:5px 0;flex-wrap:nowrap">
+    <span style="min-width:72px;font-size:11px;color:var(--text);flex:none">発生14F</span>
+    <div style="display:flex;gap:2px;flex:none"><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div><div style="width:18px;height:20px;background:var(--panel2);border:1px solid var(--line);border-radius:2px"></div></div>
+    <div style="width:2px;height:24px;background:var(--accent2);border-radius:1px;flex:none"></div>
+    <div style="display:flex;gap:2px;flex:none"><div style="width:18px;height:20px;background:var(--bad);opacity:.5;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.5;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.5;border-radius:2px"></div><div style="width:18px;height:20px;background:var(--bad);opacity:.5;border-radius:2px"></div></div>
+    <span style="font-size:11px;font-weight:700;color:var(--bad)">✗ 確定×</span>
+  </div>
+  <div style="border-top:1px solid var(--line);margin:14px 0"></div>
+  <div style="font-weight:700;margin-bottom:8px;color:var(--text)">例：相手の技が -10F の場合（技表で見ると）</div>
+  <table style="width:100%;border-collapse:collapse;font-size:12px">
+    <thead>
+      <tr style="background:var(--panel2)">
+        <th style="text-align:left;padding:6px 8px;border:1px solid var(--line);color:var(--text);font-weight:700">技の速さ</th>
+        <th style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--text);font-weight:700">発生F</th>
+        <th style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--text);font-weight:700">確定反撃</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:6px 8px;border:1px solid var(--line);color:var(--text)">弱攻撃（速い）</td>
+        <td style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--text)">4F</td>
+        <td style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--good);font-weight:700">✓ 確定○</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 8px;border:1px solid var(--line);color:var(--text)">中攻撃（ちょうど）</td>
+        <td style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--text)">10F</td>
+        <td style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--good);font-weight:700">✓ 確定○（ぎりぎり）</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 8px;border:1px solid var(--line);color:var(--text)">強攻撃（遅い）</td>
+        <td style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--text)">14F</td>
+        <td style="text-align:center;padding:6px 8px;border:1px solid var(--line);color:var(--bad);font-weight:700">✗ 確定×</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="color:var(--muted);font-size:11px;margin:8px 0 0">フレームタブの「確反逆引き」に不利Fを入力すると使える技が一覧で出る</p>
+</div>`,
   },
   {
     id: "g6", order: 6,
