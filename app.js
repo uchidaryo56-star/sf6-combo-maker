@@ -210,6 +210,7 @@ function renderCombos(){
         <div class="stat-block stat-super"><span class="stat-num">${c.super??0}</span><span class="stat-lbl">SAゲージ</span></div>
       </div>
       <div class="notation">${renderNotation(c.notation)}</div>
+      ${c.notationModern?`<div class="notation" style="margin-top:4px"><span class="modern-tag">モダン</span>${renderNotation(c.notationModern)}</div>`:""}
       ${c.note?`<div class="note">${esc(c.note)}</div>`:""}
       ${mediaHTML("comboVideos", c)}
       <div class="row-actions">
@@ -265,6 +266,8 @@ document.getElementById("addCombo").onclick = ()=>{
     <input class="move-search" style="width:100%;margin-top:6px" placeholder="🔍 技を検索して下から選ぶ">
     <div class="move-picker"></div>
     <div class="hint" style="margin-bottom:10px">技をクリックするとレシピ欄の末尾に追加されます（フレーム表に登録されている技）。OD技やDR等は手入力で追記してください。</div>
+    <label class="fld">モダン入力レシピ（任意）</label>
+    <input id="mNotationModern" style="width:100%" placeholder="例: SP > 6+SP（モダン版がある場合のみ）">
     <label class="fld">ダメージ</label><input id="mDamage" type="number" value="2000" style="width:100%">
     <label class="fld">動画</label>
     <input id="mVideo" style="width:100%" placeholder="動画URL（YouTube等・任意）">
@@ -297,14 +300,14 @@ document.getElementById("addCombo").onclick = ()=>{
     const start = box.querySelector("#mStart").value.trim() || "その他";
     const group = box.querySelector("#mGroup").value.trim() || "未分類";
     const notation = box.querySelector("#mNotation").value.trim();
+    const notationModern = box.querySelector("#mNotationModern").value.trim();
     const damage = parseInt(box.querySelector("#mDamage").value) || 0;
     const video = box.querySelector("#mVideo").value.trim();
     store[currentChar] = store[currentChar]||{};
     store[currentChar].userCombos = store[currentChar].userCombos||[];
-    store[currentChar].userCombos.push({
-      id:newId, name, start, group, notation, damage, drive:0, super:0,
-      difficulty:1, position:"中央", video, note:"（自作）"
-    });
+    const comboObj = {id:newId, name, start, group, notation, damage, drive:0, super:0, difficulty:1, position:"中央", video, note:"（自作）"};
+    if(notationModern) comboObj.notationModern = notationModern;
+    store[currentChar].userCombos.push(comboObj);
     saveStore(); renderComboFilters(); renderCombos(); closeModal();
   };
 };
@@ -472,6 +475,7 @@ function renderSetplays(){
       <div class="card-head"><h3>${esc(s.situation)}</h3>
         ${s.timestamp?`<span class="badge">⏱ ${esc(s.timestamp)}</span>`:""}</div>
       <div class="stats"><span>手順 <b>${esc(s.setup)}</b></span></div>
+      ${s.setupModern?`<div class="stats"><span class="modern-tag" style="margin-right:6px">モダン</span><span>手順 <b>${esc(s.setupModern)}</b></span></div>`:""}
       <div class="stats"><span>択 <b>${esc(s.mixup)}</b></span></div>
       ${s.note?`<div class="note">${esc(s.note)}</div>`:""}
       ${mediaHTML("setplayVideos", s)}
@@ -512,6 +516,7 @@ document.getElementById("addSetplay").onclick = ()=>{
     <h3>セットプレイを追加</h3>
     <label class="fld">状況</label><input id="mSituation" style="width:100%" placeholder="例: 端 強昇龍ダウン後">
     <label class="fld">手順</label><input id="mSetup" style="width:100%" placeholder="例: 前ステ x2">
+    <label class="fld">モダン手順（任意）</label><input id="mSetupModern" style="width:100%" placeholder="モダン版が異なる場合のみ">
     <label class="fld">グループ</label><input id="mGroup" style="width:100%" placeholder="自由入力。空欄で未分類">
     <label class="fld">択（レシピ）</label>
     <input id="mMixup" style="width:100%" placeholder="例: 打撃(2中K) / 投げ">
@@ -548,13 +553,16 @@ document.getElementById("addSetplay").onclick = ()=>{
     const situation = box.querySelector("#mSituation").value.trim();
     if(!situation){ alert("状況を入力してください"); return; }
     const setup = box.querySelector("#mSetup").value.trim();
+    const setupModern = box.querySelector("#mSetupModern").value.trim();
     const mixup = box.querySelector("#mMixup").value.trim();
     const group = box.querySelector("#mGroup").value.trim() || "未分類";
     const video = box.querySelector("#mVideo").value.trim();
     const timestamp = video ? box.querySelector("#mTimestamp").value.trim() : "";
     store[currentChar] = store[currentChar]||{};
     store[currentChar].userSetplays = store[currentChar].userSetplays||[];
-    store[currentChar].userSetplays.push({id:newId,situation,setup,mixup,group,video,timestamp,note:"（自作）"});
+    const spObj = {id:newId,situation,setup,mixup,group,video,timestamp,note:"（自作）"};
+    if(setupModern) spObj.setupModern = setupModern;
+    store[currentChar].userSetplays.push(spObj);
     saveStore(); renderSetplayGroupFilters(); renderSetplays(); closeModal();
   };
 };
@@ -941,6 +949,7 @@ document.getElementById("exportCombos").onclick = ()=>{
   let n = existing.filter(c=>!c.id.startsWith("u-")).length + 1;
   const entries = user.map(c=>{
     const obj = { id:`${currentChar}-${n++}`, name:c.name||"", notation:c.notation||"", start:c.start||"その他", position:c.position||"中央", difficulty:c.difficulty||1, damage:c.damage||0, drive:c.drive||0, super:c.super||0, group:c.group||"未分類" };
+    if(c.notationModern) obj.notationModern = c.notationModern;
     const vid = videoOf_(c.id) || c.video||"";
     if(vid) obj.video = vid;
     if(c.note && c.note !== "（自作）") obj.note = c.note;
@@ -957,6 +966,7 @@ document.getElementById("exportSetplays").onclick = ()=>{
   let n = existing.filter(s=>!s.id.startsWith("u-")).length + 1;
   const entries = user.map(s=>{
     const obj = { id:`${currentChar}-sp-${n++}`, situation:s.situation||"", setup:s.setup||"", mixup:s.mixup||"", group:s.group||"未分類" };
+    if(s.setupModern) obj.setupModern = s.setupModern;
     const vid = videoOf_(s.id) || s.video||"";
     if(vid){ obj.video = vid; if(s.timestamp) obj.timestamp = s.timestamp; }
     if(s.note && s.note !== "（自作）") obj.note = s.note;
