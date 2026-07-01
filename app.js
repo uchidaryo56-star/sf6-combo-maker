@@ -281,6 +281,8 @@ document.getElementById("addCombo").onclick = ()=>{
     </div>
   `);
   const box = document.getElementById("modalBox");
+  createTokenInput(box.querySelector("#mNotation"), " > ");
+  createTokenInput(box.querySelector("#mNotationModern"), " > ");
   attachMovePicker(box, "mNotation", " > ");
   box.querySelector("#mVidFile").onclick = ()=>{
     pickVideoFile("comboVideos", newId, ()=>{
@@ -347,10 +349,15 @@ function renderFrames(){
   }
   const tb = document.querySelector("#frameTable tbody");
   const m = "color:var(--muted);font-size:14px";
-  if(!data.length){ tb.innerHTML = `<tr><td colspan="17" class="empty">該当する技がありません</td></tr>`; renderPunish(); return; }
-  tb.innerHTML = data.map(f=>`<tr data-fi="${orig.indexOf(f)}">
+  const modernCmds = ns("frameModernCmd");
+  if(!data.length){ tb.innerHTML = `<tr><td colspan="18" class="empty">該当する技がありません</td></tr>`; renderPunish(); return; }
+  tb.innerHTML = data.map(f=>{
+    const fi = orig.indexOf(f);
+    const modCmd = modernCmds[fi] || f.commandModern || "";
+    return `<tr data-fi="${fi}">
     <td>${esc(f.move)}</td>
     <td style="font-family:Consolas,monospace">${fmtCommand(f.command)}</td>
+    <td class="modern-cmd-cell" data-fi="${fi}" title="クリックしてモダン入力を編集">${modCmd?esc(modCmd):'<span style="opacity:.35;font-size:12px">クリックして入力</span>'}</td>
     <td style="${m}">${esc(f.type)}</td>
     <td>${f.startup??"-"}</td>
     <td style="${m}">${esc(f.active||"-")}</td>
@@ -366,7 +373,38 @@ function renderFrames(){
     <td style="${m}">${esc(f.saGain||"-")}</td>
     <td style="${m}">${esc(f.attribute||"-")}</td>
     <td style="color:var(--muted);font-size:13px">${esc(f.note||"")}</td>
-  </tr>`).join("");
+  </tr>`;
+  }).join("");
+  // モダン入力セルのインライン編集
+  tb.querySelectorAll(".modern-cmd-cell").forEach(cell=>{
+    cell.onclick = e=>{
+      if(cell.querySelector("input")) return;
+      e.stopPropagation();
+      const fi = parseInt(cell.dataset.fi);
+      const cur = ns("frameModernCmd")[fi] || orig[fi]?.commandModern || "";
+      const inp = document.createElement("input");
+      inp.value = cur;
+      inp.style.cssText = "width:100%;min-width:80px;font-size:13px;padding:2px 5px;background:var(--panel);color:var(--text);border:1px solid var(--accent2);border-radius:4px;box-sizing:border-box";
+      inp.placeholder = "例: SP / 6+SP";
+      cell.innerHTML = "";
+      cell.appendChild(inp);
+      inp.focus(); inp.select();
+      let done = false;
+      function saveCmd(){
+        if(done) return; done = true;
+        const val = inp.value.trim();
+        const cmds = ns("frameModernCmd");
+        if(val) cmds[fi] = val; else delete cmds[fi];
+        saveStore();
+        cell.innerHTML = val ? esc(val) : '<span style="opacity:.35;font-size:12px">クリックして入力</span>';
+      }
+      inp.addEventListener("blur", ()=>setTimeout(saveCmd, 120));
+      inp.addEventListener("keydown", e2=>{
+        if(e2.key==="Enter"){ e2.preventDefault(); inp.blur(); }
+        if(e2.key==="Escape"){ done=true; cell.innerHTML = cur?esc(cur):'<span style="opacity:.35;font-size:12px">クリックして入力</span>'; }
+      });
+    };
+  });
   renderPunish();
 }
 function cls(n){ if(typeof n!=="number") return "zero"; return n>0?"pos":(n<0?"neg":"zero"); }
@@ -536,6 +574,7 @@ document.getElementById("addSetplay").onclick = ()=>{
     </div>
   `);
   const box = document.getElementById("modalBox");
+  createTokenInput(box.querySelector("#mMixup"), " / ");
   attachMovePicker(box, "mMixup", " / ");
   box.querySelector("#mVidFile").onclick = ()=>{
     pickVideoFile("setplayVideos", newId, ()=>{
@@ -1000,6 +1039,53 @@ document.getElementById("addRecVideo").onclick = ()=>{
 
 /* -------- ユーティリティ -------- */
 function esc(s){ return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m])); }
+/* ---- トークン入力 ---- */
+function createTokenInput(input, sep){
+  if(!input) return;
+  input.style.display = "none";
+  const div = document.createElement("div");
+  div.className = "token-input";
+  input.insertAdjacentElement("afterend", div);
+  const field = document.createElement("input");
+  field.className = "token-input-field";
+  field.placeholder = input.placeholder || "";
+  div.appendChild(field);
+  let tokens = input.value ? input.value.split(sep).map(t=>t.trim()).filter(Boolean) : [];
+  function renderChips(){
+    div.querySelectorAll(".token-chip").forEach(c=>c.remove());
+    tokens.forEach((t,i)=>{
+      const chip = document.createElement("span");
+      chip.className = "token-chip";
+      chip.innerHTML = `${esc(t)}<span class="t-del" title="削除">×</span>`;
+      chip.querySelector(".t-del").addEventListener("mousedown", e=>{
+        e.preventDefault();
+        tokens.splice(i,1); sync(); renderChips();
+      });
+      div.insertBefore(chip, field);
+    });
+  }
+  function sync(){
+    const typed = field.value.trim();
+    input.value = typed ? [...tokens, typed].join(sep) : tokens.join(sep);
+  }
+  function addToken(text){
+    const t = String(text||"").trim();
+    if(!t) return;
+    tokens.push(t); field.value = ""; sync(); renderChips(); field.focus();
+  }
+  field.addEventListener("keydown", e=>{
+    if((e.key==="Enter"||e.key==="Tab")&&field.value.trim()){
+      e.preventDefault(); addToken(field.value);
+    } else if(e.key==="Backspace"&&!field.value&&tokens.length){
+      tokens.pop(); sync(); renderChips();
+    }
+  });
+  field.addEventListener("input", sync);
+  div.addEventListener("click", ()=>field.focus());
+  input._addToken = addToken;
+  input._getTokenValue = ()=>{ sync(); return input.value; };
+  renderChips();
+}
 function renderNotation(text){
   if(!text) return "";
   const parts = String(text).split(/\s*>\s*/);
@@ -1034,8 +1120,9 @@ function confirmModal(message, onOk, okLabel="削除する"){
 // box内の .move-search / .move-picker を、フレーム表の技一覧で動かす。
 // 技をクリックすると targetId の入力欄末尾に sep 区切りで追記する。
 function attachMovePicker(box, targetId, sep){
+  const orig = SF6_DATA.frames[currentChar]||[];
   const seen = new Set();
-  const moves = (SF6_DATA.frames[currentChar]||[]).filter(f=>{
+  const moves = orig.map((f,i)=>({...f,_fi:i})).filter(f=>{
     if(seen.has(f.move)) return false; seen.add(f.move); return true;
   });
   const types = ["全て", ...new Set(moves.map(f=>f.type))];
@@ -1043,10 +1130,24 @@ function attachMovePicker(box, targetId, sep){
   const search = box.querySelector(".move-search");
   if(!wrap) return;
   let typeFilter = "全て";
+  let modernMode = false;
+
+  // クラシック/モダン切替バー
+  const modeBar = document.createElement("div");
+  modeBar.className = "picker-mode-bar";
+  modeBar.innerHTML = `<button class="ghost active" data-pmode="classic">クラシック</button><button class="ghost" data-pmode="modern">モダン</button>`;
+  search.insertAdjacentElement("afterend", modeBar);
+  modeBar.querySelectorAll("[data-pmode]").forEach(btn=>btn.onclick=()=>{
+    modernMode = btn.dataset.pmode==="modern";
+    modeBar.querySelectorAll("[data-pmode]").forEach(b=>b.classList.toggle("active", b===btn));
+    draw(search.value);
+  });
+
   const typeWrap = document.createElement("div");
   typeWrap.className = "chips move-type-filters";
-  typeWrap.style.marginTop = "6px";
-  search.insertAdjacentElement("afterend", typeWrap);
+  typeWrap.style.marginTop = "4px";
+  modeBar.insertAdjacentElement("afterend", typeWrap);
+
   function drawTypes(){
     typeWrap.innerHTML = types.map(t=>
       `<span class="chip ${t===typeFilter?'active':''}" data-mtype="${esc(t)}">${esc(t)}</span>`).join("");
@@ -1054,30 +1155,46 @@ function attachMovePicker(box, targetId, sep){
       typeFilter = ch.dataset.mtype; drawTypes(); draw(search.value);
     });
   }
+  function getModernCmd(f){
+    const overrides = ns("frameModernCmd");
+    return overrides[f._fi] || f.commandModern || "";
+  }
   function draw(q){
     const qq = (q||"").trim();
-    let list = moves.filter(f=>!qq || f.move.includes(qq) || (f.command||"").includes(qq));
+    let list = moves.filter(f=>{
+      if(!qq) return true;
+      const mc = modernMode ? getModernCmd(f) : (f.command||"");
+      return f.move.includes(qq) || mc.includes(qq) || (f.command||"").includes(qq);
+    });
     if(typeFilter!=="全て") list = list.filter(f=>f.type===typeFilter);
     if(!list.length){ wrap.innerHTML = `<span class="hint" style="margin:0">該当する技がありません</span>`; return; }
     const groups = new Map();
     list.forEach(f=>{ if(!groups.has(f.type)) groups.set(f.type, []); groups.get(f.type).push(f); });
     wrap.innerHTML = [...groups.entries()].map(([type, items])=>{
       const showCmd = type!=="共通システム";
-      return `
-      <div class="move-group">
+      return `<div class="move-group">
         <span class="move-group-label">${esc(type)}（${items.length}）</span>
         <div class="move-group-chips">
-          ${items.map(f=>`<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(showCmd?(f.command||""):"")}">
-            ${esc(f.move)}${showCmd&&f.command?` <span style="opacity:.85">（${esc(f.command)}）</span>`:""}
-          </span>`).join("")}
+          ${items.map(f=>{
+            const modCmd = getModernCmd(f);
+            const dispCmd = modernMode ? (modCmd || `<span style="opacity:.4">未登録</span>`) : (showCmd&&f.command?esc(f.command):"");
+            const rawCmd = modernMode ? (modCmd||"") : (showCmd?(f.command||""):"");
+            return `<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(rawCmd)}" data-fi="${f._fi}">
+              ${esc(f.move)}${(modernMode?modCmd:(showCmd&&f.command))?` <span style="opacity:.85">（${dispCmd}）</span>`:""}
+            </span>`;
+          }).join("")}
         </div>
       </div>`;
     }).join("");
     wrap.querySelectorAll("[data-mv]").forEach(ch=>ch.onclick=()=>{
       const input = box.querySelector("#"+targetId);
-      const token = ch.dataset.cmd ? `${ch.dataset.mv}（${ch.dataset.cmd}）` : ch.dataset.mv;
-      input.value = input.value.trim() ? (input.value.replace(/\s+$/,"") + sep + token) : token;
-      input.focus();
+      const cmd = ch.dataset.cmd;
+      const token = cmd ? `${ch.dataset.mv}（${cmd}）` : ch.dataset.mv;
+      if(input && input._addToken) input._addToken(token);
+      else if(input){
+        input.value = input.value.trim() ? (input.value.replace(/\s+$/,"")+sep+token) : token;
+        input.focus();
+      }
     });
   }
   drawTypes();

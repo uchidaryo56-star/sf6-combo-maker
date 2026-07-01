@@ -73,6 +73,15 @@
   .stat-num{font-size:20px;font-weight:700;line-height:1.2}
   .stat-lbl{font-size:11px;color:var(--muted);margin-top:1px}
   .modern-tag{font-size:11px;font-weight:700;color:#4af;background:rgba(68,170,255,0.12);border:1px solid rgba(68,170,255,0.35);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0}
+  .token-input{display:flex;flex-wrap:wrap;gap:4px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-height:42px;cursor:text}
+  .token-input:focus-within{border-color:var(--accent2)}
+  .token-chip{display:inline-flex;align-items:center;gap:3px;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:3px 8px;font-size:13px;font-family:"Consolas",monospace;white-space:nowrap}
+  .token-chip .t-del{cursor:pointer;opacity:.6;font-size:14px;line-height:1;padding:0 1px;margin-left:2px}
+  .token-chip .t-del:hover{opacity:1;color:var(--accent)}
+  .token-input-field{flex:1;min-width:80px;background:none;border:none;outline:none;padding:2px 4px;font-size:14px;color:var(--text);font-family:inherit}
+  .picker-mode-bar{display:flex;gap:4px;margin:6px 0 4px}
+  .picker-mode-bar .ghost{padding:3px 10px;font-size:13px}
+  .picker-mode-bar .ghost.active{background:var(--accent2);color:#fff;border-color:var(--accent2)}
   .note{font-size:15px;color:var(--muted);margin-top:6px}
   .row-actions{display:flex;gap:6px;margin-top:10px;align-items:center;flex-wrap:wrap}
   /* カード内の編集/削除/動画系ボタンは控えめに小さくして本文を読みやすくする */
@@ -118,8 +127,9 @@
   #frameTable{border-collapse:collapse}
   #frameTable th,#frameTable td{padding:6px 8px;font-size:14px;border-right:1px solid var(--line)}
   #frameTable th:last-child,#frameTable td:last-child{border-right:none}
-  #frameTable td:nth-child(2){font-size:13px;white-space:normal;min-width:130px;max-width:190px;line-height:1.4}  /* コマンド（条件と本体の間で改行） */
-  #frameTable td:nth-child(3){white-space:nowrap;min-width:64px}  /* 区分（縦に折り返されないように） */
+  #frameTable td:nth-child(2){font-size:13px;white-space:normal;min-width:130px;max-width:190px;line-height:1.4}  /* コマンド */
+  #frameTable td:nth-child(3){font-size:13px;white-space:normal;min-width:80px;max-width:160px;cursor:pointer;color:var(--accent2)}  /* モダン入力 */
+  #frameTable td:nth-child(4){white-space:nowrap;min-width:64px}  /* 区分 */
   #frameTable th:last-child,#frameTable td:last-child{min-width:200px;max-width:280px;white-space:normal}
   /* 見出しは折り返さず1行で表示（縦に潰れて読めなくなるのを防ぐ） */
   #frameTable thead th{white-space:nowrap;font-size:13px;cursor:default}
@@ -167,7 +177,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.39</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.40</span></h1>
 </header>
 
 <div class="tabs">
@@ -242,6 +252,7 @@
           <tr>
             <th rowspan="2" data-sort="move" title="技の名前">技名</th>
             <th rowspan="2" data-sort="command" title="レバー・ボタンの入力（テンキー表記）">コマンド</th>
+            <th rowspan="2" title="モダン操作での入力コマンド（クリックして編集）">モダン入力</th>
             <th rowspan="2" data-sort="type" title="技の種類（通常技/特殊技/必殺技/スーパーアーツ/投げ/共通システム）">区分</th>
             <th colspan="3" title="技が出てから終わるまでの時間の内訳">動作フレーム</th>
             <th colspan="2" title="技を当てた後、自分と相手どちらが先に動けるかの差">硬直差</th>
@@ -325,9 +336,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.39"></script>
-<script src="glossary.js?v=1.25.39"></script>
-<script src="guide.js?v=1.25.39"></script>
-<script src="app.js?v=1.25.39"></script>
+<script src="data.js?v=1.25.40"></script>
+<script src="glossary.js?v=1.25.40"></script>
+<script src="guide.js?v=1.25.40"></script>
+<script src="app.js?v=1.25.40"></script>
 </body>
 </html>
