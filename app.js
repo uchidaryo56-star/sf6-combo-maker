@@ -906,6 +906,58 @@ document.getElementById("exportRecVideos").onclick = ()=>{
     });
   };
 };
+function openExportModal(title, hint, code){
+  openModal(`
+    <h3>${title}</h3>
+    <div class="hint" style="margin-bottom:8px">${hint}</div>
+    <textarea id="exportCode" style="width:100%;height:220px;font-family:Consolas,monospace;font-size:12px" readonly>${esc(code)}</textarea>
+    <div class="row-actions" style="margin-top:10px">
+      <button id="mCopyCode">📋 コピー</button>
+      <button class="ghost" id="mCancel">閉じる</button>
+    </div>
+  `);
+  const box = document.getElementById("modalBox");
+  box.querySelector("#mCancel").onclick = closeModal;
+  box.querySelector("#mCopyCode").onclick = ()=>{
+    const ta = box.querySelector("#exportCode");
+    ta.select();
+    navigator.clipboard.writeText(ta.value).then(()=>{
+      box.querySelector("#mCopyCode").textContent = "✓ コピーしました";
+    }).catch(()=>{ document.execCommand("copy"); box.querySelector("#mCopyCode").textContent = "✓ コピーしました"; });
+  };
+}
+document.getElementById("exportCombos").onclick = ()=>{
+  const user = (store[currentChar]||{}).userCombos||[];
+  if(!user.length){ alert("追加したコンボがありません"); return; }
+  const videoOf_ = id => { const ov = ns("comboVideos"); return ov[id]||""; };
+  const existing = SF6_DATA.combos[currentChar]||[];
+  let n = existing.filter(c=>!c.id.startsWith("u-")).length + 1;
+  const entries = user.map(c=>{
+    const obj = { id:`${currentChar}-${n++}`, name:c.name||"", notation:c.notation||"", start:c.start||"その他", position:c.position||"中央", difficulty:c.difficulty||1, damage:c.damage||0, drive:c.drive||0, super:c.super||0, group:c.group||"未分類" };
+    const vid = videoOf_(c.id) || c.video||"";
+    if(vid) obj.video = vid;
+    if(c.note && c.note !== "（自作）") obj.note = c.note;
+    return JSON.stringify(obj, null, 2);
+  });
+  const code = `// data.js の "combos": { "${currentChar}": [...] } に追加\n[\n${entries.join(",\n")}\n]`;
+  openExportModal("コンボをシードに書き出す", `<b>${currentChar}</b> のユーザー追加コンボをコピーして、data.js の <code>"${currentChar}":</code> 配列に貼り付けてください。その後プッシュをお願いすると全員に反映されます。`, code);
+};
+document.getElementById("exportSetplays").onclick = ()=>{
+  const user = (store[currentChar]||{}).userSetplays||[];
+  if(!user.length){ alert("追加したセットプレイがありません"); return; }
+  const videoOf_ = id => { const ov = ns("setplayVideos"); return ov[id]||""; };
+  const existing = SF6_DATA.setplays[currentChar]||[];
+  let n = existing.filter(s=>!s.id.startsWith("u-")).length + 1;
+  const entries = user.map(s=>{
+    const obj = { id:`${currentChar}-sp-${n++}`, situation:s.situation||"", setup:s.setup||"", mixup:s.mixup||"", group:s.group||"未分類" };
+    const vid = videoOf_(s.id) || s.video||"";
+    if(vid){ obj.video = vid; if(s.timestamp) obj.timestamp = s.timestamp; }
+    if(s.note && s.note !== "（自作）") obj.note = s.note;
+    return JSON.stringify(obj, null, 2);
+  });
+  const code = `// data.js の "setplays": { "${currentChar}": [...] } に追加\n[\n${entries.join(",\n")}\n]`;
+  openExportModal("セットプレイをシードに書き出す", `<b>${currentChar}</b> のユーザー追加セットプレイをコピーして、data.js の <code>"${currentChar}":</code> 配列に貼り付けてください。その後プッシュをお願いすると全員に反映されます。`, code);
+};
 document.getElementById("addRecVideo").onclick = ()=>{
   openModal(`
     <h3>おすすめ動画を追加</h3>
