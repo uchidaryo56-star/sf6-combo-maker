@@ -92,13 +92,18 @@ function attachGroupToggleHandlers(container, kind){
 }
 
 /* -------- キャラセレクタ＆タブ -------- */
+let currentView = document.querySelector(".tab.active")?.dataset.view || "combo";
 function initChars(){
   const settings = gns("settings");
   const hide = !!settings.hideSakurei;
-  const chars = SF6_DATA.characters.filter(c => !hide || c.id !== "sakurei");
+  const noSakureiViews = new Set(["frame","notes"]);
+  const chars = SF6_DATA.characters.filter(c => {
+    if(c.id === "sakurei" && (hide || noSakureiViews.has(currentView))) return false;
+    return true;
+  });
   const sel = document.getElementById("charSelect");
   sel.innerHTML = chars.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
-  if(hide && currentChar === "sakurei") currentChar = chars[0]?.id || currentChar;
+  if(!chars.find(c=>c.id===currentChar)) currentChar = chars[0]?.id || currentChar;
   sel.value = currentChar;
   sel.onchange = ()=>{
     currentChar = sel.value;
@@ -127,7 +132,11 @@ document.querySelectorAll(".tab").forEach(t=>{
     document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
     t.classList.add("active");
     document.getElementById("view-"+t.dataset.view).classList.add("active");
+    currentView = t.dataset.view;
     updateCharselVisibility(t.dataset.view);
+    const prevChar = currentChar;
+    initChars();
+    if(currentChar !== prevChar) renderAll();
   };
 });
 updateCharselVisibility(document.querySelector(".tab.active").dataset.view);
