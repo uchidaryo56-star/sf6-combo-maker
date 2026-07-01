@@ -157,21 +157,27 @@ const SF6_DATA = {
       "id": "ingrid",
       "name": "イングリッド",
       "color": "#4a9bd1"
+    },
+    {
+      "id": "sakurei",
+      "name": "作例",
+      "color": "#7a7a8a"
     }
   ],
   "combos": {
     "jp": [],
     "ryu": [],
-    "ed": [
+    "ed": [],
+    "sakurei": [
       {
-        "id": "ed-sample-1",
+        "id": "sakurei-1",
         "name": "作例",
         "notation": "パリィDR > 立強P（ボディ）強P > しゃがみ中P（しゃがみストレート）2+中P > 中バーンナックル 214+中P",
         "start": "立ち",
         "position": "中央",
         "difficulty": 2,
         "damage": 2200,
-        "drive": 0,
+        "drive": 1,
         "super": 0,
         "group": "作例",
         "video": "videos/ed_sample.mp4"
