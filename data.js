@@ -9,6 +9,11 @@
 const SF6_DATA = {
   "characters": [
     {
+      "id": "sakurei",
+      "name": "作例",
+      "color": "#7a7a8a"
+    },
+    {
       "id": "ryu",
       "name": "リュウ",
       "color": "#d23b3b"
@@ -157,11 +162,6 @@ const SF6_DATA = {
       "id": "ingrid",
       "name": "イングリッド",
       "color": "#4a9bd1"
-    },
-    {
-      "id": "sakurei",
-      "name": "作例",
-      "color": "#7a7a8a"
     }
   ],
   "combos": {
