@@ -9,6 +9,7 @@
     --bg:#08090d; --panel:#0f1117; --panel2:#171a23; --line:#252a38;
     --text:#edf0f7; --muted:#7a88a8; --accent:#e8621a; --accent2:#c8930a;
     --good:#28c47a; --warn:#e8a820; --bad:#e03c3c; --radius:8px;
+    --char-color:#e8621a;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px}
@@ -53,7 +54,7 @@
     position:relative;
   }
   .tab:hover{color:var(--text)}
-  .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .tab.active{color:var(--char-color);border-bottom-color:var(--char-color)}
 
   /* ===== MAIN ===== */
   main{padding:20px;max-width:1000px;margin:0 auto}
@@ -258,12 +259,51 @@
   .guide-body p{white-space:pre-wrap;font-size:17px;line-height:1.85;margin:10px 0}
   .guide-diagram{max-width:860px;margin:14px 0;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:16px}
   .guide-diagram svg{width:100%;height:auto;display:block}
-  @media(max-width:640px){.grid2{grid-template-columns:1fr}main{padding:14px}.guide-card{flex-direction:column}#view-guide{width:100vw;margin-left:calc(50% - 50vw)}}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}main{padding:14px}.guide-card{flex-direction:column}#view-guide{width:100vw;margin-left:calc(50% - 50vw)}.tab{padding:10px 13px;font-size:14px}}
+
+  /* ===== CHARACTER BANNER ===== */
+  #charBanner{
+    position:relative;height:190px;overflow:hidden;display:none;
+    background:var(--panel) no-repeat right center / auto 100%;
+    border-bottom:2px solid var(--char-color);
+  }
+  #charBanner::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg,
+      rgba(8,9,13,1) 0%,
+      rgba(8,9,13,0.93) 25%,
+      rgba(8,9,13,0.6) 55%,
+      rgba(8,9,13,0.05) 100%);
+  }
+  #bannerContent{
+    position:relative;z-index:2;height:100%;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:18px 28px;max-width:1040px;
+  }
+  #bannerGame{
+    font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+    color:var(--char-color);margin-bottom:6px;opacity:0.9;
+  }
+  #bannerName{
+    font-size:52px;font-weight:900;letter-spacing:5px;text-transform:uppercase;
+    color:#fff;line-height:1;
+    font-family:"Segoe UI Black","Arial Black",system-ui,sans-serif;
+    text-shadow:0 0 40px var(--char-color),0 0 80px var(--char-color),0 2px 8px rgba(0,0,0,0.95);
+  }
+  #bannerDeco{
+    position:absolute;bottom:0;left:0;right:0;z-index:2;
+    height:2px;
+    background:linear-gradient(90deg,var(--char-color),transparent 60%);
+  }
+  @media(max-width:640px){
+    #charBanner{height:140px}
+    #bannerName{font-size:34px;letter-spacing:3px}
+  }
 </style>
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.44</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.45</span></h1>
 </header>
 
 <div class="tabs">
@@ -280,6 +320,14 @@
   <span style="color:var(--muted);font-size:15px">使用キャラ</span>
   <select id="charSelect"></select>
   <label class="check" style="margin-left:auto;font-size:13px;color:var(--muted)"><input type="checkbox" id="hideSakurei"> 作例を非表示</label>
+</div>
+
+<div id="charBanner">
+  <div id="bannerContent">
+    <div id="bannerGame">STREET FIGHTER 6</div>
+    <div id="bannerName">SELECT FIGHTER</div>
+  </div>
+  <div id="bannerDeco"></div>
 </div>
 
 <main>
@@ -422,9 +470,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.44"></script>
-<script src="glossary.js?v=1.25.44"></script>
-<script src="guide.js?v=1.25.44"></script>
-<script src="app.js?v=1.25.44"></script>
+<script src="data.js?v=1.25.45"></script>
+<script src="glossary.js?v=1.25.45"></script>
+<script src="guide.js?v=1.25.45"></script>
+<script src="app.js?v=1.25.45"></script>
 </body>
 </html>

@@ -108,6 +108,7 @@ function initChars(){
   sel.onchange = ()=>{
     currentChar = sel.value;
     comboFilter = "全て"; comboGroupFilter = "全て"; setplayGroupFilter = "全て"; matchupGroupFilter = "全て"; selectedOpponent = null; frameTypeFilter = "全て";
+    updateCharBanner(currentChar);
     renderAll();
   };
   const cb = document.getElementById("hideSakurei");
@@ -121,10 +122,40 @@ function initChars(){
     };
   }
 }
+// キャラ別メタ（英語表示名・テーマカラー・公式背景画像）
+const charMeta = {
+  jp:      { en:"JP",       color:"#8835e8" },
+  ryu:     { en:"RYU",      color:"#d02010" },
+  guile:   { en:"GUILE",    color:"#3a7824" },
+  terry:   { en:"TERRY",    color:"#e84018" },
+  zangief: { en:"ZANGIEF",  color:"#c01c1c" },
+  ed:      { en:"ED",       color:"#2838d4" },
+  ingrid:  { en:"INGRID",   color:"#d4980a" },
+};
+const SF6_IMG_BASE = "https://www.streetfighter.com/6/assets/images/character";
+function updateCharBanner(charId){
+  const meta = charMeta[charId];
+  const banner = document.getElementById("charBanner");
+  const nameEl = document.getElementById("bannerName");
+  if(!banner || !nameEl) return;
+  if(meta){
+    banner.style.backgroundImage = `url(${SF6_IMG_BASE}/${charId}/bg_${charId}.jpg)`;
+    nameEl.textContent = meta.en;
+    document.documentElement.style.setProperty("--char-color", meta.color);
+  } else {
+    banner.style.backgroundImage = "";
+    nameEl.textContent = "SELECT FIGHTER";
+    document.documentElement.style.setProperty("--char-color", "#e8621a");
+  }
+}
+
 // キャラ選択はキャラごとにデータが変わるタブ（コンボ/フレーム/セットプレイ/マッチアップメモ）でのみ表示
 const charselViews = new Set(["combo","frame","setplay","notes"]);
 function updateCharselVisibility(view){
-  document.querySelector(".charsel").style.display = charselViews.has(view) ? "" : "none";
+  const show = charselViews.has(view);
+  document.querySelector(".charsel").style.display = show ? "" : "none";
+  const banner = document.getElementById("charBanner");
+  if(banner) banner.style.display = show ? "" : "none";
 }
 document.querySelectorAll(".tab").forEach(t=>{
   t.onclick = ()=>{
@@ -1367,6 +1398,7 @@ function renderAll(){
   renderGlossaryFilters(); renderGlossary();
 }
 initChars();
+updateCharBanner(currentChar);
 renderAll();
 // 保存済みローカル動画のキーを読み込んでから再描画（再読み込み後も動画が出るように）
 idbKeys().then(keys=>{ localVideoKeys = new Set(keys); renderCombos(); renderSetplays(); renderGuide(); renderNoteEditor(); }).catch(()=>{});
