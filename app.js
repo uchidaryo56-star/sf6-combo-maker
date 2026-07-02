@@ -135,15 +135,15 @@ const charMeta = {
 const SF6_IMG_BASE = "https://www.streetfighter.com/6/assets/images/character";
 function updateCharBanner(charId){
   const meta = charMeta[charId];
-  const banner = document.getElementById("charBanner");
   const nameEl = document.getElementById("bannerName");
-  if(!banner || !nameEl) return;
+  const imgEl  = document.getElementById("bannerImg");
+  if(!nameEl) return;
   if(meta){
-    banner.style.backgroundImage = `url(${SF6_IMG_BASE}/${charId}/bg_${charId}.jpg)`;
+    if(imgEl) imgEl.src = `${SF6_IMG_BASE}/${charId}/bg_${charId}.jpg`;
     nameEl.textContent = meta.en;
     document.documentElement.style.setProperty("--char-color", meta.color);
   } else {
-    banner.style.backgroundImage = "";
+    if(imgEl) imgEl.src = "";
     nameEl.textContent = "SELECT FIGHTER";
     document.documentElement.style.setProperty("--char-color", "#e8621a");
   }

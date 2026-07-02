@@ -264,8 +264,13 @@
   /* ===== CHARACTER BANNER ===== */
   #charBanner{
     position:relative;height:190px;overflow:hidden;display:none;
-    background:var(--panel) no-repeat right center / auto 100%;
+    background:var(--panel);
     border-bottom:2px solid var(--char-color);
+  }
+  #bannerImg{
+    position:absolute;right:0;top:0;height:100%;width:auto;
+    object-fit:cover;object-position:center top;
+    display:block;
   }
   #charBanner::before{
     content:"";position:absolute;inset:0;z-index:1;
@@ -303,7 +308,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.45</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.46</span></h1>
 </header>
 
 <div class="tabs">
@@ -323,6 +328,7 @@
 </div>
 
 <div id="charBanner">
+  <img id="bannerImg" src="" alt="" referrerpolicy="no-referrer">
   <div id="bannerContent">
     <div id="bannerGame">STREET FIGHTER 6</div>
     <div id="bannerName">SELECT FIGHTER</div>
@@ -470,9 +476,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.45"></script>
-<script src="glossary.js?v=1.25.45"></script>
-<script src="guide.js?v=1.25.45"></script>
-<script src="app.js?v=1.25.45"></script>
+<script src="data.js?v=1.25.46"></script>
+<script src="glossary.js?v=1.25.46"></script>
+<script src="guide.js?v=1.25.46"></script>
+<script src="app.js?v=1.25.46"></script>
 </body>
 </html>
