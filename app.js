@@ -392,7 +392,7 @@ function renderFrames(){
     return `<tr data-fi="${fi}">
     <td>${esc(f.move)}</td>
     <td style="font-family:Consolas,monospace">${fmtCommand(f.command)}</td>
-    <td class="modern-cmd-cell" data-fi="${fi}" title="クリックしてモダン入力を編集">${modCmd?esc(modCmd):'<span style="opacity:.35;font-size:12px">クリックして入力</span>'}</td>
+    <td class="modern-cmd-cell" data-fi="${fi}" title="クリックしてモダン入力を編集">${renderModernCmd(modCmd)}</td>
     <td style="${m}">${esc(f.type)}</td>
     <td>${f.startup??"-"}</td>
     <td style="${m}">${esc(f.active||"-")}</td>
@@ -1126,6 +1126,29 @@ function renderNotation(text){
   const parts = String(text).split(/\s*>\s*/);
   if(parts.length <= 1) return `<span class="move-chip">${esc(text)}</span>`;
   return parts.map(p=>`<span class="move-chip">${esc(p.trim())}</span>`).join('<span class="move-arrow">→</span>');
+}
+
+const _SF6CTRL = "https://www.streetfighter.com/6/assets/images/common/controller";
+function renderModernCmd(compact){
+  if(!compact) return '<span style="opacity:.35;font-size:12px">-</span>';
+  // 旧テキスト形式（modern_やkey-を含まない）はそのままチップ表示
+  if(!compact.includes("modern_") && !compact.includes("key-")){
+    return `<span class="move-chip" style="font-size:12px">${esc(compact)}</span>`;
+  }
+  const imgStyle = 'height:22px;vertical-align:middle;margin:0 1px';
+  const keyStyle = 'height:18px;vertical-align:middle;margin:0 1px';
+  const smStyle  = 'height:14px;vertical-align:middle;margin:0 2px';
+  function img(name){
+    const h = (name==='key-plus'||name==='key-or'||name==='arrow_3') ? smStyle
+            : name.startsWith('key-') ? keyStyle : imgStyle;
+    return `<img src="${_SF6CTRL}/${name}.png" referrerpolicy="no-referrer" style="${h}">`;
+  }
+  const segments = compact.split('>');
+  const rendered = segments.map(seg => {
+    const tokens = seg.split(',');
+    return tokens.map(img).join(img('key-plus'));
+  });
+  return '<span style="white-space:nowrap">' + rendered.join(img('arrow_3')) + '</span>';
 }
 
 /* -------- モーダル & 技ピッカー（フレーム表の技からレシピを作る） -------- */
