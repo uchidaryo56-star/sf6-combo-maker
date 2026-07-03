@@ -155,7 +155,7 @@ function updateCharselVisibility(view){
   const show = charselViews.has(view);
   document.querySelector(".charsel").style.display = show ? "" : "none";
   const banner = document.getElementById("charBanner");
-  if(banner) banner.style.display = show ? "" : "none";
+  if(banner) banner.style.display = show ? "block" : "none";
 }
 document.querySelectorAll(".tab").forEach(t=>{
   t.onclick = ()=>{
