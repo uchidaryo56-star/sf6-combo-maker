@@ -1135,6 +1135,10 @@ function renderModernCmd(compact){
   if(!compact.includes("modern_") && !compact.includes("key-")){
     return `<span class="move-chip" style="font-size:12px">${esc(compact)}</span>`;
   }
+  // |区切りでラベルを分離
+  const pipeIdx = compact.indexOf('|');
+  const label = pipeIdx !== -1 ? compact.slice(pipeIdx + 1) : '';
+  const cmdPart = pipeIdx !== -1 ? compact.slice(0, pipeIdx) : compact;
   const imgStyle = 'height:22px;vertical-align:middle;margin:0 1px';
   const keyStyle = 'height:18px;vertical-align:middle;margin:0 1px';
   const smStyle  = 'height:14px;vertical-align:middle;margin:0 2px';
@@ -1143,12 +1147,14 @@ function renderModernCmd(compact){
             : name.startsWith('key-') ? keyStyle : imgStyle;
     return `<img src="${_SF6CTRL}/${name}.png" referrerpolicy="no-referrer" style="${h}">`;
   }
-  const segments = compact.split('>');
+  const segments = cmdPart.split('>');
   const rendered = segments.map(seg => {
     const tokens = seg.split(',');
     return tokens.map(img).join(img('key-plus'));
   });
-  return '<span style="white-space:nowrap">' + rendered.join(img('arrow_3')) + '</span>';
+  const icons = '<span style="white-space:nowrap">' + rendered.join(img('arrow_3')) + '</span>';
+  if(!label) return icons;
+  return icons + `<span style="font-size:11px;color:var(--muted,#888);margin-left:4px;vertical-align:middle">${esc(label)}</span>`;
 }
 
 /* -------- モーダル & 技ピッカー（フレーム表の技からレシピを作る） -------- */
