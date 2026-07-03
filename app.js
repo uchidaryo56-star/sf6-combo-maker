@@ -139,7 +139,7 @@ function updateCharBanner(charId){
   const imgEl  = document.getElementById("bannerImg");
   if(!nameEl) return;
   if(meta){
-    if(imgEl) imgEl.src = `${SF6_IMG_BASE}/${charId}/bg_${charId}.jpg`;
+    if(imgEl) imgEl.src = `${SF6_IMG_BASE}/${charId}/${charId}.png`;
     nameEl.textContent = meta.en;
     document.documentElement.style.setProperty("--char-color", meta.color);
   } else {
