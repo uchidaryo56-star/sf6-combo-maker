@@ -130,7 +130,7 @@ const charMeta = {
   terry:   { en:"TERRY",   color:"#e84018", imgStyle:"left:35%;top:-50%;height:500%;width:auto;display:block" },
   zangief: { en:"ZANGIEF", color:"#c01c1c", imgStyle:"left:10%;top:-30%;height:500%;width:auto;display:block" },
   ed:      { en:"ED",      color:"#2838d4", imgStyle:"left:16%;top:-68%;height:500%;width:auto;display:block" },
-  ingrid:  { en:"INGRID",  color:"#d4980a", imgStyle:"left:0%;top:-350%;height:900%;width:auto;display:block" },
+  ingrid:  { en:"INGRID",  color:"#d4980a", imgStyle:"left:0%;top:-485%;height:900%;width:auto;display:block" },
 };
 const SF6_IMG_BASE = "https://www.streetfighter.com/6/assets/images/character";
 function updateCharBanner(charId){
