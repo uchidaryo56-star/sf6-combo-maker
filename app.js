@@ -165,6 +165,7 @@ document.querySelectorAll(".tab").forEach(t=>{
     document.getElementById("view-"+t.dataset.view).classList.add("active");
     currentView = t.dataset.view;
     updateCharselVisibility(t.dataset.view);
+    updateCharBanner(currentChar);
     const prevChar = currentChar;
     initChars();
     if(currentChar !== prevChar) renderAll();
