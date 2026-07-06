@@ -8,15 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0018; --panel:#130030; --panel2:#1d025a; --line:#4311a9;
-    --text:#f0eaff; --muted:#9e8fcf; --accent:#9e59f1; --accent2:#c084fc;
+    --bg:#0e0230; --panel:#1a0848; --panel2:#270a6e; --line:#5a20c0;
+    --text:#f4efff; --muted:#b8a8e8; --accent:#b06af4; --accent2:#d4a0ff;
     --good:#28c47a; --warn:#e8a820; --bad:#e03c3c; --radius:4px;
     --char-color:#9e59f1;
-    --th-bg:#4c088c; --row-odd:#210564; --row-even:#1d025a; --row-cat:#1d025a;
-    --line-subtle:rgba(67,17,169,0.5);
+    --th-bg:#5c0ca8; --row-odd:#2d0e7a; --row-even:#230862; --row-cat:#230862;
+    --line-subtle:rgba(90,32,192,0.5);
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:"Noto Sans JP","Segoe UI",system-ui,sans-serif;background:var(--bg);background-image:radial-gradient(ellipse at 50% 0%,rgba(76,8,140,.25) 0%,transparent 60%);color:var(--text);line-height:1.6;font-size:16px}
+  body{margin:0;font-family:"Noto Sans JP","Segoe UI",system-ui,sans-serif;background:var(--bg);background-image:radial-gradient(ellipse at 50% 0%,rgba(100,20,180,.35) 0%,transparent 55%);color:var(--text);line-height:1.6;font-size:16px}
 
   /* ===== HEADER ===== */
   header{
@@ -191,10 +191,10 @@
   /* ===== TABLE ===== */
   table{width:100%;border-collapse:collapse;font-size:15px}
   th,td{padding:9px 10px;text-align:left;border-bottom:1px solid rgba(67,17,169,.4)}
-  th{color:#fff;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;background:var(--th-bg);border-bottom:2px solid rgba(67,17,169,.8);font-family:"Oswald","Noto Sans JP",sans-serif}
+  th{color:#fff;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;background:var(--th-bg);border-bottom:2px solid rgba(90,32,192,.9);font-family:"Oswald","Noto Sans JP",sans-serif}
   tbody tr:nth-child(odd) td{background:var(--row-odd)}
   tbody tr:nth-child(even) td{background:var(--row-even)}
-  tbody tr:hover td{background:rgba(76,8,140,.6)!important}
+  tbody tr:hover td{background:rgba(90,32,192,.55)!important}
   td.pos{color:var(--good);font-weight:700}
   td.neg{color:var(--bad);font-weight:700}
   td.zero{color:var(--muted)}
@@ -227,7 +227,7 @@
   /* ===== FRAME TABLE ===== */
   .panel-box.wide{width:96vw;margin-left:calc(50% - 48vw);max-width:96vw}
   #frameTable{border-collapse:collapse}
-  #frameTable th,#frameTable td{padding:7px 10px;font-size:13px;border-right:1px solid rgba(67,17,169,.3)}
+  #frameTable th,#frameTable td{padding:7px 10px;font-size:13px;border-right:1px solid rgba(90,32,192,.4)}
   #frameTable th:last-child,#frameTable td:last-child{border-right:none}
   #frameTable td:nth-child(2){font-size:13px;white-space:normal;min-width:130px;max-width:190px;line-height:1.4}
   #frameTable td:nth-child(3){font-size:13px;white-space:normal;min-width:80px;max-width:160px;cursor:pointer;color:var(--accent2)}
@@ -330,7 +330,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.64</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.65</span></h1>
 </header>
 
 <div class="tabs">
@@ -498,9 +498,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.64"></script>
-<script src="glossary.js?v=1.25.64"></script>
-<script src="guide.js?v=1.25.64"></script>
-<script src="app.js?v=1.25.64"></script>
+<script src="data.js?v=1.25.65"></script>
+<script src="glossary.js?v=1.25.65"></script>
+<script src="guide.js?v=1.25.65"></script>
+<script src="app.js?v=1.25.65"></script>
 </body>
 </html>
