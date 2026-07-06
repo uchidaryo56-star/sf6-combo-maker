@@ -387,10 +387,13 @@ function renderFrames(){
   const m = "color:var(--muted);font-size:14px";
   const modernCmds = ns("frameModernCmd");
   if(!data.length){ tb.innerHTML = `<tr><td colspan="18" class="empty">該当する技がありません</td></tr>`; renderPunish(); return; }
+  let lastType = null;
   tb.innerHTML = data.map(f=>{
     const fi = orig.indexOf(f);
     const modCmd = modernCmds[fi] || f.commandModern || "";
-    return `<tr data-fi="${fi}">
+    let catRow = "";
+    if(f.type !== lastType){ lastType = f.type; catRow = `<tr class="frame-cat-row"><td colspan="18">${esc(f.type)}</td></tr>`; }
+    return catRow + `<tr data-fi="${fi}">
     <td>${esc(f.move)}</td>
     <td style="font-family:Consolas,monospace">${fmtCommand(f.command)}</td>
     <td class="modern-cmd-cell" data-fi="${fi}" title="クリックしてモダン入力を編集">${renderModernCmd(modCmd)}</td>
