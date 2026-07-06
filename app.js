@@ -131,6 +131,7 @@ const charMeta = {
   zangief: { en:"ZANGIEF", color:"#c01c1c", imgStyle:"left:30%;top:-65%;height:500%;width:auto;display:block" },
   ed:      { en:"ED",      color:"#2838d4", imgStyle:"left:21%;top:-83%;height:600%;width:auto;display:block" },
   ingrid:  { en:"INGRID",  color:"#d4980a", imgStyle:"left:20%;top:-238%;height:600%;width:auto;display:block" },
+  cviper:  { en:"C.VIPER", color:"#5b6cd2", imgStyle:"left:25%;top:-50%;height:600%;width:auto;display:block" },
 };
 const SF6_IMG_BASE = "https://www.streetfighter.com/6/assets/images/character";
 function updateCharBanner(charId){
