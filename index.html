@@ -8,11 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#180050; --panel:#280080; --panel2:#320098; --line:#6a35d0;
+    --bg:#1c0060; --panel:#2e0090; --panel2:#3c0ab0; --line:#7040e0;
     --text:#ffffff; --muted:#c0aef0; --accent:#c080ff; --accent2:#e0b0ff;
     --good:#28c47a; --warn:#e8a820; --bad:#e03c3c; --radius:4px;
     --char-color:#9e59f1;
-    --th-bg:#6a10c8; --row-odd:#380d95; --row-even:#2c0875; --row-cat:#2c0875;
+    --th-bg:#5800b0; --row-odd:#420fa8; --row-even:#340888; --row-cat:#340888;
     --line-subtle:rgba(106,53,208,0.6);
   }
   *{box-sizing:border-box}
@@ -189,7 +189,7 @@
   .stars{display:flex;gap:2px;color:var(--warn);font-size:14px}
 
   /* ===== TABLE ===== */
-  table{width:100%;border-collapse:collapse;font-size:15px}
+  table{width:100%;border-collapse:collapse;font-size:15px;letter-spacing:.2px}
   th,td{padding:9px 10px;text-align:left;border-bottom:1px solid rgba(67,17,169,.4)}
   th{color:#fff;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;background:var(--th-bg);border-bottom:2px solid rgba(90,32,192,.9);font-family:"Oswald","Noto Sans JP",sans-serif}
   tbody tr:nth-child(odd) td{background:var(--row-odd)}
@@ -227,7 +227,7 @@
   /* ===== FRAME TABLE ===== */
   .panel-box.wide{width:96vw;margin-left:calc(50% - 48vw);max-width:96vw}
   #frameTable{border-collapse:collapse}
-  #frameTable th,#frameTable td{padding:7px 10px;font-size:13px;border-right:1px solid rgba(90,32,192,.4)}
+  #frameTable th,#frameTable td{padding:8px 12px;font-size:14px;border-right:1px solid rgba(90,32,192,.4)}
   #frameTable th:last-child,#frameTable td:last-child{border-right:none}
   #frameTable td:nth-child(2){font-size:13px;white-space:normal;min-width:130px;max-width:190px;line-height:1.4}
   #frameTable td:nth-child(3){font-size:13px;white-space:normal;min-width:80px;max-width:160px;cursor:pointer;color:var(--accent2)}
@@ -330,7 +330,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.66</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.67</span></h1>
 </header>
 
 <div class="tabs">
@@ -498,9 +498,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.66"></script>
-<script src="glossary.js?v=1.25.66"></script>
-<script src="guide.js?v=1.25.66"></script>
-<script src="app.js?v=1.25.66"></script>
+<script src="data.js?v=1.25.67"></script>
+<script src="glossary.js?v=1.25.67"></script>
+<script src="guide.js?v=1.25.67"></script>
+<script src="app.js?v=1.25.67"></script>
 </body>
 </html>
