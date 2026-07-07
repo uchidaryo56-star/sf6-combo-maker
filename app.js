@@ -447,11 +447,55 @@ function renderFrames(){
   renderPunish();
 }
 function cls(n){ if(typeof n!=="number") return "zero"; return n>0?"pos":(n<0?"neg":"zero"); }
-// コマンド表記：「（条件）本体」の形なら条件と本体の間で改行し、横に伸びすぎず自然な位置で折り返す
+// コマンド表記: 方向数字をSF6公式アイコン化、ボタンを色付きスパン化
 function fmtCommand(cmd){
   if(!cmd) return "-";
-  const e = esc(cmd);
-  return e.replace(/）\s*/, "）<br>");
+  const CTR = _SF6CTRL;
+  const ds = 'height:18px;vertical-align:middle;margin:0 0px';
+  const ps = 'height:13px;vertical-align:middle;margin:0 1px';
+  const bs = 'display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;color:#fff;font-size:9px;font-weight:900;vertical-align:middle;margin:0 1px;flex-shrink:0';
+  function di(k){ return `<img src="${CTR}/${k}.png" referrerpolicy="no-referrer" style="${ds}">`; }
+  function pi(k){ return `<img src="${CTR}/${k}.png" referrerpolicy="no-referrer" style="${ps}">`; }
+  function b(lbl,bg){ return `<span style="${bs};background:${bg}">${lbl}</span>`; }
+  const D={'1':'key-dl','2':'key-d','3':'key-dr','4':'key-l','6':'key-r','7':'key-ul','8':'key-u','9':'key-ur'};
+  const LP=b('弱','#1e6fe0'),MP=b('中','#c08800'),HP=b('強','#cc2030');
+  const LK=b('弱','#1a9640'),MK=b('中','#bb5510'),HK=b('強','#7030aa');
+  const pl=pi('key-plus');
+  const BTNS=[['PPP',LP+pl+MP+pl+HP],['KKK',LK+pl+MK+pl+HK],
+              ['PP',LP+pl+HP],['KK',LK+pl+HK],
+              ['弱P',LP],['中P',MP],['強P',HP],['弱K',LK],['中K',MK],['強K',HK],
+              ['P',b('P','#4488ff')],['K',b('K','#2a9955')]];
+  function renderSeg(s){
+    let out='',i=0;
+    while(i<s.length){
+      if(s[i]==='['){const e2=s.indexOf(']',i+1);if(e2!==-1){out+=`<span style="font-size:9px;opacity:.55">[</span>`;[...s.slice(i+1,e2)].forEach(c=>{if(D[c])out+=di(D[c]);});out+=`<span style="font-size:9px;opacity:.55">]</span>`;i=e2+1;continue;}}
+      if(s.slice(i,i+3)==='720'){out+=`<span style="font-size:11px;font-weight:800;vertical-align:middle;margin:0 1px">720°</span>`;i+=3;continue;}
+      if(s.slice(i,i+3)==='360'){out+=`<span style="font-size:11px;font-weight:800;vertical-align:middle;margin:0 1px">360°</span>`;i+=3;continue;}
+      if(D[s[i]]){while(i<s.length&&D[s[i]]){out+=di(D[s[i]]);i++;}continue;}
+      if(s[i]==='+'){out+=pl;i++;continue;}
+      if(s[i]==='/'||s[i]==='／'){out+=`<span style="font-size:10px;opacity:.6;margin:0 2px;vertical-align:middle">/</span>`;i++;continue;}
+      let bm=false;
+      for(const [n,h] of BTNS){if(s.startsWith(n,i)){out+=h;i+=n.length;bm=true;break;}}
+      if(bm)continue;
+      if(s.startsWith('ホールド',i)){out+=`<span style="font-size:9px;opacity:.7;vertical-align:middle">ホールド</span>`;i+=4;continue;}
+      out+=esc(s[i]);i++;
+    }
+    return out;
+  }
+  // 条件（...）とコマンド本体を分離して表示
+  const toks=cmd.split(/(（[^）]+）)/);
+  let out='',condHtml='';
+  for(const t of toks){
+    if(!t)continue;
+    if(t.startsWith('（')&&t.endsWith('）')){
+      condHtml+=`<span style="font-size:9px;color:var(--muted,#888);white-space:normal">${esc(t)}</span>`;
+    } else {
+      if(condHtml){out+=condHtml+'<br>';condHtml='';}
+      out+=`<span style="white-space:nowrap">${renderSeg(t.trim())}</span>`;
+    }
+  }
+  if(condHtml)out+=condHtml;
+  return out||'-';
 }
 function fmt(n){ if(n==null||n==="") return "-"; if(typeof n!=="number") return esc(n); return n>0?("+"+n):(""+n); }
 
