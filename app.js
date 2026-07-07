@@ -451,23 +451,23 @@ function cls(n){ if(typeof n!=="number") return "zero"; return n>0?"pos":(n<0?"n
 function fmtCommand(cmd){
   if(!cmd) return "-";
   const CTR = _SF6CTRL;
-  const ds = 'height:18px;vertical-align:middle;margin:0 0px';
+  const ds = 'height:18px;vertical-align:middle;margin:0 1px';
+  const bs = 'height:20px;vertical-align:middle;margin:0 1px';
   const ps = 'height:13px;vertical-align:middle;margin:0 1px';
   function di(k){ return `<img src="${CTR}/${k}.png" referrerpolicy="no-referrer" style="${ds}">`; }
+  function bi(k){ return `<img src="${CTR}/${k}.png" referrerpolicy="no-referrer" style="${bs}">`; }
   function pi(k){ return `<img src="${CTR}/${k}.png" referrerpolicy="no-referrer" style="${ps}">`; }
-  const bs = 'display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;color:#fff;font-size:9px;font-weight:900;vertical-align:middle;margin:0 1px;flex-shrink:0';
-  function b(lbl,bg){ return `<span style="${bs};background:${bg}">${lbl}</span>`; }
-  const D={'1':'key-dl','2':'key-d','3':'key-dr','4':'key-l','6':'key-r','7':'key-ul','8':'key-u','9':'key-ur'};
-  const LP=b('弱','#1e6fe0'),MP=b('中','#c08800'),HP=b('強','#cc2030');
-  const LK=b('弱','#1a9640'),MK=b('中','#bb5510'),HK=b('強','#7030aa');
-  // OD同時押し：公式CDN key-all.png を使用（SF6公式ボタンアイコン）
-  const allBtn=di('key-all');
+  // 公式SF6フレームデータと同じCDN画像を使用
+  const D={'1':'key-dl','2':'key-d','3':'key-dr','4':'key-l','5':'key-nutral','6':'key-r','7':'key-ul','8':'key-u','9':'key-ur'};
+  const LP=bi('icon_punch_l'),MP=bi('icon_punch_m'),HP=bi('icon_punch_h');
+  const LK=bi('icon_kick_l'),MK=bi('icon_kick_m'),HK=bi('icon_kick_h');
+  const gP=bi('icon_punch'),gK=bi('icon_kick');
   const pl=pi('key-plus');
-  // 同時押し（OD）はボタンを隣接表示のみ（+なし）
-  const BTNS=[['PPP',allBtn+allBtn+allBtn],['KKK',allBtn+allBtn+allBtn],
-              ['PP',allBtn+allBtn],['KK',allBtn+allBtn],
+  // OD同時押し：公式と同じ icon_punch.png×2 / icon_kick.png×2
+  const BTNS=[['PPP',gP+gP+gP],['KKK',gK+gK+gK],
+              ['PP',gP+gP],['KK',gK+gK],
               ['弱P',LP],['中P',MP],['強P',HP],['弱K',LK],['中K',MK],['強K',HK],
-              ['P',b('P','#4488ff')],['K',b('K','#2a9955')]];
+              ['P',gP],['K',gK]];
   function renderSeg(s){
     let out='',i=0;
     while(i<s.length){
