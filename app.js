@@ -1192,23 +1192,21 @@ function renderModernCmd(compact){
   const pipeIdx = compact.indexOf('|');
   const label = pipeIdx !== -1 ? compact.slice(pipeIdx + 1) : '';
   const cmdPart = pipeIdx !== -1 ? compact.slice(0, pipeIdx) : compact;
-  const imgStyle = 'height:22px;vertical-align:middle;margin:0 1px';
-  const keyStyle = 'height:18px;vertical-align:middle;margin:0 1px';
-  const smStyle  = 'height:14px;vertical-align:middle;margin:0 2px';
+  const imgStyle = 'height:18px;vertical-align:middle;margin:0 1px';
+  const keyStyle = 'height:14px;vertical-align:middle;margin:0 1px';
+  const smStyle  = 'height:10px;vertical-align:middle;margin:0 1px';
   function img(name){
     const h = (name==='key-plus'||name==='key-or'||name==='arrow_3') ? smStyle
             : name.startsWith('key-') ? keyStyle : imgStyle;
     return `<img src="${_SF6CTRL}/${name}.png" referrerpolicy="no-referrer" style="${h}">`;
   }
   const segments = cmdPart.split('>');
-  // セグメントごとに1行（nowrap）、区切り arrow_3 は次の行先頭に付ける
-  const lines = segments.map((seg, i) => {
+  // セグメント内はnowrap、セグメント間（>）でのみ折り返し可能
+  const rendered = segments.map(seg => {
     const tokens = seg.split(',');
-    const icons = tokens.map(img).join(img('key-plus'));
-    const prefix = i > 0 ? img('arrow_3') : '';
-    return `<span style="display:inline-flex;align-items:center;white-space:nowrap">${prefix}${icons}</span>`;
+    return `<span style="display:inline-flex;align-items:center;white-space:nowrap">${tokens.map(img).join(img('key-plus'))}</span>`;
   });
-  const iconsHtml = `<span style="display:flex;flex-direction:column;align-items:flex-start;gap:1px;width:100%">${lines.join('')}</span>`;
+  const iconsHtml = `<span style="display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;width:100%">${rendered.join(img('arrow_3'))}</span>`;
   if(!label) return iconsHtml;
   return iconsHtml + `<span style="font-size:11px;color:var(--muted,#888);margin-top:2px;display:inline-block">${esc(label)}</span>`;
 }
