@@ -118,6 +118,9 @@
   .modal-box h3{margin-top:0;color:var(--text);font-family:"Oswald","Noto Sans JP",sans-serif;letter-spacing:.5px;font-size:18px}
   .move-picker{max-height:400px;overflow:auto;padding:12px;background:var(--row-even);border:1px solid var(--line);border-radius:3px;margin:6px 0}
   .move-picker .chip{padding:8px 14px;font-size:14px;margin:0;color:var(--text)}
+  .picker-chip{display:inline-flex;flex-direction:column;align-items:flex-start;gap:4px}
+  .picker-chip-name{display:block;font-size:13px;font-weight:600}
+  .picker-chip-cmd{display:flex;flex-wrap:wrap;align-items:center;gap:1px 0;font-size:11px;opacity:.85;max-width:180px}
   .move-picker .chip:hover{background:rgba(76,8,140,.6);border-color:var(--accent)}
   .move-group{padding:10px 0}
   .move-group + .move-group{border-top:1px solid rgba(67,17,169,.4)}
@@ -330,7 +333,7 @@
 </head>
 <body>
 <header>
-  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.78</span></h1>
+  <h1><span class="mark">スト6</span>コンボメーカー <span class="ver">v1.25.79</span></h1>
 </header>
 
 <div class="tabs">
@@ -498,9 +501,9 @@
 </div>
 
 <!-- ?v=… はキャッシュ対策。更新時はこの番号とヘッダーのvX.Y.Zを上げると確実に最新が配信されます -->
-<script src="data.js?v=1.25.78"></script>
-<script src="glossary.js?v=1.25.78"></script>
-<script src="guide.js?v=1.25.78"></script>
-<script src="app.js?v=1.25.78"></script>
+<script src="data.js?v=1.25.79"></script>
+<script src="glossary.js?v=1.25.79"></script>
+<script src="guide.js?v=1.25.79"></script>
+<script src="app.js?v=1.25.79"></script>
 </body>
 </html>

@@ -1292,10 +1292,13 @@ function attachMovePicker(box, targetId, sep){
         <div class="move-group-chips">
           ${items.map(f=>{
             const modCmd = getModernCmd(f);
-            const dispCmd = modernMode ? (modCmd || `<span style="opacity:.4">未登録</span>`) : (showCmd&&f.command?esc(f.command):"");
+            const dispHtml = modernMode
+              ? (modCmd ? renderModernCmd(modCmd) : `<span style="opacity:.4">未登録</span>`)
+              : (showCmd && f.command ? fmtCommand(f.command) : "");
             const rawCmd = modernMode ? (modCmd||"") : (showCmd?(f.command||""):"");
-            return `<span class="chip" data-mv="${esc(f.move)}" data-cmd="${esc(rawCmd)}" data-fi="${f._fi}">
-              ${esc(f.move)}${(modernMode?modCmd:(showCmd&&f.command))?` <span style="opacity:.85">（${dispCmd}）</span>`:""}
+            return `<span class="chip picker-chip" data-mv="${esc(f.move)}" data-cmd="${esc(rawCmd)}" data-fi="${f._fi}">
+              <span class="picker-chip-name">${esc(f.move)}</span>
+              ${dispHtml ? `<span class="picker-chip-cmd">${dispHtml}</span>` : ""}
             </span>`;
           }).join("")}
         </div>
