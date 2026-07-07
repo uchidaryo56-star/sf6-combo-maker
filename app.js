@@ -1201,13 +1201,16 @@ function renderModernCmd(compact){
     return `<img src="${_SF6CTRL}/${name}.png" referrerpolicy="no-referrer" style="${h}">`;
   }
   const segments = cmdPart.split('>');
-  const rendered = segments.map(seg => {
+  // セグメントごとに1行（nowrap）、区切り arrow_3 は次の行先頭に付ける
+  const lines = segments.map((seg, i) => {
     const tokens = seg.split(',');
-    return `<span style="display:inline-flex;align-items:center;flex-wrap:wrap">${tokens.map(img).join(img('key-plus'))}</span>`;
+    const icons = tokens.map(img).join(img('key-plus'));
+    const prefix = i > 0 ? img('arrow_3') : '';
+    return `<span style="display:inline-flex;align-items:center;white-space:nowrap">${prefix}${icons}</span>`;
   });
-  const icons = `<span style="display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;width:100%">${rendered.join(img('arrow_3'))}</span>`;
-  if(!label) return icons;
-  return icons + `<br><span style="font-size:11px;color:var(--muted,#888);margin-top:2px;display:inline-block">${esc(label)}</span>`;
+  const iconsHtml = `<span style="display:flex;flex-direction:column;align-items:flex-start;gap:1px;width:100%">${lines.join('')}</span>`;
+  if(!label) return iconsHtml;
+  return iconsHtml + `<span style="font-size:11px;color:var(--muted,#888);margin-top:2px;display:inline-block">${esc(label)}</span>`;
 }
 
 /* -------- モーダル & 技ピッカー（フレーム表の技からレシピを作る） -------- */
