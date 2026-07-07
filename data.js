@@ -8099,7 +8099,7 @@ const SF6_DATA = {
           {
                 "move": "OD ダブルラリアット",
                 "type": "必殺技",
-                "command": "弱P 中P 強P",
+                "command": "PPP",
                 "commandModern": "modern_auto,modern_sp,key-all,key-all",
                 "startup": 12,
                 "active": "12-3612-13, 16-17, 21-22, 29-30, 35-36",
@@ -8119,7 +8119,7 @@ const SF6_DATA = {
           {
                 "move": "弱 スクリューパイルドライバー",
                 "type": "必殺技",
-                "command": "（近距離で）+弱P",
+                "command": "（近距離で）360+弱P",
                 "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_l|弱・近距離",
                 "startup": 5,
                 "active": "5-7",
@@ -8139,7 +8139,7 @@ const SF6_DATA = {
           {
                 "move": "中 スクリューパイルドライバー",
                 "type": "必殺技",
-                "command": "（近距離で）+中P",
+                "command": "（近距離で）360+中P",
                 "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_m|中・近距離",
                 "startup": 5,
                 "active": "5-7",
@@ -8159,7 +8159,7 @@ const SF6_DATA = {
           {
                 "move": "強 スクリューパイルドライバー",
                 "type": "必殺技",
-                "command": "（近距離で）+強P",
+                "command": "（近距離で）360+強P",
                 "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_h|強・近距離",
                 "startup": 5,
                 "active": "5-7",
@@ -8179,7 +8179,7 @@ const SF6_DATA = {
           {
                 "move": "OD スクリューパイルドライバー",
                 "type": "必殺技",
-                "command": "（近距離で）+PP",
+                "command": "（近距離で）360+PP",
                 "commandModern": "modern_auto,modern_sp,key-l,key-dl,key-d,key-dr,key-r,key-all,key-all|近距離",
                 "startup": 5,
                 "active": "5-7",
@@ -8199,7 +8199,7 @@ const SF6_DATA = {
           {
                 "move": "ボルシチダイナマイト",
                 "type": "必殺技",
-                "command": "（ジャンプ中に）（近距離で）+K",
+                "command": "（ジャンプ中に）（近距離で）360+K",
                 "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_sp|ジャンプ中に近距離",
                 "startup": 4,
                 "active": "4-6",
@@ -8219,7 +8219,7 @@ const SF6_DATA = {
           {
                 "move": "OD ボルシチダイナマイト",
                 "type": "必殺技",
-                "command": "（ジャンプ中に）（近距離で）+KK",
+                "command": "（ジャンプ中に）（近距離で）360+KK",
                 "commandModern": "modern_auto,modern_sp,key-l,key-dl,key-d,key-dr,key-r,key-all,key-all|ジャンプ中に近距離",
                 "startup": 4,
                 "active": "4-6",
@@ -8459,7 +8459,7 @@ const SF6_DATA = {
           {
                 "move": "SA3 ボリショイストームバスター",
                 "type": "スーパーアーツ",
-                "command": "（近距離で）+P",
+                "command": "（近距離で）720+P",
                 "commandModern": "key-l,key-dl,key-d,key-dr,key-r,key-l,key-dl,key-d,key-dr,key-r,modern_h|近距離で強",
                 "startup": "6+0",
                 "active": "6-7",
@@ -8479,7 +8479,7 @@ const SF6_DATA = {
           {
                 "move": "CA ボリショイストームバスター",
                 "type": "スーパーアーツ",
-                "command": "（近距離で）（体力25%以下で）+P",
+                "command": "（近距離で）（体力25%以下で）720+P",
                 "commandModern": "key-l,key-dl,key-d,key-dr,key-r,key-l,key-dl,key-d,key-dr,key-r,modern_h|体力25%以下で近距離で強",
                 "startup": "6+0",
                 "active": "6-7",

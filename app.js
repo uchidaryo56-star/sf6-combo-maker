@@ -1154,11 +1154,11 @@ function renderModernCmd(compact){
   const segments = cmdPart.split('>');
   const rendered = segments.map(seg => {
     const tokens = seg.split(',');
-    return tokens.map(img).join(img('key-plus'));
+    return `<span style="white-space:nowrap;display:inline-block">${tokens.map(img).join(img('key-plus'))}</span>`;
   });
-  const icons = '<span style="white-space:nowrap">' + rendered.join(img('arrow_3')) + '</span>';
+  const icons = `<span style="display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;width:100%">${rendered.join(img('arrow_3'))}</span>`;
   if(!label) return icons;
-  return icons + `<span style="font-size:11px;color:var(--muted,#888);margin-left:4px;vertical-align:middle">${esc(label)}</span>`;
+  return icons + `<br><span style="font-size:11px;color:var(--muted,#888);margin-top:2px;display:inline-block">${esc(label)}</span>`;
 }
 
 /* -------- モーダル & 技ピッカー（フレーム表の技からレシピを作る） -------- */
