@@ -484,19 +484,21 @@ function fmtCommand(cmd){
     return out;
   }
   // 条件（...）とコマンド本体を分離して表示
+  // 外側をflex-wrap:wrapにしてセル幅内で折り返す
   const toks=cmd.split(/(（[^）]+）)/);
-  let out='',condHtml='';
+  let rows=[], condBuf='';
   for(const t of toks){
     if(!t)continue;
     if(t.startsWith('（')&&t.endsWith('）')){
-      condHtml+=`<span style="font-size:9px;color:var(--muted,#888);white-space:normal">${esc(t)}</span>`;
+      condBuf+=`<span style="font-size:9px;color:var(--muted,#888)">${esc(t)}</span>`;
     } else {
-      if(condHtml){out+=condHtml+'<br>';condHtml='';}
-      out+=`<span style="white-space:nowrap">${renderSeg(t.trim())}</span>`;
+      const seg=`<span style="display:inline-flex;align-items:center;white-space:nowrap;flex-wrap:nowrap">${renderSeg(t.trim())}</span>`;
+      if(condBuf){ rows.push(condBuf+'<br>'+seg); condBuf=''; }
+      else rows.push(seg);
     }
   }
-  if(condHtml)out+=condHtml;
-  return out||'-';
+  if(condBuf)rows.push(condBuf);
+  return `<span style="display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;width:100%">${rows.join('')}</span>`||'-';
 }
 function fmt(n){ if(n==null||n==="") return "-"; if(typeof n!=="number") return esc(n); return n>0?("+"+n):(""+n); }
 
