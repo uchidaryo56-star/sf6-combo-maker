@@ -1192,9 +1192,9 @@ function renderModernCmd(compact){
   const pipeIdx = compact.indexOf('|');
   const label = pipeIdx !== -1 ? compact.slice(pipeIdx + 1) : '';
   const cmdPart = pipeIdx !== -1 ? compact.slice(0, pipeIdx) : compact;
-  const imgStyle = 'height:22px;vertical-align:middle;margin:0 1px';
-  const keyStyle = 'height:18px;vertical-align:middle;margin:0 1px';
-  const smStyle  = 'height:14px;vertical-align:middle;margin:0 2px';
+  const imgStyle = 'height:20px;vertical-align:middle;margin:0 1px';
+  const keyStyle = 'height:16px;vertical-align:middle;margin:0 1px';
+  const smStyle  = 'height:12px;vertical-align:middle;margin:0 1px';
   function img(name){
     const h = (name==='key-plus'||name==='key-or'||name==='arrow_3') ? smStyle
             : name.startsWith('key-') ? keyStyle : imgStyle;
@@ -1203,7 +1203,7 @@ function renderModernCmd(compact){
   const segments = cmdPart.split('>');
   const rendered = segments.map(seg => {
     const tokens = seg.split(',');
-    return `<span style="white-space:nowrap;display:inline-block">${tokens.map(img).join(img('key-plus'))}</span>`;
+    return `<span style="display:inline-flex;align-items:center;flex-wrap:wrap">${tokens.map(img).join(img('key-plus'))}</span>`;
   });
   const icons = `<span style="display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;width:100%">${rendered.join(img('arrow_3'))}</span>`;
   if(!label) return icons;
