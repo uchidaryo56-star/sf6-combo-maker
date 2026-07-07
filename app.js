@@ -1192,9 +1192,9 @@ function renderModernCmd(compact){
   const pipeIdx = compact.indexOf('|');
   const label = pipeIdx !== -1 ? compact.slice(pipeIdx + 1) : '';
   const cmdPart = pipeIdx !== -1 ? compact.slice(0, pipeIdx) : compact;
-  const imgStyle = 'height:20px;vertical-align:middle;margin:0 1px';
-  const keyStyle = 'height:16px;vertical-align:middle;margin:0 1px';
-  const smStyle  = 'height:12px;vertical-align:middle;margin:0 1px';
+  const imgStyle = 'height:22px;vertical-align:middle;margin:0 1px';
+  const keyStyle = 'height:18px;vertical-align:middle;margin:0 1px';
+  const smStyle  = 'height:14px;vertical-align:middle;margin:0 2px';
   function img(name){
     const h = (name==='key-plus'||name==='key-or'||name==='arrow_3') ? smStyle
             : name.startsWith('key-') ? keyStyle : imgStyle;
