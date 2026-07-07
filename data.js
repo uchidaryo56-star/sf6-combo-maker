@@ -710,7 +710,7 @@ const SF6_DATA = {
         "move": "弱 トリグラフ",
         "type": "必殺技",
         "command": "22+弱P",
-        "commandModern": "key-d,key-d,modern_l|弱"
+        "commandModern": "key-d,key-d,modern_l|弱",
         "startup": 22,
         "active": "22-31",
         "recovery": "全体 55",
@@ -730,7 +730,7 @@ const SF6_DATA = {
         "move": "中 トリグラフ",
         "type": "必殺技",
         "command": "22+中P",
-        "commandModern": "key-d,key-d,modern_m|中"
+        "commandModern": "key-d,key-d,modern_m|中",
         "startup": 22,
         "active": "22-31",
         "recovery": "全体 55",
@@ -750,7 +750,7 @@ const SF6_DATA = {
         "move": "強 トリグラフ",
         "type": "必殺技",
         "command": "22+強P",
-        "commandModern": "key-d,key-d,modern_h|強"
+        "commandModern": "key-d,key-d,modern_h|強",
         "startup": 22,
         "active": "22-31",
         "recovery": "全体 55",
@@ -770,7 +770,7 @@ const SF6_DATA = {
         "move": "OD 弱 トリグラフ",
         "type": "必殺技",
         "command": "22+弱P中P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all",
         "startup": 20,
         "active": "20-39",
         "recovery": "全体 53",
@@ -790,7 +790,7 @@ const SF6_DATA = {
         "move": "OD 中 トリグラフ",
         "type": "必殺技",
         "command": "22+弱P強P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all",
         "startup": 20,
         "active": "20-39",
         "recovery": "全体 53",
@@ -810,7 +810,7 @@ const SF6_DATA = {
         "move": "OD 強 トリグラフ",
         "type": "必殺技",
         "command": "22+中P強P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all",
         "startup": 20,
         "active": "20-39",
         "recovery": "全体 53",
@@ -830,7 +830,7 @@ const SF6_DATA = {
         "move": "弱 ストリボーグ",
         "type": "必殺技",
         "command": "236+弱P",
-        "commandModern": "key-d,key-dr,key-r,modern_l|弱"
+        "commandModern": "key-d,key-dr,key-r,modern_l|弱",
         "startup": 16,
         "active": "16-21",
         "recovery": "全体 49",
@@ -850,7 +850,7 @@ const SF6_DATA = {
         "move": "中 ストリボーグ",
         "type": "必殺技",
         "command": "236+中P",
-        "commandModern": "key-d,key-dr,key-r,modern_m|中"
+        "commandModern": "key-d,key-dr,key-r,modern_m|中",
         "startup": 20,
         "active": "20-2620-22, 24-26",
         "recovery": "全体 53",
@@ -870,7 +870,7 @@ const SF6_DATA = {
         "move": "強 ストリボーグ",
         "type": "必殺技",
         "command": "236+強P",
-        "commandModern": "key-d,key-dr,key-r,modern_h|強"
+        "commandModern": "key-d,key-dr,key-r,modern_h|強",
         "startup": 28,
         "active": "28-4228-30, 40-42",
         "recovery": "全体 61",
@@ -890,7 +890,7 @@ const SF6_DATA = {
         "move": "OD ストリボーグ",
         "type": "必殺技",
         "command": "236+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all",
         "startup": 19,
         "active": "19-3019-21, 28-30",
         "recovery": "全体 52",
@@ -910,7 +910,7 @@ const SF6_DATA = {
         "move": "弱 ヴィーハト",
         "type": "必殺技",
         "command": "214+弱P",
-        "commandModern": "key-d,key-dl,key-l,modern_l|弱"
+        "commandModern": "key-d,key-dl,key-l,modern_l|弱",
         "startup": 150,
         "active": "150-159",
         "recovery": "全体 50",
@@ -930,7 +930,7 @@ const SF6_DATA = {
         "move": "中 ヴィーハト",
         "type": "必殺技",
         "command": "214+中P",
-        "commandModern": "key-d,key-dl,key-l,modern_m|中"
+        "commandModern": "key-d,key-dl,key-l,modern_m|中",
         "startup": 150,
         "active": "150-159",
         "recovery": "全体 50",
@@ -950,7 +950,7 @@ const SF6_DATA = {
         "move": "強 ヴィーハト",
         "type": "必殺技",
         "command": "214+強P",
-        "commandModern": "key-d,key-dl,key-l,modern_h|強"
+        "commandModern": "key-d,key-dl,key-l,modern_h|強",
         "startup": 150,
         "active": "150-159",
         "recovery": "全体 50",
@@ -970,7 +970,7 @@ const SF6_DATA = {
         "move": "OD 弱 ヴィーハト",
         "type": "必殺技",
         "command": "214+弱P中P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 110,
         "active": "110-149110-119, 140-149",
         "recovery": "全体 40",
@@ -990,7 +990,7 @@ const SF6_DATA = {
         "move": "OD 中 ヴィーハト",
         "type": "必殺技",
         "command": "214+弱P強P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 110,
         "active": "110-149110-119, 140-149",
         "recovery": "全体 40",
@@ -1010,7 +1010,7 @@ const SF6_DATA = {
         "move": "OD 強 ヴィーハト",
         "type": "必殺技",
         "command": "214+中P強P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 110,
         "active": "110-149110-119, 140-149",
         "recovery": "全体 40",
@@ -1030,7 +1030,7 @@ const SF6_DATA = {
         "move": "ヴィーハト・アクノ",
         "type": "必殺技",
         "command": "（ヴィーハト設置中に）214+弱P / 中P",
-        "commandModern": "key-d,key-dl,key-l,modern_l|ヴィーハト設置中に弱中"
+        "commandModern": "key-d,key-dl,key-l,modern_l|ヴィーハト設置中に弱中",
         "startup": null,
         "active": "",
         "recovery": "全体 44",
@@ -1050,7 +1050,7 @@ const SF6_DATA = {
         "move": "ヴィーハト・チェーニ",
         "type": "必殺技",
         "command": "（ヴィーハト設置中に）214+強P",
-        "commandModern": "key-d,key-dl,key-l,modern_h|ヴィーハト設置中に強"
+        "commandModern": "key-d,key-dl,key-l,modern_h|ヴィーハト設置中に強",
         "startup": null,
         "active": "",
         "recovery": "全体 40",
@@ -1070,7 +1070,7 @@ const SF6_DATA = {
         "move": "アムネジア",
         "type": "必殺技",
         "command": "22+K",
-        "commandModern": "key-d,modern_sp"
+        "commandModern": "key-d,modern_sp",
         "startup": 3,
         "active": "3-20",
         "recovery": "35",
@@ -1090,7 +1090,7 @@ const SF6_DATA = {
         "move": "OD アムネジア",
         "type": "必殺技",
         "command": "22+KK",
-        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-d,key-all,key-all",
         "startup": 1,
         "active": "1-20",
         "recovery": "35",
@@ -1110,7 +1110,7 @@ const SF6_DATA = {
         "move": "弱 トルバラン",
         "type": "必殺技",
         "command": "236+弱K",
-        "commandModern": "key-r,modern_l|弱"
+        "commandModern": "key-r,modern_l|弱",
         "startup": 22,
         "active": "",
         "recovery": "全体 50",
@@ -1130,7 +1130,7 @@ const SF6_DATA = {
         "move": "中 トルバラン",
         "type": "必殺技",
         "command": "236+中K",
-        "commandModern": "key-r,modern_m|中"
+        "commandModern": "key-r,modern_m|中",
         "startup": 26,
         "active": "",
         "recovery": "全体 50",
@@ -1150,7 +1150,7 @@ const SF6_DATA = {
         "move": "強 トルバラン",
         "type": "必殺技",
         "command": "236+強K",
-        "commandModern": "key-r,modern_h|強"
+        "commandModern": "key-r,modern_h|強",
         "startup": 26,
         "active": "",
         "recovery": "全体 50",
@@ -1170,7 +1170,7 @@ const SF6_DATA = {
         "move": "OD トルバラン",
         "type": "必殺技",
         "command": "236+KK",
-        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all",
         "startup": 22,
         "active": "",
         "recovery": "全体 50",
@@ -1190,7 +1190,7 @@ const SF6_DATA = {
         "move": "アブニマーチ",
         "type": "必殺技",
         "command": "214+K",
-        "commandModern": "key-l,modern_sp"
+        "commandModern": "key-l,modern_sp",
         "startup": 26,
         "active": "",
         "recovery": "全体 72",
@@ -1210,7 +1210,7 @@ const SF6_DATA = {
         "move": "OD アブニマーチ",
         "type": "必殺技",
         "command": "214+KK",
-        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all",
         "startup": 26,
         "active": "",
         "recovery": "全体 72",
@@ -1230,7 +1230,7 @@ const SF6_DATA = {
         "move": "SA1 チェルノボーグ",
         "type": "スーパーアーツ",
         "command": "236236+P",
-        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_l|強"
+        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_l|強",
         "startup": 8,
         "active": "",
         "recovery": "全体 84",
@@ -1250,7 +1250,7 @@ const SF6_DATA = {
         "move": "SA2 ラヴーシュカ",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
         "startup": 29,
         "active": "",
         "recovery": "全体 13",
@@ -1270,7 +1270,7 @@ const SF6_DATA = {
         "move": "SA3 ザプリェット",
         "type": "スーパーアーツ",
         "command": "236236+K",
-        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_h|強"
+        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_h|強",
         "startup": 18,
         "active": "18-23",
         "recovery": "62",
@@ -1290,7 +1290,7 @@ const SF6_DATA = {
         "move": "CA ザプリェット",
         "type": "スーパーアーツ",
         "command": "（体力25%以下で）236236+K",
-        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_h|体力25%以下で強"
+        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_h|体力25%以下で強",
         "startup": 18,
         "active": "18-23",
         "recovery": "62",
@@ -2092,7 +2092,7 @@ const SF6_DATA = {
         "move": "弱 波動拳",
         "type": "必殺技",
         "command": "236+弱P",
-        "commandModern": "key-d,key-dr,key-r,modern_l|弱"
+        "commandModern": "key-d,key-dr,key-r,modern_l|弱",
         "startup": 16,
         "active": "",
         "recovery": "全体 47",
@@ -2112,7 +2112,7 @@ const SF6_DATA = {
         "move": "中 波動拳",
         "type": "必殺技",
         "command": "236+中P",
-        "commandModern": "key-d,key-dr,key-r,modern_m|中"
+        "commandModern": "key-d,key-dr,key-r,modern_m|中",
         "startup": 14,
         "active": "",
         "recovery": "全体 47",
@@ -2132,7 +2132,7 @@ const SF6_DATA = {
         "move": "強 波動拳",
         "type": "必殺技",
         "command": "236+強P",
-        "commandModern": "key-d,key-dr,key-r,modern_h|強"
+        "commandModern": "key-d,key-dr,key-r,modern_h|強",
         "startup": 12,
         "active": "",
         "recovery": "全体 47",
@@ -2152,7 +2152,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]波動拳",
         "type": "必殺技",
         "command": "236+P",
-        "commandModern": "key-d,key-dr,key-r,modern_sp|電刃錬気中に"
+        "commandModern": "key-d,key-dr,key-r,modern_sp|電刃錬気中に",
         "startup": 12,
         "active": "",
         "recovery": "全体 40",
@@ -2172,7 +2172,7 @@ const SF6_DATA = {
         "move": "OD 波動拳",
         "type": "必殺技",
         "command": "236+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all",
         "startup": 12,
         "active": "",
         "recovery": "全体 40",
@@ -2192,7 +2192,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]OD 波動拳",
         "type": "必殺技",
         "command": "236+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all|電刃錬気中に"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all|電刃錬気中に",
         "startup": 12,
         "active": "",
         "recovery": "全体 38",
@@ -2212,7 +2212,7 @@ const SF6_DATA = {
         "move": "弱 昇龍拳",
         "type": "必殺技",
         "command": "623+弱P",
-        "commandModern": "key-r,key-d,key-dr,modern_l|弱"
+        "commandModern": "key-r,key-d,key-dr,modern_l|弱",
         "startup": 5,
         "active": "5-14",
         "recovery": "21+着地後12",
@@ -2232,7 +2232,7 @@ const SF6_DATA = {
         "move": "中 昇龍拳",
         "type": "必殺技",
         "command": "623+中P",
-        "commandModern": "key-r,key-d,key-dr,modern_m|中"
+        "commandModern": "key-r,key-d,key-dr,modern_m|中",
         "startup": 6,
         "active": "6-15",
         "recovery": "30+着地後12",
@@ -2252,7 +2252,7 @@ const SF6_DATA = {
         "move": "強 昇龍拳",
         "type": "必殺技",
         "command": "623+強P",
-        "commandModern": "key-r,key-d,key-dr,modern_h|強"
+        "commandModern": "key-r,key-d,key-dr,modern_h|強",
         "startup": 7,
         "active": "7-16",
         "recovery": "34+着地後12",
@@ -2272,7 +2272,7 @@ const SF6_DATA = {
         "move": "OD 昇龍拳",
         "type": "必殺技",
         "command": "623+PP",
-        "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all",
         "startup": 6,
         "active": "6-156-7,8-15",
         "recovery": "37+着地後15",
@@ -2292,7 +2292,7 @@ const SF6_DATA = {
         "move": "弱 竜巻旋風脚",
         "type": "必殺技",
         "command": "214+弱K",
-        "commandModern": "key-l,modern_l|弱"
+        "commandModern": "key-l,modern_l|弱",
         "startup": 12,
         "active": "12-14",
         "recovery": "14+着地後18",
@@ -2312,7 +2312,7 @@ const SF6_DATA = {
         "move": "中 竜巻旋風脚",
         "type": "必殺技",
         "command": "214+中K",
-        "commandModern": "key-l,modern_m|中"
+        "commandModern": "key-l,modern_m|中",
         "startup": 14,
         "active": "14-3014-15, 29-30",
         "recovery": "11+着地後20",
@@ -2332,7 +2332,7 @@ const SF6_DATA = {
         "move": "強 竜巻旋風脚",
         "type": "必殺技",
         "command": "214+強K",
-        "commandModern": "key-l,modern_h|強"
+        "commandModern": "key-l,modern_h|強",
         "startup": 16,
         "active": "16-4716-17, 31-32, 46-47",
         "recovery": "14+着地後17",
@@ -2352,7 +2352,7 @@ const SF6_DATA = {
         "move": "OD 竜巻旋風脚",
         "type": "必殺技",
         "command": "214+KK",
-        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all",
         "startup": 13,
         "active": "13-3713-14, 19-20, 25-26, 30-31, 36-37",
         "recovery": "10+着地後13",
@@ -2372,7 +2372,7 @@ const SF6_DATA = {
         "move": "空中竜巻旋風脚",
         "type": "必殺技",
         "command": "（前ジャンプ中に）214+K",
-        "commandModern": "key-l,modern_sp|前ジャンプ中に"
+        "commandModern": "key-l,modern_sp|前ジャンプ中に",
         "startup": 11,
         "active": "11-2711-12,18-19,26-27",
         "recovery": "着地後16",
@@ -2392,7 +2392,7 @@ const SF6_DATA = {
         "move": "OD 空中竜巻旋風脚",
         "type": "必殺技",
         "command": "（前ジャンプ中に）214+KK",
-        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all|前ジャンプ中に"
+        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all|前ジャンプ中に",
         "startup": 11,
         "active": "11-2811-12, 14-16, 18-20, 22-24, 27-28",
         "recovery": "着地後16",
@@ -2412,7 +2412,7 @@ const SF6_DATA = {
         "move": "弱 上段足刀蹴り",
         "type": "必殺技",
         "command": "236+弱K",
-        "commandModern": "key-r,modern_l|弱"
+        "commandModern": "key-r,modern_l|弱",
         "startup": 14,
         "active": "14-19",
         "recovery": "22",
@@ -2432,7 +2432,7 @@ const SF6_DATA = {
         "move": "中 上段足刀蹴り",
         "type": "必殺技",
         "command": "236+中K",
-        "commandModern": "key-r,modern_m|中"
+        "commandModern": "key-r,modern_m|中",
         "startup": 18,
         "active": "18-26",
         "recovery": "19",
@@ -2452,7 +2452,7 @@ const SF6_DATA = {
         "move": "強 上段足刀蹴り",
         "type": "必殺技",
         "command": "236+強K",
-        "commandModern": "key-r,modern_h|強"
+        "commandModern": "key-r,modern_h|強",
         "startup": 27,
         "active": "27-35",
         "recovery": "15",
@@ -2472,7 +2472,7 @@ const SF6_DATA = {
         "move": "OD 上段足刀蹴り",
         "type": "必殺技",
         "command": "236+KK",
-        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all",
         "startup": 17,
         "active": "17-21",
         "recovery": "33",
@@ -2492,7 +2492,7 @@ const SF6_DATA = {
         "move": "弱 波掌撃",
         "type": "必殺技",
         "command": "214+弱P",
-        "commandModern": "key-d,key-dl,key-l,modern_l|弱"
+        "commandModern": "key-d,key-dl,key-l,modern_l|弱",
         "startup": 12,
         "active": "12-17",
         "recovery": "18",
@@ -2512,7 +2512,7 @@ const SF6_DATA = {
         "move": "中 波掌撃",
         "type": "必殺技",
         "command": "214+中P",
-        "commandModern": "key-d,key-dl,key-l,modern_m|中"
+        "commandModern": "key-d,key-dl,key-l,modern_m|中",
         "startup": 19,
         "active": "19-24",
         "recovery": "17",
@@ -2532,7 +2532,7 @@ const SF6_DATA = {
         "move": "強 波掌撃",
         "type": "必殺技",
         "command": "214+強P",
-        "commandModern": "key-d,key-dl,key-l,modern_h|強"
+        "commandModern": "key-d,key-dl,key-l,modern_h|強",
         "startup": 30,
         "active": "30-34.35",
         "recovery": "19",
@@ -2552,7 +2552,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]波掌撃",
         "type": "必殺技",
         "command": "214+P",
-        "commandModern": "key-d,key-dl,key-l,modern_sp|電刃錬気中に"
+        "commandModern": "key-d,key-dl,key-l,modern_sp|電刃錬気中に",
         "startup": 20,
         "active": "20-24.25",
         "recovery": "19",
@@ -2572,7 +2572,7 @@ const SF6_DATA = {
         "move": "OD 波掌撃",
         "type": "必殺技",
         "command": "214+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 18,
         "active": "18-22",
         "recovery": "20",
@@ -2592,7 +2592,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]OD 波掌撃",
         "type": "必殺技",
         "command": "214+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all|電刃錬気中に"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all|電刃錬気中に",
         "startup": 18,
         "active": "18-23",
         "recovery": "19",
@@ -2612,7 +2612,7 @@ const SF6_DATA = {
         "move": "電刃錬気",
         "type": "必殺技",
         "command": "22+P",
-        "commandModern": "key-d,key-d,modern_sp"
+        "commandModern": "key-d,key-d,modern_sp",
         "startup": null,
         "active": "",
         "recovery": "全体 52",
@@ -2632,7 +2632,7 @@ const SF6_DATA = {
         "move": "SA1 真空波動拳",
         "type": "スーパーアーツ",
         "command": "236236+P",
-        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_l|強"
+        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_l|強",
         "startup": 7,
         "active": "",
         "recovery": "全体 86",
@@ -2652,7 +2652,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]SA1 真空波動拳",
         "type": "スーパーアーツ",
         "command": "236236+P",
-        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_l|電刃錬気中に強"
+        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_l|電刃錬気中に強",
         "startup": 7,
         "active": "",
         "recovery": "全体 89",
@@ -2672,7 +2672,7 @@ const SF6_DATA = {
         "move": "SA2 真波掌撃（Lv1）",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
         "startup": 12,
         "active": "12-17",
         "recovery": "39",
@@ -2692,7 +2692,7 @@ const SF6_DATA = {
         "move": "SA2 真波掌撃（Lv2）",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
         "startup": 20,
         "active": "20-25",
         "recovery": "39",
@@ -2712,7 +2712,7 @@ const SF6_DATA = {
         "move": "SA2 真波掌撃（Lv3）",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
         "startup": 70,
         "active": "70-75",
         "recovery": "39",
@@ -2732,7 +2732,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]SA2 真波掌撃（Lv1）",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|電刃錬気中に強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|電刃錬気中に強",
         "startup": 12,
         "active": "12-17",
         "recovery": "39",
@@ -2752,7 +2752,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]SA2 真波掌撃（Lv2）",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|電刃錬気中に強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|電刃錬気中に強",
         "startup": 20,
         "active": "20-25",
         "recovery": "39",
@@ -2772,7 +2772,7 @@ const SF6_DATA = {
         "move": "[電刃錬気]SA2 真波掌撃（Lv3）",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|電刃錬気中に強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|電刃錬気中に強",
         "startup": 70,
         "active": "70-75",
         "recovery": "39",
@@ -2792,7 +2792,7 @@ const SF6_DATA = {
         "move": "SA3 真・昇龍拳",
         "type": "スーパーアーツ",
         "command": "236236+K",
-        "commandModern": "key-r,key-d,key-dr,key-r,key-d,key-dr,modern_h|強"
+        "commandModern": "key-r,key-d,key-dr,key-r,key-d,key-dr,modern_h|強",
         "startup": 5,
         "active": "5-165-6, 7-8, 9-10, 11-12, 13-14, 15-16",
         "recovery": "71",
@@ -2812,7 +2812,7 @@ const SF6_DATA = {
         "move": "CA 真・昇龍拳",
         "type": "スーパーアーツ",
         "command": "（体力25%以下で）236236+K",
-        "commandModern": "key-r,key-d,key-dr,key-r,key-d,key-dr,modern_h|体力25%以下で強"
+        "commandModern": "key-r,key-d,key-dr,key-r,key-d,key-dr,modern_h|体力25%以下で強",
         "startup": 5,
         "active": "5-165-6, 7-8, 9-10, 11-12, 13-14, 15-16",
         "recovery": "71",
@@ -3674,7 +3674,7 @@ const SF6_DATA = {
         "move": "弱 ソニックブーム",
         "type": "必殺技",
         "command": "[4]6+弱P",
-        "commandModern": "key-l,modern_sp,modern_l|弱"
+        "commandModern": "key-l,modern_sp,modern_l|弱",
         "startup": 10,
         "active": "",
         "recovery": "全体 40",
@@ -3694,7 +3694,7 @@ const SF6_DATA = {
         "move": "【ジャスト】 弱 ソニックブーム",
         "type": "必殺技",
         "command": "[4]6+弱P",
-        "commandModern": "key-l,modern_sp,modern_l|弱・ジャスト"
+        "commandModern": "key-l,modern_sp,modern_l|弱・ジャスト",
         "startup": 10,
         "active": "",
         "recovery": "全体 40",
@@ -3714,7 +3714,7 @@ const SF6_DATA = {
         "move": "中 ソニックブーム",
         "type": "必殺技",
         "command": "[4]6+中P",
-        "commandModern": "key-l,modern_sp,modern_m|中"
+        "commandModern": "key-l,modern_sp,modern_m|中",
         "startup": 10,
         "active": "",
         "recovery": "全体 40",
@@ -3734,7 +3734,7 @@ const SF6_DATA = {
         "move": "【ジャスト】 中 ソニックブーム",
         "type": "必殺技",
         "command": "[4]6+中P",
-        "commandModern": "key-l,modern_sp,modern_m|中・ジャスト"
+        "commandModern": "key-l,modern_sp,modern_m|中・ジャスト",
         "startup": 10,
         "active": "",
         "recovery": "全体 40",
@@ -3754,7 +3754,7 @@ const SF6_DATA = {
         "move": "強 ソニックブーム",
         "type": "必殺技",
         "command": "[4]6+強P",
-        "commandModern": "key-l,modern_sp,modern_h|強"
+        "commandModern": "key-l,modern_sp,modern_h|強",
         "startup": 10,
         "active": "",
         "recovery": "全体 40",
@@ -3774,7 +3774,7 @@ const SF6_DATA = {
         "move": "【ジャスト】 強 ソニックブーム",
         "type": "必殺技",
         "command": "[4]6+強P",
-        "commandModern": "key-l,modern_sp,modern_h|強・ジャスト"
+        "commandModern": "key-l,modern_sp,modern_h|強・ジャスト",
         "startup": 10,
         "active": "",
         "recovery": "全体 40",
@@ -3794,7 +3794,7 @@ const SF6_DATA = {
         "move": "OD ソニックブーム",
         "type": "必殺技",
         "command": "[4]6+PP",
-        "commandModern": "modern_auto,modern_sp,key-l,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-l,key-r,key-all,key-all",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -3814,7 +3814,7 @@ const SF6_DATA = {
         "move": "弱 サマーソルトキック",
         "type": "必殺技",
         "command": "[2]8+弱K",
-        "commandModern": "key-d,modern_sp,modern_l|弱"
+        "commandModern": "key-d,modern_sp,modern_l|弱",
         "startup": 5,
         "active": "5-10",
         "recovery": "26+着地後15",
@@ -3834,7 +3834,7 @@ const SF6_DATA = {
         "move": "【ジャスト】 弱 サマーソルトキック",
         "type": "必殺技",
         "command": "[2]8+弱K",
-        "commandModern": "key-d,modern_sp,modern_l|弱・ジャスト"
+        "commandModern": "key-d,modern_sp,modern_l|弱・ジャスト",
         "startup": 5,
         "active": "5-10",
         "recovery": "26+着地後15",
@@ -3854,7 +3854,7 @@ const SF6_DATA = {
         "move": "中 サマーソルトキック",
         "type": "必殺技",
         "command": "[2]8+中K",
-        "commandModern": "key-d,modern_sp,modern_m|中"
+        "commandModern": "key-d,modern_sp,modern_m|中",
         "startup": 6,
         "active": "6-11",
         "recovery": "27+着地後15",
@@ -3874,7 +3874,7 @@ const SF6_DATA = {
         "move": "【ジャスト】 中 サマーソルトキック",
         "type": "必殺技",
         "command": "[2]8+中K",
-        "commandModern": "key-d,modern_sp,modern_m|中・ジャスト"
+        "commandModern": "key-d,modern_sp,modern_m|中・ジャスト",
         "startup": 6,
         "active": "6-11",
         "recovery": "27+着地後15",
@@ -3894,7 +3894,7 @@ const SF6_DATA = {
         "move": "強 サマーソルトキック",
         "type": "必殺技",
         "command": "[2]8+強K",
-        "commandModern": "key-d,modern_sp,modern_h|強"
+        "commandModern": "key-d,modern_sp,modern_h|強",
         "startup": 7,
         "active": "7-12",
         "recovery": "28+着地後15",
@@ -3914,7 +3914,7 @@ const SF6_DATA = {
         "move": "【ジャスト】 強 サマーソルトキック",
         "type": "必殺技",
         "command": "[2]8+強K",
-        "commandModern": "key-d,modern_sp,modern_h|強・ジャスト"
+        "commandModern": "key-d,modern_sp,modern_h|強・ジャスト",
         "startup": 7,
         "active": "7-12",
         "recovery": "28+着地後15",
@@ -3934,7 +3934,7 @@ const SF6_DATA = {
         "move": "OD サマーソルトキック",
         "type": "必殺技",
         "command": "[2]8+KK",
-        "commandModern": "modern_auto,modern_sp,key-d,key-u,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-u,key-all,key-all",
         "startup": 6,
         "active": "6-11",
         "recovery": "26+着地後20",
@@ -3954,7 +3954,7 @@ const SF6_DATA = {
         "move": "弱 ソニックブレイド",
         "type": "必殺技",
         "command": "214+弱P",
-        "commandModern": "key-d,key-dl,key-l,modern_l|弱"
+        "commandModern": "key-d,key-dl,key-l,modern_l|弱",
         "startup": 16,
         "active": "16-60",
         "recovery": "全体 42",
@@ -3974,7 +3974,7 @@ const SF6_DATA = {
         "move": "中 ソニックブレイド",
         "type": "必殺技",
         "command": "214+中P",
-        "commandModern": "key-d,key-dl,key-l,modern_m|中"
+        "commandModern": "key-d,key-dl,key-l,modern_m|中",
         "startup": 21,
         "active": "21-105",
         "recovery": "全体 50",
@@ -3994,7 +3994,7 @@ const SF6_DATA = {
         "move": "強 ソニックブレイド",
         "type": "必殺技",
         "command": "214+強P",
-        "commandModern": "key-d,key-dl,key-l,modern_h|強"
+        "commandModern": "key-d,key-dl,key-l,modern_h|強",
         "startup": 31,
         "active": "31-130",
         "recovery": "全体 54",
@@ -4014,7 +4014,7 @@ const SF6_DATA = {
         "move": "OD 弱 ソニックブレイド",
         "type": "必殺技",
         "command": "214+弱P中P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 15,
         "active": "15-114",
         "recovery": "全体 39",
@@ -4034,7 +4034,7 @@ const SF6_DATA = {
         "move": "OD 中 ソニックブレイド",
         "type": "必殺技",
         "command": "214+弱P強P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 15,
         "active": "15-114",
         "recovery": "全体 39",
@@ -4054,7 +4054,7 @@ const SF6_DATA = {
         "move": "OD 強 ソニックブレイド",
         "type": "必殺技",
         "command": "214+中P強P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 15,
         "active": "15-114",
         "recovery": "全体 39",
@@ -4074,7 +4074,7 @@ const SF6_DATA = {
         "move": "弱 ソニッククロス",
         "type": "必殺技",
         "command": "（ソニックブレイド中に）6+弱P",
-        "commandModern": "key-r,modern_l|ソニックブレイド中に弱"
+        "commandModern": "key-r,modern_l|ソニックブレイド中に弱",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4094,7 +4094,7 @@ const SF6_DATA = {
         "move": "【ジャスト】弱 ソニッククロス",
         "type": "必殺技",
         "command": "（ソニックブレイド中に）6+弱P",
-        "commandModern": "key-r,modern_l|ソニックブレイド中に弱・ジャスト"
+        "commandModern": "key-r,modern_l|ソニックブレイド中に弱・ジャスト",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4114,7 +4114,7 @@ const SF6_DATA = {
         "move": "中 ソニッククロス",
         "type": "必殺技",
         "command": "（ソニックブレイド中に）6+中P",
-        "commandModern": "key-r,modern_m|ソニックブレイド中に中"
+        "commandModern": "key-r,modern_m|ソニックブレイド中に中",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4134,7 +4134,7 @@ const SF6_DATA = {
         "move": "【ジャスト】中 ソニッククロス",
         "type": "必殺技",
         "command": "（ソニックブレイド中に）6+中P",
-        "commandModern": "key-r,modern_m|ソニックブレイド中に中・ジャスト"
+        "commandModern": "key-r,modern_m|ソニックブレイド中に中・ジャスト",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4154,7 +4154,7 @@ const SF6_DATA = {
         "move": "強 ソニッククロス",
         "type": "必殺技",
         "command": "（ソニックブレイド中に）6+強P",
-        "commandModern": "key-r,modern_h|ソニックブレイド中に強"
+        "commandModern": "key-r,modern_h|ソニックブレイド中に強",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4174,7 +4174,7 @@ const SF6_DATA = {
         "move": "【ジャスト】強 ソニッククロス",
         "type": "必殺技",
         "command": "（ソニックブレイド中に）6+強P",
-        "commandModern": "key-r,modern_h|ソニックブレイド中に強・ジャスト"
+        "commandModern": "key-r,modern_h|ソニックブレイド中に強・ジャスト",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4194,7 +4194,7 @@ const SF6_DATA = {
         "move": "OD ソニッククロス１",
         "type": "必殺技",
         "command": "（ソニックブレイド中に）6+PP / （ODソニックブレイド中に）6+P",
-        "commandModern": "key-r,modern_h|OD中に"
+        "commandModern": "key-r,modern_h|OD中に",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4214,7 +4214,7 @@ const SF6_DATA = {
         "move": "OD ソニッククロス２",
         "type": "必殺技",
         "command": "（ODソニックブレイド中に）6+PP",
-        "commandModern": "key-r,key-all,key-all|OD中に"
+        "commandModern": "key-r,key-all,key-all|OD中に",
         "startup": 10,
         "active": "",
         "recovery": "全体 38",
@@ -4234,7 +4234,7 @@ const SF6_DATA = {
         "move": "ソニックブレイク （単発）",
         "type": "必殺技",
         "command": "（ソリッドパンチャー中に）PP",
-        "commandModern": "key-all,key-all|ソリッドパンチャー中に"
+        "commandModern": "key-all,key-all|ソリッドパンチャー中に",
         "startup": 11,
         "active": "",
         "recovery": "全体 36",
@@ -4254,7 +4254,7 @@ const SF6_DATA = {
         "move": "ソニックブレイク （派生）",
         "type": "必殺技",
         "command": "（ソリッドパンチャー中に）（ソニックブーム or ソニックブレイク中に）P",
-        "commandModern": "modern_h|ソリッドパンチャー中に"
+        "commandModern": "modern_h|ソリッドパンチャー中に",
         "startup": 11,
         "active": "",
         "recovery": "全体 ※36",
@@ -4274,7 +4274,7 @@ const SF6_DATA = {
         "move": "OD ソニックブレイク",
         "type": "必殺技",
         "command": "（ソリッドパンチャー中に）（ODソニックブーム or ODソニックブレイク中に）P",
-        "commandModern": "key-all,key-all|OD中に"
+        "commandModern": "key-all,key-all|OD中に",
         "startup": 11,
         "active": "",
         "recovery": "全体 35",
@@ -4294,7 +4294,7 @@ const SF6_DATA = {
         "move": "SA1 ソニックハリケーン （上）",
         "type": "スーパーアーツ",
         "command": "[4]646+強P",
-        "commandModern": "key-l,modern_sp,key-l,key-r,key-l,modern_h|強"
+        "commandModern": "key-l,modern_sp,key-l,key-r,key-l,modern_h|強",
         "startup": 7,
         "active": "7-58",
         "recovery": "全体 75",
@@ -4314,7 +4314,7 @@ const SF6_DATA = {
         "move": "SA1 ソニックハリケーン （横）",
         "type": "スーパーアーツ",
         "command": "[4]646+弱P / 中P",
-        "commandModern": "key-l,modern_sp,key-l,key-r,key-l,modern_l|弱中"
+        "commandModern": "key-l,modern_sp,key-l,key-r,key-l,modern_l|弱中",
         "startup": 8,
         "active": "8-58",
         "recovery": "全体 89",
@@ -4334,7 +4334,7 @@ const SF6_DATA = {
         "move": "SA2 ソリッドパンチャー",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
         "startup": null,
         "active": "",
         "recovery": "全体 6",
@@ -4354,7 +4354,7 @@ const SF6_DATA = {
         "move": "SA3 クロスファイアサマーソルト",
         "type": "スーパーアーツ",
         "command": "[4]646+K",
-        "commandModern": "key-d,modern_sp,key-l,key-r,key-l,modern_h|強"
+        "commandModern": "key-d,modern_sp,key-l,key-r,key-l,modern_h|強",
         "startup": 9,
         "active": "9-14",
         "recovery": "30+着地後40",
@@ -4374,7 +4374,7 @@ const SF6_DATA = {
         "move": "CA クロスファイアサマーソルト",
         "type": "スーパーアーツ",
         "command": "（体力25%以下で）[4]646+K",
-        "commandModern": "key-d,modern_sp,key-l,key-r,key-l,modern_h|体力25%以下で強"
+        "commandModern": "key-d,modern_sp,key-l,key-r,key-l,modern_h|体力25%以下で強",
         "startup": 9,
         "active": "9-14",
         "recovery": "30+着地後40",
@@ -5196,7 +5196,7 @@ const SF6_DATA = {
         "move": "弱 パワーウェイブ",
         "type": "必殺技",
         "command": "236+弱P",
-        "commandModern": "key-d,key-dr,key-r,modern_l|弱"
+        "commandModern": "key-d,key-dr,key-r,modern_l|弱",
         "startup": 14,
         "active": "",
         "recovery": "全体 49",
@@ -5216,7 +5216,7 @@ const SF6_DATA = {
         "move": "中 パワーウェイブ",
         "type": "必殺技",
         "command": "236+中P",
-        "commandModern": "key-d,key-dr,key-r,modern_m|中"
+        "commandModern": "key-d,key-dr,key-r,modern_m|中",
         "startup": 16,
         "active": "",
         "recovery": "全体 48",
@@ -5236,7 +5236,7 @@ const SF6_DATA = {
         "move": "ラウンドウェイブ",
         "type": "必殺技",
         "command": "236+強P",
-        "commandModern": "key-d,key-dr,key-r,modern_h|強"
+        "commandModern": "key-d,key-dr,key-r,modern_h|強",
         "startup": 29,
         "active": "",
         "recovery": "全体 51",
@@ -5256,7 +5256,7 @@ const SF6_DATA = {
         "move": "OD パワーウェイブ",
         "type": "必殺技",
         "command": "236+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all",
         "startup": 15,
         "active": "",
         "recovery": "全体 43",
@@ -5276,7 +5276,7 @@ const SF6_DATA = {
         "move": "クイックバーン",
         "type": "必殺技",
         "command": "214+弱P",
-        "commandModern": "key-d,key-dl,key-l,modern_l|弱"
+        "commandModern": "key-d,key-dl,key-l,modern_l|弱",
         "startup": 10,
         "active": "10-2310-11, 22-23",
         "recovery": "23",
@@ -5296,7 +5296,7 @@ const SF6_DATA = {
         "move": "OD クイックバーン",
         "type": "必殺技",
         "command": "214+弱P中P",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 10,
         "active": "10-2310-11, 22-23",
         "recovery": "23",
@@ -5316,7 +5316,7 @@ const SF6_DATA = {
         "move": "中 バーンナックル",
         "type": "必殺技",
         "command": "214+中P",
-        "commandModern": "key-d,key-dl,key-l,modern_m|中"
+        "commandModern": "key-d,key-dl,key-l,modern_m|中",
         "startup": 14,
         "active": "14-22",
         "recovery": "20",
@@ -5336,7 +5336,7 @@ const SF6_DATA = {
         "move": "強 バーンナックル",
         "type": "必殺技",
         "command": "214+強P",
-        "commandModern": "key-d,key-dl,key-l,modern_h|強"
+        "commandModern": "key-d,key-dl,key-l,modern_h|強",
         "startup": 23,
         "active": "23-36",
         "recovery": "17",
@@ -5356,7 +5356,7 @@ const SF6_DATA = {
         "move": "OD バーンナックル",
         "type": "必殺技",
         "command": "214+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 19,
         "active": "19-32",
         "recovery": "17",
@@ -5376,7 +5376,7 @@ const SF6_DATA = {
         "move": "弱 パワーチャージ",
         "type": "必殺技",
         "command": "236+弱K",
-        "commandModern": "key-r,modern_l|弱"
+        "commandModern": "key-r,modern_l|弱",
         "startup": 14,
         "active": "14-18",
         "recovery": "24",
@@ -5396,7 +5396,7 @@ const SF6_DATA = {
         "move": "中 パワーチャージ",
         "type": "必殺技",
         "command": "236+中K",
-        "commandModern": "key-r,modern_m|中"
+        "commandModern": "key-r,modern_m|中",
         "startup": 20,
         "active": "20-25",
         "recovery": "23",
@@ -5416,7 +5416,7 @@ const SF6_DATA = {
         "move": "強 パワーチャージ",
         "type": "必殺技",
         "command": "236+強K",
-        "commandModern": "key-r,modern_h|強"
+        "commandModern": "key-r,modern_h|強",
         "startup": 25,
         "active": "25-33",
         "recovery": "27",
@@ -5436,7 +5436,7 @@ const SF6_DATA = {
         "move": "OD パワーチャージ",
         "type": "必殺技",
         "command": "236+KK",
-        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all",
         "startup": 19,
         "active": "19-26",
         "recovery": "24",
@@ -5456,7 +5456,7 @@ const SF6_DATA = {
         "move": "弱 クラックシュート",
         "type": "必殺技",
         "command": "214+弱K",
-        "commandModern": "key-l,modern_l|弱"
+        "commandModern": "key-l,modern_l|弱",
         "startup": 16,
         "active": "16-19",
         "recovery": "18",
@@ -5476,7 +5476,7 @@ const SF6_DATA = {
         "move": "中 クラックシュート",
         "type": "必殺技",
         "command": "214+中K",
-        "commandModern": "key-l,modern_m|中"
+        "commandModern": "key-l,modern_m|中",
         "startup": 17,
         "active": "17-23",
         "recovery": "18",
@@ -5496,7 +5496,7 @@ const SF6_DATA = {
         "move": "強 クラックシュート",
         "type": "必殺技",
         "command": "214+強K",
-        "commandModern": "key-l,modern_h|強"
+        "commandModern": "key-l,modern_h|強",
         "startup": 23,
         "active": "23--33",
         "recovery": "19",
@@ -5516,7 +5516,7 @@ const SF6_DATA = {
         "move": "OD クラックシュート",
         "type": "必殺技",
         "command": "214+KK",
-        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all",
         "startup": 20,
         "active": "20-23",
         "recovery": "19",
@@ -5536,7 +5536,7 @@ const SF6_DATA = {
         "move": "弱 ライジングタックル",
         "type": "必殺技",
         "command": "623+弱P",
-        "commandModern": "key-r,key-d,key-dr,modern_l|弱"
+        "commandModern": "key-r,key-d,key-dr,modern_l|弱",
         "startup": 5,
         "active": "5-14",
         "recovery": "21+着地後12",
@@ -5556,7 +5556,7 @@ const SF6_DATA = {
         "move": "中 ライジングタックル",
         "type": "必殺技",
         "command": "623+中P",
-        "commandModern": "key-r,key-d,key-dr,modern_m|中"
+        "commandModern": "key-r,key-d,key-dr,modern_m|中",
         "startup": 6,
         "active": "6-15",
         "recovery": "28+着地後12",
@@ -5576,7 +5576,7 @@ const SF6_DATA = {
         "move": "強 ライジングタックル",
         "type": "必殺技",
         "command": "623+強P",
-        "commandModern": "key-r,key-d,key-dr,modern_h|強"
+        "commandModern": "key-r,key-d,key-dr,modern_h|強",
         "startup": 7,
         "active": "7-26",
         "recovery": "27+着地後15",
@@ -5596,7 +5596,7 @@ const SF6_DATA = {
         "move": "OD ライジングタックル",
         "type": "必殺技",
         "command": "623+PP",
-        "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all",
         "startup": 6,
         "active": "6-20",
         "recovery": "34+着地後15",
@@ -5616,7 +5616,7 @@ const SF6_DATA = {
         "move": "SA1 バスターウルフ",
         "type": "スーパーアーツ",
         "command": "236236+K",
-        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強"
+        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強",
         "startup": 7,
         "active": "7-18",
         "recovery": "60",
@@ -5636,7 +5636,7 @@ const SF6_DATA = {
         "move": "SA2 パワーゲイザー",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
         "startup": 13,
         "active": "13-25",
         "recovery": "54",
@@ -5656,7 +5656,7 @@ const SF6_DATA = {
         "move": "SA2 ツインゲイザー",
         "type": "スーパーアーツ",
         "command": "PP",
-        "commandModern": "key-all,key-all|SA2中に"
+        "commandModern": "key-all,key-all|SA2中に",
         "startup": 22,
         "active": "22-27",
         "recovery": "43",
@@ -5676,7 +5676,7 @@ const SF6_DATA = {
         "move": "SA2 トリプルゲイザー",
         "type": "スーパーアーツ",
         "command": "PP",
-        "commandModern": "key-all,key-all|SA2追加"
+        "commandModern": "key-all,key-all|SA2追加",
         "startup": 14,
         "active": "14",
         "recovery": "125",
@@ -5696,7 +5696,7 @@ const SF6_DATA = {
         "move": "SA2 トリプルゲイザー(不発)",
         "type": "スーパーアーツ",
         "command": "PP",
-        "commandModern": "key-all,key-all|SA2追加（不発）"
+        "commandModern": "key-all,key-all|SA2追加（不発）",
         "startup": null,
         "active": "",
         "recovery": "全体 90",
@@ -5716,7 +5716,7 @@ const SF6_DATA = {
         "move": "SA3 ライジングファング",
         "type": "スーパーアーツ",
         "command": "236236+P",
-        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|強"
+        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|強",
         "startup": 8,
         "active": "8-34",
         "recovery": "57",
@@ -5736,7 +5736,7 @@ const SF6_DATA = {
         "move": "CA ライジングファング",
         "type": "スーパーアーツ",
         "command": "（体力25%以下で）236236+P",
-        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|体力25%以下で強"
+        "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|体力25%以下で強",
         "startup": 8,
         "active": "8-34",
         "recovery": "57",
@@ -6458,7 +6458,7 @@ const SF6_DATA = {
         "move": "弱 サンダースラップ",
         "type": "必殺技",
         "command": "214+弱P",
-        "commandModern": "key-d,key-dl,key-l,modern_l|弱"
+        "commandModern": "key-d,key-dl,key-l,modern_l|弱",
         "startup": 17,
         "active": "17-20",
         "recovery": "23",
@@ -6478,7 +6478,7 @@ const SF6_DATA = {
         "move": "中 サンダースラップ",
         "type": "必殺技",
         "command": "214+中P",
-        "commandModern": "key-d,key-dl,key-l,modern_m|中"
+        "commandModern": "key-d,key-dl,key-l,modern_m|中",
         "startup": 16,
         "active": "16-19",
         "recovery": "22",
@@ -6498,7 +6498,7 @@ const SF6_DATA = {
         "move": "強 サンダースラップ",
         "type": "必殺技",
         "command": "214+強P",
-        "commandModern": "key-d,key-dl,key-l,modern_h|強"
+        "commandModern": "key-d,key-dl,key-l,modern_h|強",
         "startup": 7,
         "active": "7-16",
         "recovery": "37",
@@ -6518,7 +6518,7 @@ const SF6_DATA = {
         "move": "OD サンダースラップ",
         "type": "必殺技",
         "command": "214+PP",
-        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
         "startup": 18,
         "active": "18-4118-21, 38-41",
         "recovery": "21",
@@ -6538,7 +6538,7 @@ const SF6_DATA = {
         "move": "弱 トレースコンビネーション",
         "type": "必殺技",
         "command": "（弱 サンダースラップ中に）6+PP",
-        "commandModern": "key-r,key-all,key-all|サンダースラップ中に弱"
+        "commandModern": "key-r,key-all,key-all|サンダースラップ中に弱",
         "startup": 15,
         "active": "15-17",
         "recovery": "28",
@@ -6558,7 +6558,7 @@ const SF6_DATA = {
         "move": "中 トレースコンビネーション",
         "type": "必殺技",
         "command": "（中 サンダースラップ中に）6+PP",
-        "commandModern": "key-r,key-all,key-all|サンダースラップ中に中"
+        "commandModern": "key-r,key-all,key-all|サンダースラップ中に中",
         "startup": 21,
         "active": "21-24",
         "recovery": "25",
@@ -6578,7 +6578,7 @@ const SF6_DATA = {
         "move": "強 トレースコンビネーション",
         "type": "必殺技",
         "command": "（強 サンダースラップ中に）6+PP",
-        "commandModern": "key-r,key-all,key-all|サンダースラップ中に強"
+        "commandModern": "key-r,key-all,key-all|サンダースラップ中に強",
         "startup": 17,
         "active": "17-20",
         "recovery": "37",
@@ -6598,7 +6598,7 @@ const SF6_DATA = {
         "move": "[サンダースラップ]フェイント",
         "type": "必殺技",
         "command": "（サンダースラップ攻撃前に） K",
-        "commandModern": "modern_auto,modern_l|サンダースラップ中にフェイント"
+        "commandModern": "modern_auto,modern_l|サンダースラップ中にフェイント",
         "startup": null,
         "active": "",
         "recovery": "全体 12",
@@ -6618,7 +6618,7 @@ const SF6_DATA = {
         "move": "弱 バーニングキック",
         "type": "必殺技",
         "command": "236+弱K",
-        "commandModern": "key-r,modern_l|弱"
+        "commandModern": "key-r,modern_l|弱",
         "startup": 23,
         "active": "23-27",
         "recovery": "20",
@@ -6638,7 +6638,7 @@ const SF6_DATA = {
         "move": "中 バーニングキック",
         "type": "必殺技",
         "command": "236+中K",
-        "commandModern": "key-r,modern_m|中"
+        "commandModern": "key-r,modern_m|中",
         "startup": 25,
         "active": "25-29",
         "recovery": "20",
@@ -6658,7 +6658,7 @@ const SF6_DATA = {
         "move": "強 バーニングキック",
         "type": "必殺技",
         "command": "236+強K",
-        "commandModern": "key-r,modern_h|強"
+        "commandModern": "key-r,modern_h|強",
         "startup": 27,
         "active": "27-31",
         "recovery": "20",
@@ -6678,7 +6678,7 @@ const SF6_DATA = {
         "move": "OD バーニングキック",
         "type": "必殺技",
         "command": "236+KK",
-        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all",
         "startup": 8,
         "active": "8-358-10, 32-35",
         "recovery": "21",
@@ -6698,7 +6698,7 @@ const SF6_DATA = {
         "move": "チェイスナックル",
         "type": "必殺技",
         "command": "（バーニングキック中に）PP",
-        "commandModern": "key-all,key-all|バーニングキック中に"
+        "commandModern": "key-all,key-all|バーニングキック中に",
         "startup": 12,
         "active": "12-15",
         "recovery": "34",
@@ -6718,7 +6718,7 @@ const SF6_DATA = {
         "move": "ダブルバーン",
         "type": "必殺技",
         "command": "（バーニングキック中に）KK",
-        "commandModern": "modern_auto,modern_sp,key-all,key-all|バーニングキック中に"
+        "commandModern": "modern_auto,modern_sp,key-all,key-all|バーニングキック中に",
         "startup": 21,
         "active": "21-25",
         "recovery": "20",
@@ -6738,7 +6738,7 @@ const SF6_DATA = {
         "move": "弱 空中バーニングキック",
         "type": "必殺技",
         "command": "（垂直 or 前ジャンプ中に）236+弱K",
-        "commandModern": "key-r,modern_l|ジャンプ中に弱"
+        "commandModern": "key-r,modern_l|ジャンプ中に弱",
         "startup": 22,
         "active": "22-28",
         "recovery": "着地後13",
@@ -6758,7 +6758,7 @@ const SF6_DATA = {
         "move": "中 空中バーニングキック",
         "type": "必殺技",
         "command": "（垂直 or 前ジャンプ中に）236+中K",
-        "commandModern": "key-r,modern_m|ジャンプ中に中"
+        "commandModern": "key-r,modern_m|ジャンプ中に中",
         "startup": 20,
         "active": "20-26",
         "recovery": "着地後13",
@@ -6778,7 +6778,7 @@ const SF6_DATA = {
         "move": "強 空中バーニングキック",
         "type": "必殺技",
         "command": "（垂直 or 前ジャンプ中に）236+強K",
-        "commandModern": "key-r,modern_h|ジャンプ中に強"
+        "commandModern": "key-r,modern_h|ジャンプ中に強",
         "startup": 18,
         "active": "18-24",
         "recovery": "着地後13",
@@ -6798,7 +6798,7 @@ const SF6_DATA = {
         "move": "OD 空中バーニングキック",
         "type": "必殺技",
         "command": "（垂直 or 前ジャンプ中に）236+KK",
-        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all|ジャンプ中に"
+        "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all|ジャンプ中に",
         "startup": 18,
         "active": "18-24",
         "recovery": "着地後13",
@@ -6818,7 +6818,7 @@ const SF6_DATA = {
         "move": "弱 セイスモハンマー",
         "type": "必殺技",
         "command": "623+弱P",
-        "commandModern": "key-r,key-d,key-dr,modern_l|弱"
+        "commandModern": "key-r,key-d,key-dr,modern_l|弱",
         "startup": 24,
         "active": "24-31",
         "recovery": "26",
@@ -6838,7 +6838,7 @@ const SF6_DATA = {
         "move": "中 セイスモハンマー",
         "type": "必殺技",
         "command": "623+中P",
-        "commandModern": "key-r,key-d,key-dr,modern_m|中"
+        "commandModern": "key-r,key-d,key-dr,modern_m|中",
         "startup": 24,
         "active": "24-31",
         "recovery": "26",
@@ -6858,7 +6858,7 @@ const SF6_DATA = {
         "move": "強 セイスモハンマー",
         "type": "必殺技",
         "command": "623+強P",
-        "commandModern": "key-r,key-d,key-dr,modern_h|強"
+        "commandModern": "key-r,key-d,key-dr,modern_h|強",
         "startup": 24,
         "active": "24-31",
         "recovery": "26",
@@ -6878,7 +6878,7 @@ const SF6_DATA = {
         "move": "OD セイスモハンマー",
         "type": "必殺技",
         "command": "623+PP",
-        "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all",
         "startup": 19,
         "active": "19-26",
         "recovery": "26",
@@ -6898,7 +6898,7 @@ const SF6_DATA = {
         "move": "[セイスモハンマー]フェイント",
         "type": "必殺技",
         "command": "（セイスモハンマー攻撃前に） K",
-        "commandModern": "modern_auto,modern_l|セイスモハンマー中にフェイント"
+        "commandModern": "modern_auto,modern_l|セイスモハンマー中にフェイント",
         "startup": null,
         "active": "",
         "recovery": "全体 16",
@@ -6918,7 +6918,7 @@ const SF6_DATA = {
         "move": "セービングフォース(Lv1)",
         "type": "必殺技",
         "command": "214+K",
-        "commandModern": "key-l,modern_sp"
+        "commandModern": "key-l,modern_sp",
         "startup": 23,
         "active": "23-3423-26, 31-34",
         "recovery": "36",
@@ -6938,7 +6938,7 @@ const SF6_DATA = {
         "move": "セービングフォース(Lv2)",
         "type": "必殺技",
         "command": "214+Kホールド",
-        "commandModern": "key-l,modern_sp|ホールド"
+        "commandModern": "key-l,modern_sp|ホールド",
         "startup": 30,
         "active": "30-4130-33, 38-41",
         "recovery": "36",
@@ -6958,7 +6958,7 @@ const SF6_DATA = {
         "move": "セービングフォース(Lv3)",
         "type": "必殺技",
         "command": "214+Kホールド",
-        "commandModern": "key-l,modern_sp|ホールド長押し"
+        "commandModern": "key-l,modern_sp|ホールド長押し",
         "startup": 69,
         "active": "69-8069-72, 77-80",
         "recovery": "36",
@@ -6978,7 +6978,7 @@ const SF6_DATA = {
         "move": "OD セービングフォース(Lv1)",
         "type": "必殺技",
         "command": "214+KK",
-        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all"
+        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all",
         "startup": 20,
         "active": "20-3120-23, 28-31",
         "recovery": "36",
@@ -6998,7 +6998,7 @@ const SF6_DATA = {
         "move": "OD セービングフォース(Lv2)",
         "type": "必殺技",
         "command": "214+KKホールド",
-        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all|ホールド"
+        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all|ホールド",
         "startup": 30,
         "active": "30-4130-33, 38-41",
         "recovery": "36",
@@ -7018,7 +7018,7 @@ const SF6_DATA = {
         "move": "OD セービングフォース(Lv3)",
         "type": "必殺技",
         "command": "214+KKホールド",
-        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all|ホールド長押し"
+        "commandModern": "modern_auto,modern_sp,key-l,key-all,key-all|ホールド長押し",
         "startup": 67,
         "active": "67-7867-70, 75-78",
         "recovery": "36",
@@ -7038,7 +7038,7 @@ const SF6_DATA = {
         "move": "[セービングフォース]前方ステップ",
         "type": "必殺技",
         "command": "（セービングフォース中に）66",
-        "commandModern": "key-r,key-r|セービングフォース中に"
+        "commandModern": "key-r,key-r|セービングフォース中に",
         "startup": null,
         "active": "",
         "recovery": "全体 21",
@@ -7058,7 +7058,7 @@ const SF6_DATA = {
         "move": "SA1 バウンサーステップ",
         "type": "スーパーアーツ",
         "command": "236236+K",
-        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強"
+        "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強",
         "startup": 8,
         "active": "8-208-11, 15-20",
         "recovery": "53",
@@ -7078,7 +7078,7 @@ const SF6_DATA = {
         "move": "SA2 ミッションオーバー",
         "type": "スーパーアーツ",
         "command": "214214+P",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
         "startup": 7,
         "active": "7-10",
         "recovery": "45",
@@ -7098,7 +7098,7 @@ const SF6_DATA = {
         "move": "SA3 アンラックリジェクター",
         "type": "スーパーアーツ",
         "command": "214214+K",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_h|強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_h|強",
         "startup": 10,
         "active": "10-13",
         "recovery": "54",
@@ -7118,7 +7118,7 @@ const SF6_DATA = {
         "move": "CA アンラックリジェクター",
         "type": "スーパーアーツ",
         "command": "（体力25%以下で）214214+K",
-        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_h|体力25%以下で強"
+        "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_h|体力25%以下で強",
         "startup": 10,
         "active": "10-13",
         "recovery": "54",
@@ -8080,7 +8080,7 @@ const SF6_DATA = {
                 "move": "ダブルラリアット",
                 "type": "必殺技",
                 "command": "PP",
-                "commandModern": "modern_h,modern_auto,modern_h|同時押し"
+                "commandModern": "modern_h,modern_auto,modern_h|同時押し",
                 "startup": 15,
                 "active": "15-4515-16, 26-27, 36-37, 44-45",
                 "recovery": "27",
@@ -8100,7 +8100,7 @@ const SF6_DATA = {
                 "move": "OD ダブルラリアット",
                 "type": "必殺技",
                 "command": "弱P 中P 強P",
-                "commandModern": "modern_auto,modern_sp,key-all,key-all"
+                "commandModern": "modern_auto,modern_sp,key-all,key-all",
                 "startup": 12,
                 "active": "12-3612-13, 16-17, 21-22, 29-30, 35-36",
                 "recovery": "26",
@@ -8120,7 +8120,7 @@ const SF6_DATA = {
                 "move": "弱 スクリューパイルドライバー",
                 "type": "必殺技",
                 "command": "（近距離で）+弱P",
-                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_l|弱・近距離"
+                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_l|弱・近距離",
                 "startup": 5,
                 "active": "5-7",
                 "recovery": "54",
@@ -8140,7 +8140,7 @@ const SF6_DATA = {
                 "move": "中 スクリューパイルドライバー",
                 "type": "必殺技",
                 "command": "（近距離で）+中P",
-                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_m|中・近距離"
+                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_m|中・近距離",
                 "startup": 5,
                 "active": "5-7",
                 "recovery": "54",
@@ -8160,7 +8160,7 @@ const SF6_DATA = {
                 "move": "強 スクリューパイルドライバー",
                 "type": "必殺技",
                 "command": "（近距離で）+強P",
-                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_h|強・近距離"
+                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_h|強・近距離",
                 "startup": 5,
                 "active": "5-7",
                 "recovery": "54",
@@ -8180,7 +8180,7 @@ const SF6_DATA = {
                 "move": "OD スクリューパイルドライバー",
                 "type": "必殺技",
                 "command": "（近距離で）+PP",
-                "commandModern": "modern_auto,modern_sp,key-l,key-dl,key-d,key-dr,key-r,key-all,key-all|近距離"
+                "commandModern": "modern_auto,modern_sp,key-l,key-dl,key-d,key-dr,key-r,key-all,key-all|近距離",
                 "startup": 5,
                 "active": "5-7",
                 "recovery": "54",
@@ -8200,7 +8200,7 @@ const SF6_DATA = {
                 "move": "ボルシチダイナマイト",
                 "type": "必殺技",
                 "command": "（ジャンプ中に）（近距離で）+K",
-                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_sp|ジャンプ中に近距離"
+                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,modern_sp|ジャンプ中に近距離",
                 "startup": 4,
                 "active": "4-6",
                 "recovery": "着地後16",
@@ -8220,7 +8220,7 @@ const SF6_DATA = {
                 "move": "OD ボルシチダイナマイト",
                 "type": "必殺技",
                 "command": "（ジャンプ中に）（近距離で）+KK",
-                "commandModern": "modern_auto,modern_sp,key-l,key-dl,key-d,key-dr,key-r,key-all,key-all|ジャンプ中に近距離"
+                "commandModern": "modern_auto,modern_sp,key-l,key-dl,key-d,key-dr,key-r,key-all,key-all|ジャンプ中に近距離",
                 "startup": 4,
                 "active": "4-6",
                 "recovery": "着地後16",
@@ -8240,7 +8240,7 @@ const SF6_DATA = {
                 "move": "ロシアンスープレックス",
                 "type": "必殺技",
                 "command": "（近距離で）63214+K",
-                "commandModern": "key-r,key-d,key-dl,key-l,modern_sp|近距離で"
+                "commandModern": "key-r,key-d,key-dl,key-l,modern_sp|近距離で",
                 "startup": 10,
                 "active": "10-11",
                 "recovery": "50",
@@ -8260,7 +8260,7 @@ const SF6_DATA = {
                 "move": "OD ロシアンスープレックス",
                 "type": "必殺技",
                 "command": "（近距離で）63214+KK",
-                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dl,key-l,key-all,key-all|近距離で"
+                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dl,key-l,key-all,key-all|近距離で",
                 "startup": 10,
                 "active": "10-11",
                 "recovery": "50",
@@ -8280,7 +8280,7 @@ const SF6_DATA = {
                 "move": "シベリアンエクスプレス（近距離版）",
                 "type": "必殺技",
                 "command": "（近距離で）63214+K",
-                "commandModern": "key-r,key-d,key-dl,key-l,modern_sp|近距離で"
+                "commandModern": "key-r,key-d,key-dl,key-l,modern_sp|近距離で",
                 "startup": 28,
                 "active": "28-29",
                 "recovery": "41",
@@ -8300,7 +8300,7 @@ const SF6_DATA = {
                 "move": "OD シベリアンエクスプレス（近距離版）",
                 "type": "必殺技",
                 "command": "（近距離で）63214+KK",
-                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dl,key-l,key-all,key-all|近距離で"
+                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dl,key-l,key-all,key-all|近距離で",
                 "startup": 23,
                 "active": "23-24",
                 "recovery": "44",
@@ -8320,7 +8320,7 @@ const SF6_DATA = {
                 "move": "シベリアンエクスプレス（遠距離版）",
                 "type": "必殺技",
                 "command": "（遠距離で）63214+K",
-                "commandModern": "key-r,key-d,key-dl,key-l,modern_sp|遠距離で"
+                "commandModern": "key-r,key-d,key-dl,key-l,modern_sp|遠距離で",
                 "startup": 55,
                 "active": "55-56",
                 "recovery": "40",
@@ -8340,7 +8340,7 @@ const SF6_DATA = {
                 "move": "OD シベリアンエクスプレス（遠距離版）",
                 "type": "必殺技",
                 "command": "（遠距離で）63214+KK",
-                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dl,key-l,key-all,key-all|遠距離で"
+                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dl,key-l,key-all,key-all|遠距離で",
                 "startup": 54,
                 "active": "54-55",
                 "recovery": "40",
@@ -8360,7 +8360,7 @@ const SF6_DATA = {
                 "move": "ツンドラストーム",
                 "type": "必殺技",
                 "command": "22+強K",
-                "commandModern": "key-d,key-d,modern_auto,modern_h|強"
+                "commandModern": "key-d,key-d,modern_auto,modern_h|強",
                 "startup": 5,
                 "active": "5-55",
                 "recovery": "24",
@@ -8380,7 +8380,7 @@ const SF6_DATA = {
                 "move": "SA1 エリアルロシアンスラム",
                 "type": "スーパーアーツ",
                 "command": "236236+K",
-                "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強"
+                "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強",
                 "startup": 11,
                 "active": "11-17",
                 "recovery": "60",
@@ -8400,7 +8400,7 @@ const SF6_DATA = {
                 "move": "SA2 サイクロンラリアット（ホールド）",
                 "type": "スーパーアーツ",
                 "command": "236236+P",
-                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_m|強・ホールド"
+                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_m|強・ホールド",
                 "startup": 18,
                 "active": "18-122※18-111, 33-35, 41-42, 50-51, 60-61, 69-70, 79-80, 90-91, 99-100, 110-111, 120-122",
                 "recovery": "52",
@@ -8420,7 +8420,7 @@ const SF6_DATA = {
                 "move": "SA2 サイクロンラリアット（その場）",
                 "type": "スーパーアーツ",
                 "command": "236236+P",
-                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_m|強"
+                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_m|強",
                 "startup": null,
                 "active": "",
                 "recovery": "",
@@ -8440,7 +8440,7 @@ const SF6_DATA = {
                 "move": "SA2 サイクロンラリアット（移動）",
                 "type": "スーパーアーツ",
                 "command": "236236+P",
-                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_m|強"
+                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_m|強",
                 "startup": null,
                 "active": "",
                 "recovery": "",
@@ -8460,7 +8460,7 @@ const SF6_DATA = {
                 "move": "SA3 ボリショイストームバスター",
                 "type": "スーパーアーツ",
                 "command": "（近距離で）+P",
-                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,key-l,key-dl,key-d,key-dr,key-r,modern_h|近距離で強"
+                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,key-l,key-dl,key-d,key-dr,key-r,modern_h|近距離で強",
                 "startup": "6+0",
                 "active": "6-7",
                 "recovery": "116",
@@ -8480,7 +8480,7 @@ const SF6_DATA = {
                 "move": "CA ボリショイストームバスター",
                 "type": "スーパーアーツ",
                 "command": "（近距離で）（体力25%以下で）+P",
-                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,key-l,key-dl,key-d,key-dr,key-r,modern_h|体力25%以下で近距離で強"
+                "commandModern": "key-l,key-dl,key-d,key-dr,key-r,key-l,key-dl,key-d,key-dr,key-r,modern_h|体力25%以下で近距離で強",
                 "startup": "6+0",
                 "active": "6-7",
                 "recovery": "116",
@@ -9362,7 +9362,7 @@ const SF6_DATA = {
                 "move": "サイコスパーク",
                 "type": "必殺技",
                 "command": "236+P",
-                "commandModern": "key-d,key-dr,key-r,modern_sp"
+                "commandModern": "key-d,key-dr,key-r,modern_sp",
                 "startup": 14,
                 "active": "14-25",
                 "recovery": "8",
@@ -9382,7 +9382,7 @@ const SF6_DATA = {
                 "move": "OD サイコスパーク",
                 "type": "必殺技",
                 "command": "236+PP",
-                "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all"
+                "commandModern": "modern_auto,modern_sp,key-d,key-dr,key-r,key-all,key-all",
                 "startup": 14,
                 "active": "14-25",
                 "recovery": "7",
@@ -9402,7 +9402,7 @@ const SF6_DATA = {
                 "move": "弱 サイコシュート",
                 "type": "必殺技",
                 "command": "（サイコスパーク中に）6+弱P",
-                "commandModern": "key-r,modern_l|サイコスパーク中に弱"
+                "commandModern": "key-r,modern_l|サイコスパーク中に弱",
                 "startup": 12,
                 "active": "",
                 "recovery": "全体 42",
@@ -9422,7 +9422,7 @@ const SF6_DATA = {
                 "move": "中 サイコシュート",
                 "type": "必殺技",
                 "command": "（サイコスパーク中に）6+中P",
-                "commandModern": "key-r,modern_m|サイコスパーク中に中"
+                "commandModern": "key-r,modern_m|サイコスパーク中に中",
                 "startup": 12,
                 "active": "",
                 "recovery": "全体 42",
@@ -9442,7 +9442,7 @@ const SF6_DATA = {
                 "move": "強 サイコシュート",
                 "type": "必殺技",
                 "command": "（サイコスパーク中に）6+強P",
-                "commandModern": "key-r,modern_h|サイコスパーク中に強"
+                "commandModern": "key-r,modern_h|サイコスパーク中に強",
                 "startup": 12,
                 "active": "",
                 "recovery": "全体 42",
@@ -9462,7 +9462,7 @@ const SF6_DATA = {
                 "move": "OD 弱 サイコシュート",
                 "type": "必殺技",
                 "command": "（ODサイコスパーク中に）6+弱P",
-                "commandModern": "key-r,modern_l|ODサイコスパーク中に弱"
+                "commandModern": "key-r,modern_l|ODサイコスパーク中に弱",
                 "startup": 12,
                 "active": "",
                 "recovery": "全体 40",
@@ -9482,7 +9482,7 @@ const SF6_DATA = {
                 "move": "OD 中 サイコシュート",
                 "type": "必殺技",
                 "command": "（ODサイコスパーク中に）6+中P",
-                "commandModern": "key-r,modern_m|ODサイコスパーク中に中"
+                "commandModern": "key-r,modern_m|ODサイコスパーク中に中",
                 "startup": 12,
                 "active": "",
                 "recovery": "全体 40",
@@ -9502,7 +9502,7 @@ const SF6_DATA = {
                 "move": "OD 強 サイコシュート",
                 "type": "必殺技",
                 "command": "（ODサイコスパーク中に）6+強P",
-                "commandModern": "key-r,modern_h|ODサイコスパーク中に強"
+                "commandModern": "key-r,modern_h|ODサイコスパーク中に強",
                 "startup": 12,
                 "active": "",
                 "recovery": "全体 40",
@@ -9522,7 +9522,7 @@ const SF6_DATA = {
                 "move": "弱 サイコアッパー",
                 "type": "必殺技",
                 "command": "623+弱P",
-                "commandModern": "key-r,key-d,key-dr,modern_l|弱"
+                "commandModern": "key-r,key-d,key-dr,modern_l|弱",
                 "startup": 10,
                 "active": "10-17",
                 "recovery": "28",
@@ -9542,7 +9542,7 @@ const SF6_DATA = {
                 "move": "中 サイコアッパー",
                 "type": "必殺技",
                 "command": "623+中P",
-                "commandModern": "key-r,key-d,key-dr,modern_m|中"
+                "commandModern": "key-r,key-d,key-dr,modern_m|中",
                 "startup": 14,
                 "active": "14-19",
                 "recovery": "32",
@@ -9562,7 +9562,7 @@ const SF6_DATA = {
                 "move": "強 サイコアッパー",
                 "type": "必殺技",
                 "command": "623+強P",
-                "commandModern": "key-r,key-d,key-dr,modern_h|強"
+                "commandModern": "key-r,key-d,key-dr,modern_h|強",
                 "startup": 16,
                 "active": "16-21",
                 "recovery": "33",
@@ -9582,7 +9582,7 @@ const SF6_DATA = {
                 "move": "OD サイコアッパー",
                 "type": "必殺技",
                 "command": "623+PP",
-                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all"
+                "commandModern": "modern_auto,modern_sp,key-r,key-d,key-dr,key-all,key-all",
                 "startup": 13,
                 "active": "13-18",
                 "recovery": "36",
@@ -9602,7 +9602,7 @@ const SF6_DATA = {
                 "move": "弱 サイコブリッツ",
                 "type": "必殺技",
                 "command": "214+弱P",
-                "commandModern": "key-d,key-dl,key-l,modern_l|弱"
+                "commandModern": "key-d,key-dl,key-l,modern_l|弱",
                 "startup": 11,
                 "active": "11-2911-13, 17-19, 26-29",
                 "recovery": "14",
@@ -9622,7 +9622,7 @@ const SF6_DATA = {
                 "move": "中 サイコブリッツ",
                 "type": "必殺技",
                 "command": "214+中P",
-                "commandModern": "key-d,key-dl,key-l,modern_m|中"
+                "commandModern": "key-d,key-dl,key-l,modern_m|中",
                 "startup": 13,
                 "active": "13-3613-14, 22-24, 34-36",
                 "recovery": "16",
@@ -9642,7 +9642,7 @@ const SF6_DATA = {
                 "move": "強 サイコブリッツ",
                 "type": "必殺技",
                 "command": "214+強P",
-                "commandModern": "key-d,key-dl,key-l,modern_h|強"
+                "commandModern": "key-d,key-dl,key-l,modern_h|強",
                 "startup": 15,
                 "active": "15-3715-16, 28-29, 36-37",
                 "recovery": "23",
@@ -9662,7 +9662,7 @@ const SF6_DATA = {
                 "move": "OD サイコブリッツ",
                 "type": "必殺技",
                 "command": "214+PP",
-                "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all"
+                "commandModern": "modern_auto,modern_sp,key-d,key-dl,key-l,key-all,key-all",
                 "startup": 13,
                 "active": "13-4413, 18, 22, 26, 30, 34,43-44",
                 "recovery": "20",
@@ -9682,7 +9682,7 @@ const SF6_DATA = {
                 "move": "弱 サイコフリッカー",
                 "type": "必殺技",
                 "command": "236+弱K",
-                "commandModern": "key-r,modern_l|弱"
+                "commandModern": "key-r,modern_l|弱",
                 "startup": 16,
                 "active": "16-19",
                 "recovery": "26",
@@ -9702,7 +9702,7 @@ const SF6_DATA = {
                 "move": "弱 サイコフリッカー（ホールド）",
                 "type": "必殺技",
                 "command": "236+弱Kホールド",
-                "commandModern": "key-r,modern_l|弱・ホールド"
+                "commandModern": "key-r,modern_l|弱・ホールド",
                 "startup": 31,
                 "active": "31-35",
                 "recovery": "24",
@@ -9722,7 +9722,7 @@ const SF6_DATA = {
                 "move": "中 サイコフリッカー",
                 "type": "必殺技",
                 "command": "236+中K",
-                "commandModern": "key-r,modern_m|中"
+                "commandModern": "key-r,modern_m|中",
                 "startup": 20,
                 "active": "20-23",
                 "recovery": "26",
@@ -9742,7 +9742,7 @@ const SF6_DATA = {
                 "move": "中 サイコフリッカー（ホールド）",
                 "type": "必殺技",
                 "command": "236+中Kホールド",
-                "commandModern": "key-r,modern_m|中・ホールド"
+                "commandModern": "key-r,modern_m|中・ホールド",
                 "startup": 35,
                 "active": "35-39",
                 "recovery": "24",
@@ -9762,7 +9762,7 @@ const SF6_DATA = {
                 "move": "強 サイコフリッカー",
                 "type": "必殺技",
                 "command": "236+強K",
-                "commandModern": "key-r,modern_h|強"
+                "commandModern": "key-r,modern_h|強",
                 "startup": 17,
                 "active": "17-24",
                 "recovery": "18",
@@ -9782,7 +9782,7 @@ const SF6_DATA = {
                 "move": "強 サイコフリッカー（ホールド）",
                 "type": "必殺技",
                 "command": "236+強Kホールド",
-                "commandModern": "key-r,modern_h|強・ホールド"
+                "commandModern": "key-r,modern_h|強・ホールド",
                 "startup": 35,
                 "active": "35-44",
                 "recovery": "19",
@@ -9802,7 +9802,7 @@ const SF6_DATA = {
                 "move": "OD サイコフリッカー",
                 "type": "必殺技",
                 "command": "236+KK",
-                "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all"
+                "commandModern": "modern_auto,modern_sp,key-r,key-all,key-all",
                 "startup": 25,
                 "active": "25-28",
                 "recovery": "32",
@@ -9822,7 +9822,7 @@ const SF6_DATA = {
                 "move": "キルステップ（前方）",
                 "type": "必殺技",
                 "command": "KK",
-                "commandModern": "modern_auto,modern_l,modern_auto,modern_l"
+                "commandModern": "modern_auto,modern_l,modern_auto,modern_l",
                 "startup": null,
                 "active": "",
                 "recovery": "全体 31",
@@ -9842,7 +9842,7 @@ const SF6_DATA = {
                 "move": "キルスイッチ・ブレイク",
                 "type": "必殺技",
                 "command": "（キルステップ（前方）中に）6+P",
-                "commandModern": "key-r,modern_h|キルステップ中に"
+                "commandModern": "key-r,modern_h|キルステップ中に",
                 "startup": 11,
                 "active": "11-13",
                 "recovery": "20",
@@ -9862,7 +9862,7 @@ const SF6_DATA = {
                 "move": "キルスイッチ・チェイス",
                 "type": "必殺技",
                 "command": "（キルステップ（前方）中に）6+P",
-                "commandModern": "key-r,modern_m|キルステップ中に"
+                "commandModern": "key-r,modern_m|キルステップ中に",
                 "startup": 11,
                 "active": "11-13",
                 "recovery": "20",
@@ -9882,7 +9882,7 @@ const SF6_DATA = {
                 "move": "キルステップ（後方）",
                 "type": "必殺技",
                 "command": "4+KK",
-                "commandModern": "key-l,modern_auto,modern_l,modern_auto,modern_l"
+                "commandModern": "key-l,modern_auto,modern_l,modern_auto,modern_l",
                 "startup": null,
                 "active": "",
                 "recovery": "全体 31",
@@ -9902,7 +9902,7 @@ const SF6_DATA = {
                 "move": "SA1 サイコストーム",
                 "type": "スーパーアーツ",
                 "command": "236236+K",
-                "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強"
+                "commandModern": "key-r,modern_sp,key-d,key-dr,key-r,key-d,key-dr,modern_l|強",
                 "startup": 13,
                 "active": "13- 6713-14, 22-23, 40-41, 45-46, 63, 65, 67",
                 "recovery": "56",
@@ -9922,7 +9922,7 @@ const SF6_DATA = {
                 "move": "SA2 サイコキャノン",
                 "type": "スーパーアーツ",
                 "command": "214214+P",
-                "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強"
+                "commandModern": "key-d,key-dl,key-l,key-d,key-dl,key-l,modern_m|強",
                 "startup": 8,
                 "active": "",
                 "recovery": "全体 35",
@@ -9942,7 +9942,7 @@ const SF6_DATA = {
                 "move": "SA3 サイコチェンバー",
                 "type": "スーパーアーツ",
                 "command": "236236+P",
-                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|強"
+                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|強",
                 "startup": 10,
                 "active": "10-19",
                 "recovery": "64",
@@ -9962,7 +9962,7 @@ const SF6_DATA = {
                 "move": "CA サイコチェンバー",
                 "type": "スーパーアーツ",
                 "command": "（体力25%以下で）236236+P",
-                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|体力25%以下で強"
+                "commandModern": "key-d,key-dr,key-r,key-d,key-dr,key-r,modern_h|体力25%以下で強",
                 "startup": 10,
                 "active": "10-19",
                 "recovery": "64",
