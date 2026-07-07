@@ -1200,11 +1200,18 @@ function renderModernCmd(compact){
             : name.startsWith('key-') ? keyStyle : imgStyle;
     return `<img src="${_SF6CTRL}/${name}.png" referrerpolicy="no-referrer" style="${h}">`;
   }
+  const DIR_KEYS = new Set(['key-d','key-dl','key-l','key-ul','key-u','key-ur','key-r','key-dr','key-nutral']);
+  function needsPlus(t1, t2){
+    if(DIR_KEYS.has(t1) && DIR_KEYS.has(t2)) return false; // 方向→方向: + なし
+    if(t1 === t2 && t1.startsWith('icon_')) return false;  // 同ボタン連打(OD): + なし
+    return true;
+  }
   const segments = cmdPart.split('>');
   // セグメント内はnowrap、セグメント間（>）でのみ折り返し可能
   const rendered = segments.map(seg => {
     const tokens = seg.split(',');
-    return `<span style="display:inline-flex;align-items:center;white-space:nowrap">${tokens.map(img).join(img('key-plus'))}</span>`;
+    const parts = tokens.map((t, i) => i === 0 ? img(t) : (needsPlus(tokens[i-1], t) ? img('key-plus') : '') + img(t));
+    return `<span style="display:inline-flex;align-items:center;white-space:nowrap">${parts.join('')}</span>`;
   });
   const iconsHtml = `<span style="display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;width:100%">${rendered.join(img('arrow_3'))}</span>`;
   if(!label) return iconsHtml;
