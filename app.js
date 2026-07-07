@@ -461,8 +461,9 @@ function fmtCommand(cmd){
   const LP=b('弱','#1e6fe0'),MP=b('中','#c08800'),HP=b('強','#cc2030');
   const LK=b('弱','#1a9640'),MK=b('中','#bb5510'),HK=b('強','#7030aa');
   const pl=pi('key-plus');
-  const BTNS=[['PPP',LP+pl+MP+pl+HP],['KKK',LK+pl+MK+pl+HK],
-              ['PP',LP+pl+HP],['KK',LK+pl+HK],
+  // 同時押し（OD）はボタンを隣接表示のみ（+なし）。PPは弱+中、KKは弱+中
+  const BTNS=[['PPP',LP+MP+HP],['KKK',LK+MK+HK],
+              ['PP',LP+MP],['KK',LK+MK],
               ['弱P',LP],['中P',MP],['強P',HP],['弱K',LK],['中K',MK],['強K',HK],
               ['P',b('P','#4488ff')],['K',b('K','#2a9955')]];
   function renderSeg(s){
