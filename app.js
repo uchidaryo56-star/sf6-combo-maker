@@ -453,17 +453,19 @@ function fmtCommand(cmd){
   const CTR = _SF6CTRL;
   const ds = 'height:18px;vertical-align:middle;margin:0 0px';
   const ps = 'height:13px;vertical-align:middle;margin:0 1px';
-  const bs = 'display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;color:#fff;font-size:9px;font-weight:900;vertical-align:middle;margin:0 1px;flex-shrink:0';
   function di(k){ return `<img src="${CTR}/${k}.png" referrerpolicy="no-referrer" style="${ds}">`; }
   function pi(k){ return `<img src="${CTR}/${k}.png" referrerpolicy="no-referrer" style="${ps}">`; }
+  const bs = 'display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;color:#fff;font-size:9px;font-weight:900;vertical-align:middle;margin:0 1px;flex-shrink:0';
   function b(lbl,bg){ return `<span style="${bs};background:${bg}">${lbl}</span>`; }
   const D={'1':'key-dl','2':'key-d','3':'key-dr','4':'key-l','6':'key-r','7':'key-ul','8':'key-u','9':'key-ur'};
   const LP=b('弱','#1e6fe0'),MP=b('中','#c08800'),HP=b('強','#cc2030');
   const LK=b('弱','#1a9640'),MK=b('中','#bb5510'),HK=b('強','#7030aa');
+  // OD同時押し：公式CDN key-all.png を使用（SF6公式ボタンアイコン）
+  const allBtn=di('key-all');
   const pl=pi('key-plus');
-  // 同時押し（OD）はボタンを隣接表示のみ（+なし）。PPは弱+中、KKは弱+中
-  const BTNS=[['PPP',LP+MP+HP],['KKK',LK+MK+HK],
-              ['PP',LP+MP],['KK',LK+MK],
+  // 同時押し（OD）はボタンを隣接表示のみ（+なし）
+  const BTNS=[['PPP',allBtn+allBtn+allBtn],['KKK',allBtn+allBtn+allBtn],
+              ['PP',allBtn+allBtn],['KK',allBtn+allBtn],
               ['弱P',LP],['中P',MP],['強P',HP],['弱K',LK],['中K',MK],['強K',HK],
               ['P',b('P','#4488ff')],['K',b('K','#2a9955')]];
   function renderSeg(s){
