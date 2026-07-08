@@ -1206,12 +1206,15 @@ function renderModernCmd(compact){
     if(t1 === t2 && t1.startsWith('icon_')) return false;  // 同ボタン連打(OD): + なし
     return true;
   }
+  const paren = s => `<span style="opacity:.6;font-size:13px;vertical-align:middle;margin:0 2px">( </span>${s}<span style="opacity:.6;font-size:13px;vertical-align:middle;margin:0 2px"> )</span>`;
   const segments = cmdPart.split('>');
   // セグメント内はnowrap、セグメント間（>）でのみ折り返し可能
   const rendered = segments.map(seg => {
     const tokens = seg.split(',');
+    const allModern = tokens.every(t => t === 'modern_auto' || t === 'modern_sp');
     const parts = tokens.map((t, i) => i === 0 ? img(t) : (needsPlus(tokens[i-1], t) ? img('key-plus') : '') + img(t));
-    return `<span style="display:inline-flex;align-items:center;white-space:nowrap">${parts.join('')}</span>`;
+    const inner = parts.join('');
+    return `<span style="display:inline-flex;align-items:center;white-space:nowrap">${allModern ? inner : paren(inner)}</span>`;
   });
   const iconsHtml = `<span style="display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;width:100%">${rendered.join(img('arrow_3'))}</span>`;
   if(!label) return iconsHtml;
