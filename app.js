@@ -278,6 +278,7 @@ function renderCombos(){
         <button class="ghost" data-vidurl="${c.id}">🔗 URL</button>
         ${media?`<button class="ghost" data-vidclear="${c.id}">動画を消す</button>`:""}
         ${localVideoKeys.has(vkey("comboVideos",c.id))?`<button class="ghost" data-viddl="${c.id}">📥 動画を書き出す</button>`:""}
+        <button class="ghost" data-share="${c.id}">📤 コンボを共有</button>
         <button class="danger" data-delcombo="${c.id}">削除</button>
       </div>
     </div>`;
@@ -299,6 +300,9 @@ function renderCombos(){
   el.querySelectorAll("[data-done]").forEach(c=>c.onchange=()=>{
     done[c.dataset.done]=c.checked; saveStore();
   });
+  el.querySelectorAll("[data-share]").forEach(b=>b.onclick=()=>{
+    shareCombo(list.find(x=>x.id===b.dataset.share));
+  });
   el.querySelectorAll("[data-delcombo]").forEach(b=>b.onclick=()=>{
     const id = b.dataset.delcombo;
     const isUser = id.startsWith("u-");
@@ -310,6 +314,112 @@ function renderCombos(){
     }, isUser ? "削除する" : "非表示にする");
   });
 }
+/* ---- コンボのURL共有 ---- */
+function b64encode(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64decode(str){ return decodeURIComponent(escape(atob(str))); }
+function shareCombo(c){
+  if(!c) return;
+  const payload = {
+    c: currentChar, n: c.name, s: c.start, g: groupOf("combo", c),
+    no: c.notation, nm: c.notationModern || "",
+    d: c.damage||0, dr: c.drive||0, su: c.super||0,
+    dif: c.difficulty||1, p: c.position||"中央", note: c.note||""
+  };
+  let encoded;
+  try { encoded = b64encode(JSON.stringify(payload)); }
+  catch { alert("共有用のリンク作成に失敗しました"); return; }
+  const url = `${location.origin}${location.pathname}?combo=${encoded}`;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(
+      ()=>toast("共有リンクをコピーしました！LINEやDiscordに貼って送れます"),
+      ()=>promptShareUrl(url)
+    );
+  } else {
+    promptShareUrl(url);
+  }
+}
+function promptShareUrl(url){
+  openModal(`
+    <h3>共有リンク</h3>
+    <div class="hint">このURLをコピーして送ってください。</div>
+    <input readonly value="${esc(url)}" style="width:100%" onclick="this.select()">
+    <div class="row-actions"><button class="ghost" id="mShareClose">閉じる</button></div>
+  `);
+  document.getElementById("modalBox").querySelector("#mShareClose").onclick = closeModal;
+}
+let toastTimer = null;
+function toast(msg){
+  let el = document.getElementById("appToast");
+  if(!el){
+    el = document.createElement("div");
+    el.id = "appToast";
+    el.style.cssText = "position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--panel,#241a3d);color:var(--text,#fff);border:1px solid var(--accent2,#9e59f1);border-radius:8px;padding:10px 18px;font-size:14px;z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,.4);transition:opacity .25s";
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.style.opacity = "1";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ el.style.opacity = "0"; }, 2600);
+}
+// URLに ?combo=... が付いていたら取り込み確認モーダルを出す
+function checkIncomingSharedCombo(){
+  const params = new URLSearchParams(location.search);
+  const raw = params.get("combo");
+  if(!raw) return;
+  history.replaceState(null, "", location.pathname);
+  let data;
+  try { data = JSON.parse(b64decode(raw)); }
+  catch { return; }
+  if(!data || !data.no) return;
+  const char = SF6_DATA.characters.find(c=>c.id===data.c);
+  const charName = char ? char.name : "不明なキャラ";
+  openModal(`
+    <h3>共有されたコンボ</h3>
+    <div class="hint">リンクから以下のコンボを受け取りました。追加しますか？</div>
+    <div class="card" style="margin:10px 0">
+      <div class="card-head">
+        <h3>${esc(data.n||"（無題）")}</h3>
+        <span class="badge">${esc(charName)}</span>
+        <span class="badge">${esc(data.s||"")}</span>
+      </div>
+      <div class="notation">${renderNotation(data.no)}</div>
+      ${data.nm?`<div class="notation" style="margin-top:4px"><span class="modern-tag">モダン</span>${renderNotation(data.nm)}</div>`:""}
+      <div class="combo-stats">
+        <div class="stat-block stat-dmg"><span class="stat-num">${data.d??"-"}</span><span class="stat-lbl">ダメージ</span></div>
+      </div>
+    </div>
+    <div class="row-actions">
+      <button id="mShareAdd">＋ 追加する</button>
+      <button class="ghost" id="mShareCancel">キャンセル</button>
+    </div>
+  `);
+  const box = document.getElementById("modalBox");
+  box.querySelector("#mShareCancel").onclick = closeModal;
+  box.querySelector("#mShareAdd").onclick = ()=>{
+    const targetChar = char ? char.id : currentChar;
+    store[targetChar] = store[targetChar] || {};
+    store[targetChar].userCombos = store[targetChar].userCombos || [];
+    const comboObj = {
+      id: "u-"+Date.now(), name: data.n||"（無題）", start: data.s||"その他",
+      group: data.g||"未分類", notation: data.no||"", damage: data.d||0,
+      drive: data.dr||0, super: data.su||0, difficulty: data.dif||1,
+      position: data.p||"中央", note: data.note||"（共有されたコンボ）"
+    };
+    if(data.nm) comboObj.notationModern = data.nm;
+    store[targetChar].userCombos.push(comboObj);
+    saveStore();
+    closeModal();
+    if(char){
+      currentChar = char.id;
+      document.querySelector('.tab[data-view="combo"]').click();
+      document.getElementById("charSelect").value = currentChar;
+      updateCharBanner(currentChar);
+    }
+    initChars(); renderComboFilters(); renderCombos();
+    toast("コンボを追加しました！");
+  };
+}
+
 document.getElementById("favOnly").onchange = renderCombos;
 document.getElementById("addCombo").onclick = ()=>{
   const newId = "u-"+Date.now();
@@ -388,6 +498,24 @@ function renderFrameTypeFilters(){
     ch.onclick = ()=>{ frameTypeFilter = ch.dataset.ftype; renderFrameTypeFilters(); renderFrames(); };
   });
 }
+// コマンド表示モード（両方/クラシックのみ/モダンのみ）。全キャラ共通でブラウザに保存。
+function cmdMode(){ return gns("settings").cmdMode || "both"; }
+function applyCmdMode(){
+  const mode = cmdMode();
+  document.getElementById("frameTable").className = "cmdmode-" + mode;
+  document.querySelectorAll('[data-cmdmode]').forEach(ch=>{
+    ch.classList.toggle("active", ch.dataset.cmdmode === mode);
+  });
+}
+document.querySelectorAll('[data-cmdmode]').forEach(ch=>{
+  ch.onclick = ()=>{
+    gns("settings").cmdMode = ch.dataset.cmdmode;
+    saveStore();
+    applyCmdMode();
+  };
+});
+applyCmdMode();
+
 function renderFrames(){
   const orig = SF6_DATA.frames[currentChar]||[];
   let data = orig.slice();
@@ -417,8 +545,8 @@ function renderFrames(){
     if(f.type !== lastType){ lastType = f.type; catRow = `<tr class="frame-cat-row"><td colspan="18">${esc(f.type)}</td></tr>`; }
     return catRow + `<tr data-fi="${fi}">
     <td>${esc(f.move)}</td>
-    <td style="font-family:Consolas,monospace">${fmtCommand(f.command)}</td>
-    <td class="modern-cmd-cell" data-fi="${fi}" title="クリックしてモダン入力を編集">${renderModernCmd(modCmd)}</td>
+    <td class="col-classic-cmd" style="font-family:Consolas,monospace">${fmtCommand(f.command)}</td>
+    <td class="modern-cmd-cell col-modern-cmd" data-fi="${fi}" title="クリックしてモダン入力を編集">${renderModernCmd(modCmd)}</td>
     <td style="${m}">${esc(f.type)}</td>
     <td>${f.startup??"-"}</td>
     <td style="${m}">${esc(f.active||"-")}</td>
@@ -580,6 +708,106 @@ document.querySelectorAll("#frameTable th[data-sort]").forEach(th=>{
   };
 });
 document.getElementById("punishFrame").oninput = renderPunish;
+
+/* ============ 技検索（全キャラ横断） ============ */
+function renderGlobalSearch(){
+  const q = (document.getElementById("globalSearch").value||"").trim();
+  const countEl = document.getElementById("globalSearchCount");
+  const resEl = document.getElementById("globalSearchResults");
+  if(!q){
+    countEl.textContent = "";
+    resEl.innerHTML = `<div class="empty">キーワードを入力してください</div>`;
+    return;
+  }
+  const results = [];
+  SF6_DATA.characters.forEach(c=>{
+    const frames = SF6_DATA.frames[c.id];
+    if(!frames) return;
+    frames.forEach((f,idx)=>{
+      if((f.move+" "+(f.command||"")).includes(q)){
+        results.push({char:c, f, idx});
+      }
+    });
+  });
+  countEl.textContent = `${results.length} 件ヒットしました`;
+  if(!results.length){ resEl.innerHTML = `<div class="empty">該当する技が見つかりませんでした</div>`; return; }
+  resEl.innerHTML = results.slice(0,200).map(({char,f,idx})=>`
+    <div class="card gsearch-card" data-goto-char="${char.id}" data-goto-idx="${idx}">
+      <div class="card-head">
+        <span class="badge" style="background:${char.color||'#555'}">${esc(char.name)}</span>
+        <h3 style="font-size:15px">${esc(f.move)}</h3>
+        <span class="badge">${esc(f.type)}</span>
+      </div>
+      <div class="notation" style="font-family:Consolas,monospace;font-size:13px">${esc(f.command||"-")}</div>
+      <div class="hint" style="margin:4px 0 0">発生${f.startup??"-"}F ・ ヒット${fmt(f.onHit)} ・ ガード${fmt(f.onBlock)}</div>
+    </div>`).join("");
+  if(results.length>200) resEl.insertAdjacentHTML("beforeend", `<div class="hint">上位200件のみ表示しています。もう少し絞り込んでください。</div>`);
+  resEl.querySelectorAll("[data-goto-char]").forEach(card=>{
+    card.onclick = ()=>{
+      const charId = card.dataset.gotoChar;
+      const idx = card.dataset.gotoIdx;
+      currentChar = charId;
+      document.querySelector('.tab[data-view="frame"]').click();
+      document.getElementById("charSelect").value = charId;
+      frameTypeFilter = "全て";
+      document.getElementById("frameSearch").value = "";
+      updateCharBanner(currentChar);
+      renderAll();
+      setTimeout(()=>gotoFrameRow(idx), 60);
+    };
+  });
+}
+document.getElementById("globalSearch").oninput = renderGlobalSearch;
+renderGlobalSearch();
+
+/* ============ 設定：データのバックアップ ============ */
+function showIOStatus(msg, isError){
+  const el = document.getElementById("dataIOStatus");
+  el.textContent = msg;
+  el.style.display = "";
+  el.style.color = isError ? "var(--danger,#e05252)" : "var(--accent2)";
+}
+document.getElementById("exportData").onclick = ()=>{
+  const payload = { app:"sf6-combo-maker", version:1, exportedAt:new Date().toISOString(), store };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const ymd = new Date().toISOString().slice(0,10);
+  a.href = url; a.download = `sf6combomaker_backup_${ymd}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  showIOStatus("✓ データを書き出しました。ダウンロードフォルダをご確認ください。", false);
+};
+document.getElementById("importDataBtn").onclick = ()=>{
+  document.getElementById("importDataFile").click();
+};
+document.getElementById("importDataFile").onchange = (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    let payload;
+    try { payload = JSON.parse(reader.result); }
+    catch { showIOStatus("✗ ファイルの読み込みに失敗しました（JSON形式ではありません）", true); return; }
+    const incoming = payload && payload.store ? payload.store : payload;
+    if(!incoming || typeof incoming !== "object"){
+      showIOStatus("✗ このファイルはバックアップデータではないようです", true);
+      return;
+    }
+    confirmModal(
+      "現在のデータに読み込んだ内容を上書きマージします。\n（読み込んだファイルの内容が優先されます）\nよろしいですか？",
+      ()=>{
+        store = Object.assign({}, store, incoming);
+        saveStore();
+        showIOStatus("✓ データを読み込みました。反映するには再読み込みしてください。", false);
+        initChars(); renderAll();
+      },
+      "読み込む"
+    );
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+};
 document.getElementById("frameSearch").oninput = renderFrames;
 
 /* ============ セットプレイ ============ */
@@ -1522,5 +1750,6 @@ function renderAll(){
 initChars();
 updateCharBanner(currentChar);
 renderAll();
+checkIncomingSharedCombo();
 // 保存済みローカル動画のキーを読み込んでから再描画（再読み込み後も動画が出るように）
 idbKeys().then(keys=>{ localVideoKeys = new Set(keys); renderCombos(); renderSetplays(); renderGuide(); renderNoteEditor(); }).catch(()=>{});

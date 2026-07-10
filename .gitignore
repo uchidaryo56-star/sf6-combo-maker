@@ -9,3 +9,18 @@ jp_parsed.json
 # OS / エディタ
 .DS_Store
 Thumbs.db
+
+# 開発時に使った一時スクリプト（一括変換・挿入用。再実行しないので追跡しない）
+detect_chars.js
+extract_moves.js
+insert_ed.js
+insert_ingrid.js
+insert_zangief.js
+insert_all_chars.js
+update_all_modern.js
+update_ryu_modern.js
+update_ryu_sa.js
+update_specials_modern.js
+bump.ps1
+banner_tune.html
+.claude/
